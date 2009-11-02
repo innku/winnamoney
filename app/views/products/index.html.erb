@@ -1,0 +1,37 @@
+<% title "Productos" %>
+
+<h1>Productos</h1>
+<p>
+	Listando <b><%= @products.size %> de <%= @products.total_entries %></b> Productos
+</p>
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Clave Proveedor</th>
+	<th>Nombre</th>
+    <th>Categor&iacute;a</th>
+    <th>Precio</th>
+    <th>Ver</th>
+    <th>Editar</th>
+    <th>Borrar</th>
+  </tr>
+  <% for product in @products %>
+    <tr>
+      <td><%=h product.id %></td>
+      <td><%=h product.product_key %></td>
+      <td><%=truncate product.name, 30 %></td>
+      <td><%=h product.tag.subcategory.category.name %></td>
+      <td><%= number_to_currency product.selling_price %></td>
+      <td><%= link_to "Ver", product %></td>
+      <td><%= link_to "Editar", edit_product_path(product) %></td>
+      <td><%= link_to "Borrar", product, :confirm => 'Estas seguro?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+<p>
+	<%= will_paginate @products %>
+</p>
+<div style="clear:both"></div>
+
+<p><%= link_to "Nuevo Producto", new_product_path %></p>
+<p><%= link_to "Subir productos en masa", new_product_path(:new_type => 'mass') %></p>

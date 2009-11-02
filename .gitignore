@@ -1,0 +1,10 @@
+.DS_STORE
+log/*.log
+tmp/*.html
+config/database.yml
+public/system/*
+script/runner
+db/schema.rb
+public/images/test/*/*/*/*
+public/images/development/*/*/*/*
+development/*

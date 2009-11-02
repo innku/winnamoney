@@ -1,0 +1,11 @@
+one:
+  name: MyString
+  language: MyString
+  sponsor_id: 1
+  user_positioning: MyString
+
+two:
+  name: MyString
+  language: MyString
+  sponsor_id: 1
+  user_positioning: MyString

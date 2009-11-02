@@ -1,0 +1,41 @@
+<% title "Winnamoney | Registro" %>
+
+<small>Paso 2.</small><br />
+
+<h1>Mi informaci&oacute;n</h1>
+<%= error_messages_for @user %>
+
+<% form_for @user, :url => users_path do |f| -%>
+
+<%= hidden_field_tag :store_id, params[:store_id] %>
+
+<p><%= f.label :names, "Nombres" %><br/>
+<%= f.text_field :names %></p>
+
+<p><%= f.label :last_names, "Apellidos" %><br/>
+<%= f.text_field :last_names %></p>
+
+<p><%= f.label :city_name, "Ciudad" %><br/>
+<%= f.text_field :city_name %></p>
+
+<p><%= f.label :address_1, "Direcci&oacute;n" %><br/>
+<%= f.text_field :address_1 %> <br/><br/>
+<%= f.text_field :address_2 %></p>
+
+<p><%= f.label :phone, "Tel&eacute;fono" %><br/>
+<%= f.text_field :phone %> &nbsp; <small>Ext.</small> &nbsp;<%= f.text_field :fax_extension %></p>
+
+<p><%= f.label :fax, "Fax" %><br/>
+<%= f.text_field :fax %> &nbsp; <small>Ext.</small> &nbsp;<%= f.text_field :fax_extension %></p>
+
+<p><%= f.label :email, "Correo Electr&oacute;nico" %><br/>
+<%= f.text_field :email %></p>
+
+<p><%= f.label :password, "Password" %><br/>
+<%= f.password_field :password %></p>
+
+<p><%= f.label :password_confirmation, "Confirma tu password" %><br/>
+<%= f.password_field :password_confirmation %></p>
+
+<p><%= submit_tag 'Sign up' %></p>
+<% end -%>

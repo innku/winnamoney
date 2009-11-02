@@ -1,0 +1,84 @@
+id,name,country_id,short,abbr,short2
+1,Aguascalientes,1,AGU,Ags,AG
+2,Baja California,1,BCN,B.C.,BC
+3,Baja California Sur,1,BCS,B.C.S.,BS
+4,Campeche,1,CAM,Camp,CM
+5,Coahuila,1,COA,Coah,CO
+6,Colima,1,COL,Col,CL
+7,Chiapas,1,CHP,Chis,CS
+8,Chihuahua,1,CHH,Chih,CH
+9,Distrito Federal,1,DIF,D.F.,DF
+10,Durango,1,DUR,Dgo,DG
+11,Guanajuato,1,GUA,Gto,GT
+12,Guerrero,1,GRO,Gro,GR
+13,Hidalgo,1,HID,Hgo,HG
+14,Jalisco,1,JAL,Jal,JA
+15,México,1,MEX,Mex,ME
+16,Michoacán,1,MIC,Mich,MI
+17,Morelos,1,MOR,Mor,MO
+18,Nayarit,1,NAY,Nay,NA
+19,Nuevo León,1,NLE,N.L.,NL
+20,Oaxaca,1,OAX,Oax,OA
+21,Puebla,1,PUE,Pue,PB
+22,Querétaro,1,QUE,Qro,QT
+23,Quintana Roo,1,ROO,Q. Roo,QR
+24,San Luís Potosí,1,SLP,S.L.P.,SL
+25,Sinaloa,1,SIN,Sin,SI
+26,Sonora,1,SON,Son,SO
+27,Tabasco,1,TAB,Tab,TB
+28,Tamaulipas,1,TAM,Tamps,TM
+29,Tlaxcala,1,TLA,Tlax,TL
+30,Veracruz,1,VER,Ver,VE
+31,Yucatán,1,YUC,Yuc,YU
+32,Zacatecas,1,ZAC,Zac,ZA
+33,Alabama,2,AL,Ala.,AL
+34,Alaska,2,AK,Alaska,AK
+35,Arizona,2,AZ,Ariz.,AZ
+36,Arkansas,2,AR,Ark.,AR
+37,California,2,CA,Calif.,CA
+38,Colorado,2,CO,Colo.,CO
+39,Connecticut,2,CT,Conn.,CT
+40,Delaware,2,DE,Del.,DE
+41,District of Columbia,2,DC,D.C.,DC
+42,Florida,2,FL,Fla.,FL
+43,Georgia,2,GA,Ga.,GA
+44,Hawaii,2,HI,Hawaii,HI
+45,Idaho,2,ID,Idaho,ID
+46,Illinois,2,IL,Ill.,IL
+47,Indiana,2,IN,Ind.,IN
+48,Iowa,2,IA,Iowa,IA
+49,Kansas,2,KS,Kans.,KS
+50,Kentucky,2,KY,Ky.,KY
+51,Louisiana,2,LA,La.,LA
+52,Maine,2,ME,Maine,ME
+53,Maryland,2,MD,Md.,MD
+54,Massachusetts,2,MA,Mass.,MA
+55,Michigan,2,MI,Mich.,MI
+56,Minnesota,2,MN,Minn.,MN
+57,Mississippi,2,MS,Miss.,MS
+58,Missouri,2,MO,Mo.,MO
+59,Montana,2,MT,Mont.,MT
+60,Nebraska,2,NE,Nebr.,NE
+61,Nevada,2,NV,Nev.,NV
+62,New Hampshire,2,NH,N.H.,NH
+63,New Jersey,2,NJ,N.J.,NJ
+64,New Mexico,2,NM,N. Mex.,NM
+65,New York,2,NY,N.Y.,NY
+66,North Carolina,2,NC,N.C.,NC
+67,North Dakota,2,ND,N. Dak.,ND
+68,Ohio,2,OH,Ohio,OH
+69,Oklahoma,2,OK,Okla.,OK
+70,Oregon,2,OR,Oreg.,OR
+71,Pennsylvania,2,PA,Pa.,PA
+72,Rhode Island,2,RI,R.I.,RI
+73,South Carolina,2,SC,S.C.,SC
+74,South Dakota,2,SD,S. Dak.,SD
+75,Tennessee,2,TN,Tenn.,TN
+76,Texas,2,TX,Tex.,TX
+77,Utah,2,UT,Utah,UT
+78,Vermont,2,VT,Vt.,VT
+79,Virginia,2,VA,Va.,VA
+80,Washington,2,WA,Wash.,WA
+81,West Virginia,2,WV,W. Va.,WV
+82,Wisconsin,2,WI,Wis.,WI
+83,Wyoming,2,WY,Wyo.,WY

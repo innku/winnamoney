@@ -1,0 +1,25 @@
+one:
+  name: MyString
+  product_key: MyString
+  description: MyText
+  existence: 1
+  local_transport: 1.5
+  international_transport: 1.5
+  cost: 1.5
+  discount: 1
+  selling_price: 1.5
+  image_url: 1.5
+  handling: 1.5
+
+two:
+  name: MyString
+  product_key: MyString
+  description: MyText
+  existence: 1
+  local_transport: 1.5
+  international_transport: 1.5
+  cost: 1.5
+  discount: 1
+  selling_price: 1.5
+  image_url: 1.5
+  handling: 1.5

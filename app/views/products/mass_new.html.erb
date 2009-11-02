@@ -1,0 +1,19 @@
+<% title "Subir productos en masa" %>
+
+<% form_tag products_path, :method => :post, :multipart => true do %>
+<p>
+	<%= label_tag	:category_mass, "Categor&iacute;a de los productos" %> <br />
+	<%= select_tag 	:category_mass, categories_for_select %>
+</p>
+
+<p>
+	<%= hidden_field_tag :create_type, "mass" %>
+	<%= label_tag	:products_csv, "Archivo CSV" %> <br />
+	<%= file_field_tag :products_csv %>
+</p>
+<p>
+	<%= submit_tag "Subir archivo" %>
+</p>
+<% end %>
+
+<p><%= link_to "Volver", products_path %></p>

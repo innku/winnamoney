@@ -1,0 +1,75 @@
+<% title "Producto" %>
+
+<h1><%=h @product.name %></h1>
+<p>
+  <strong>Clave del producto:</strong><br />
+  <%=h @product.product_key %>
+</p>
+<p>
+  <strong>Descripci&oacute;n:</strong> <br />
+  <%= @product.description %>
+</p>
+
+<p>
+  <strong>Categor&iacute;a</strong> <br />
+  <%= @product.tag.subcategory.category.name %> &raquo;  <%= @product.tag.subcategory.name %> &raquo;  <%= @product.tag.name %>
+</p>
+
+<p>
+  <strong>Estado de origen:</strong><br />
+  <%= @product.state_name %>
+</p>
+
+<p>
+  <strong>Existencia:</strong><br />
+  <%=h @product.existence %>
+</p>
+<p>
+  <strong>Flete Local:</strong><br />
+  <%=h @product.local_transport %>
+</p>
+<p>
+  <strong>Flete Internacional:</strong><br />
+  <%=h @product.international_transport %>
+</p>
+<p>
+  <strong>Impuesto:</strong><br />
+  <%=h @product.tax %>
+</p>
+<p>
+  <strong>Costo:</strong><br />
+  <%=h @product.cost %>
+</p>
+<p>
+  <strong>Descuento:</strong><br />
+  <%=h @product.discount %>
+</p>
+<p>
+  <strong>Precio de venta:</strong><br />
+  <%=h @product.selling_price %>
+</p>
+<p>
+  <strong>URL de la imagen peque&ntilde;a:</strong><br />
+  <%= link_to @product.small_image_url, @product.small_image_url %>
+</p>
+
+<p>
+  <strong>URL de la imagen mediana:</strong><br />
+  <%= link_to @product.medium_image_url, @product.medium_image_url %>
+</p>
+
+<p>
+  <strong>URL de la imagen grande:</strong><br />
+  <%= link_to @product.big_image_url, @product.big_image_url  %>
+</p>
+
+<p>
+  <strong>Gastos de manejo:</strong><br />
+  <%=h @product.handling %>
+</p>
+
+<p>
+  <%= link_to "Editar", edit_product_path(@product) %> |
+  <%= link_to "Borrar", @product, :confirm => 'Estas seguro?', :method => :delete %> |
+  <%= link_to "Ver todos", products_path %>
+</p>

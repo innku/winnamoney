@@ -1,0 +1,33 @@
+<% form_for payment_information, :url => user_payment_information_path(user) do |f| %>
+<p>
+	<%= f.label :account_type, "Tipo de cuenta" %> <br />
+	<%= f.label :account_type_check, "Cheques"%>
+	<%= f.radio_button :account_type, "check" %>
+	<%= f.label :account_type_savings, "Ahorros"%>
+	<%= f.radio_button :account_type, "savings" %>
+</p>
+<p>
+	<%= f.label :account_number, "N&uacute;mero de cuenta" %> <br />
+	<%= f.text_field :account_number %>
+</p>
+<p>
+	<%= f.label :routing, "Routing del banco" %> <br />
+	<%= f.text_field :routing %>
+</p>
+
+<% if user.city.state.country.name == "United States"  %>
+	<p>
+		<%= f.label :ssn, "N&uacute;mero de Seguro Social (SSN)" %> <br />
+		<%= f.text_field :ssn %>
+	</p>
+<% else %>
+	<p>
+		<%= f.label :rfc, "RFC" %> <br />
+		<%= f.text_field :rfc %>
+	</p>
+<% end %>
+
+<p>
+	<%= f.submit "Completar suscripci&oacute;n" %>
+</p>
+<% end %>

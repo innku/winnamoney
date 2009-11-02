@@ -1,0 +1,35 @@
+<% title "Tiendas" %>
+
+<h1>Clientes</h1>
+
+<p>
+	Listando <b><%= @users.size %> de <%= @users.total_entries %></b> Clientes
+</p>
+<table>
+  <tr>
+    <th>Cliente</th>
+    <th>Tienda</th>
+	<th>Status</th>
+    <th>Ver</th>
+    <th>Editar</th>
+    <th>Borrar</th>
+  </tr>
+  <% for user in @users %>
+    <tr>
+		<td><%= h user.full_name %></td>
+		<td><%= h user.store.name %></td>
+		<td><%= h user.store.status %></td>
+		<td><%= link_to "Ver", user %></td>
+		<td><%= link_to "Editar", edit_user_path(user) %></td>
+      	<td><%= link_to "Borrar", user, :confirm => 'Estas seguro?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+<p>
+	<%= will_paginate @users %>
+</p>
+
+<p>
+	<%= link_to	"Nuevo Cliente", new_store_path %>
+</p>
+<div style="clear:both"></div>
