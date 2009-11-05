@@ -11,11 +11,11 @@ class User < ActiveRecord::Base
   validates_presence_of     :names, :message => 'Debes proporcionar tu(s) nombre(s)'
   validates_presence_of     :last_names, :message => 'Debes proporcionar tu(s) apellido(s)'
   validates_presence_of     :city_id, :message => 'Debes proporcionar tu ciudad'
-  validates_presence_of     :address_1, :message => 'Debes proporcionar tu direcci&oacute;n'
+  validates_presence_of     :address1, :message => 'Debes proporcionar tu direcci&oacute;n'
   validates_presence_of     :phone, :message => 'Debes proporcionar tu tel&eacute;fono'
   
   validates_presence_of     :password,                   :if => :password_required?,
-                            :message => 'Debes proporcionar un passwords'
+                            :message => 'Debes proporcionar un password'
   validates_presence_of     :password_confirmation,      :if => :password_required?,
                             :message => 'Debes proporionar la confirmaci&oacute;n de tu password'
   validates_length_of       :password, :within => 4..40, :if => :password_required?,
@@ -28,8 +28,8 @@ class User < ActiveRecord::Base
   before_save               :encrypt_password
   before_create             :make_activation_code
   
-  attr_accessible :names, :last_names, :city_name, :address_1, :address_2, :phone, :phone_extension, :fax, :fax_extension, :email, :password, :password_confirmation
-  
+  attr_accessible :names, :last_names, :city_name, :address1, :address2,:zip, :phone, :phone_extension, :fax, :fax_extension, :email, :password, :password_confirmation
+    
   after_validation :validate_cities
   
   def full_name
@@ -113,15 +113,29 @@ class User < ActiveRecord::Base
   def recently_activated?
     @activated
   end
+  
+  def is_admin?
+    is_admin
+  end
+  
+  def unsubscribe!
+    store = self.store
+    store.unsubscribe_request!
+    UserMailer.deliver_unsubscribe_request(self)
+  end
+  
+  def already_requested?
+    self.store.unsubscribe_request?
+  end
 
   protected
   
     def validate_cities
        if !self.city and @cities
           if @cities.size > 1
-            errors.add(:city_id, "Encontramos muchas ciudades con el nombre que nos diste, por favor especif&iacute;cala en el formato <em>Ciudad, Estado</em>")
+            errors.add(:city_id, "We found many cities with your request, please be more specific using the <em>City, State</em> format")
           else @cities.size == 0
-            errors.add(:city_id, "No encontramos ninguna ciudad con el nombre que nos diste")
+            errors.add(:city_id, "We haven't found any city with your request")
           end
         end
     end

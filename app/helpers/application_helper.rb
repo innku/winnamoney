@@ -16,4 +16,8 @@ module ApplicationHelper
     end
   end
   
+  def display?(condition)
+    condition ? "" : "display:none"
+  end
+  
 end

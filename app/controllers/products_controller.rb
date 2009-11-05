@@ -1,12 +1,26 @@
 require "will_paginate"
 
 class ProductsController < ApplicationController
+  
+  before_filter :admin_required, :only => [:index, :new, :create, :edit, :update, :destroy]
+  before_filter :find_store, :only => [:show]
+  before_filter :find_cart, :only => [:show]
+  
   def index
-    @products = Product.all.paginate(:page => params[:page], :per_page => 20)
+    if params[:keyword]
+      keyword = params[:keyword].split.empty? ? nil : params[:keyword].split
+    end
+    category = params[:category] if params[:category] and params[:category].to_i > 0
+    @products = Product.name_or_product_key_like_all(keyword).tag_subcategory_category_id_like(category).paginate(:page => params[:page], :per_page => 10)
   end
   
   def show
     @product = Product.find(params[:id])
+    if @current_user.is_admin?
+      render 'show'
+    else
+      render 'details'
+    end
   end
   
   def new

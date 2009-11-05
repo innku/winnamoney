@@ -1,10 +1,13 @@
 class Store < ActiveRecord::Base
   
+  STATUS = [["Activated", "activated"], ["Stand By", "stand_by"], ["Contact Me", "contact_me"]]
+  
   belongs_to                :user
   belongs_to                :left, :class_name => 'Store', :foreign_key => 'left_id'
   belongs_to                :right, :class_name => 'Store', :foreign_key => 'right_id'
   belongs_to                :parent, :class_name => 'Store', :foreign_key => 'parent_id'
   belongs_to                :sponsor, :class_name => 'Store', :foreign_key => 'sponsor_id'
+  has_many                  :carts
   
   validates_presence_of     :name, :message => 'Tu tienda debe tener un nombre'
   validates_uniqueness_of   :name, :message => 'Ya existe una tienda con ese nombre'
@@ -14,8 +17,17 @@ class Store < ActiveRecord::Base
   named_scope               :with_status, lambda {|status| {:conditions => ["status = '#{status}'"]} }
   
   LANGUAGES=[['Español', 'spanish'],['English', 'english']]
-  POSITIONING= [['Automático','automatic'],['Por derecha','right'],['Por izquierda','left']]
+  POSITIONING= [['Automatic','automatic'],['Right','right'],['Left','left']]
   attr_accessible :name, :language, :sponsor_id, :positioning, :sponsor_name
+  
+  def self.with_subdomain(sub)
+    subdomain, domain = sub.split(".")
+    if ["www", "winnamoney"].include?(subdomain)
+      store = Store.first
+    else
+      Store.find_by_name(subdomain)
+    end
+  end
   
   def sponsor_name=(s_name)
     write_attribute(:sponsor_name, s_name)
@@ -27,8 +39,18 @@ class Store < ActiveRecord::Base
     if self.new_record?
       read_attribute(:sponsor_name)
     else
-      read_attribute(:sponsor_name) || [self.sponsor.user.full_name, self.sponsor.id].join(", ")
+      if self.sponsor
+        read_attribute(:sponsor_name) || [self.sponsor.user.full_name, self.sponsor.id].join(", ")
+      end
     end
+  end
+  
+  def active?
+    self.status == "activated" or self.status == "unsubscribe_request"
+  end
+  
+  def inactive?
+    self.status == "contact_me" or self.status == "stand_by" or self.status == "incomplete"
   end
   
   def activate!
@@ -44,6 +66,15 @@ class Store < ActiveRecord::Base
   def stand_by!
     self.status = 'stand_by'
     self.save
+  end
+  
+  def unsubscribe_request!
+    self.status = 'unsubscribe_request'
+    self.save
+  end
+  
+  def unsubscribe_request?
+    self.status == 'unsubscribe_request'
   end
   
   def user_is!(user)

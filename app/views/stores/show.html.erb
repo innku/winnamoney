@@ -1,0 +1,27 @@
+<% title store_title() %>
+
+<h1><%= store_heading %></h1>
+
+<%= list_tags %>
+
+<% form_tag(@store, :method => :get) do %>
+	<%= text_field_tag :q, params[:q] %>
+	<%= submit_tag "Search" %>
+<% end %>
+
+<br />
+
+<%= results_description %>
+
+
+<% @products.each do |product| %>
+		
+	<%= render :partial => 'stores/product', :object => product %>
+
+<% end %>
+
+<div class="clear"></div>
+
+<p>
+	<%= will_paginate @products %>
+</p>

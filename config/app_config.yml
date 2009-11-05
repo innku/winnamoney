@@ -1,0 +1,20 @@
+development:
+  domain: winnamoney.local
+  paypal_email: wsell_1257058028_biz@innku.com
+  paypal_secret: bocaboca
+  paypal_url: "https://www.sandbox.paypal.com/cgi-bin/webscr"
+
+test:
+  domain: localhost:3000
+
+production:
+  domain: winnamoney.com
+  paypal_email: paypal@winnamoney.com
+  paypal_secret: pastanaga01
+  paypal_url: "https://www.paypal.com/cgi-bin/webscr"
+
+staging:
+  domain: winnamoney.innku.com
+  paypal_email: wsell_1257058028_biz@innku.com
+  paypal_secret: bocaboca
+  paypal_url: "https://www.sandbox.paypal.com/cgi-bin/webscr"

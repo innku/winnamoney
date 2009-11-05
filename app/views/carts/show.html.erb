@@ -1,0 +1,37 @@
+<% title "Winnamoney | Checkout "%>
+
+<h1>My Cart</h1>
+
+<table id="cart_detail">
+	<tr>
+		<th>Name</th>
+		<th>Unit Price</th>
+		<th>Quantity</th>
+	</tr>
+	
+	<% @cart.items.each do |item|%>
+		<tr id="<%= item.id %>">
+			<td><%= link_to truncate(item.name,30), item.product %></td>
+			<td><%= number_to_currency item.product.selling_price %></td>
+			<td>
+				
+				<span><%= link_to "-", "#", :class => "decrease_cart_item"%></span>
+				<span class="item_quantity"><%= item.quantity %></span>
+				<%= hidden_field_tag :item_id, item.id %>
+				<span><%= link_to "+", "#", :class => "increase_cart_item"%></span>
+				<%= link_to "<small>Remove</small>", "#", :class => "remove_item_from_cart" %>
+			</td>
+		</tr>
+	<% end %>
+	
+</table>
+
+<p><strong>Total:</strong>&nbsp;<big id="cart_total_price"><%= number_to_currency @cart.price %></big></p>
+
+<p>
+	<%= link_to "Confirm and Checkout", new_cart_address_path(@cart) %>
+</p>
+
+<p>
+	<%= link_to "&laquo;&nbsp;Back", :back %>
+</p>

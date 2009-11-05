@@ -9,7 +9,11 @@ class UsersController < ApplicationController
         @users = User.store_status_is('activated').names_or_last_names_like_all(params[:q].to_s.split) + User.store_status_is('activated').store_id_is(params[:q])
       }
       format.html { 
-        @users = User.all.paginate(:page => params[:page], :per_page => 20)
+        if params[:keyword]
+          keyword = params[:keyword].split.empty? ? nil : params[:keyword].split
+        end
+        status = params[:status] unless params[:status] == "0"
+        @users = User.names_or_last_names_or_email_or_id_like_all(keyword).store_status_like(status).paginate(:page => params[:page], :per_page => 20)
       }
     end
   end
@@ -27,17 +31,64 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       self.current_user = @user
       redirect_to new_user_payment_information_path(@user)
-      flash[:notice] = "Tu informaci&oacute;n se guard&oacute; correctamente"
+      flash[:notice] = "Register successful!"
     else
+      logger.warn @user.errors.full_messages
       render :action => 'new'
     end
+  end
+  
+  def edit
+    @user = User.find(params[:id])
+    case params[:edit_action]
+      when "unsubscribe"
+        render 'unsubscribe'
+      when "change_password"
+        render 'change_password'
+      else
+        render
+    end
+  end
+  
+  def update
+    @user = User.find(params[:id])
+    case params[:update_action]
+      when "unsubscribe"
+        @current_user.unsubscribe!
+        flash[:notice] = "Your request was received successfully!"
+        redirect_to edit_user_path(@current_user, :edit_action => 'unsubscribe')
+      when "change_password"
+        if User.authenticate(@user.email, params[:old_password])
+          if not params[:user][:password].blank? and @user.update_attributes(params[:user])
+            flash[:info] = "The password changed successfully!"
+            redirect_to @user
+          else
+            flash[:error] = "Password change failed"
+            render 'change_password'
+          end
+        else
+          flash.now[:error] = "The current password you provided incorrect"
+          render 'change_password'
+        end
+      else
+        if @user.update_attributes(params[:user])
+          flash[:notice] = "Information updated successfully"
+          redirect_to @user
+        else
+          render :edit
+        end
+    end
+  end
+  
+  def show
+    @user = User.find(params[:id])
   end
 
   def activate
     self.current_user = params[:activation_code].blank? ? false : User.find_by_activation_code(params[:activation_code])
     if logged_in? && !current_user.active?
       current_user.activate
-      flash[:notice] = "Registro completo!"
+      flash[:notice] = "Register completed!"
     end
     redirect_back_or_default('/')
   end
@@ -46,7 +97,7 @@ class UsersController < ApplicationController
   
   def cant_create_user_without_store
     if session[:store_id].nil?
-      flash[:error] = "Para registrar tu informaci&oacute;n primero crea tu tienda"
+      flash[:error] = "Please create a store first"
       redirect_to new_store_path
       return false
     end
@@ -55,7 +106,7 @@ class UsersController < ApplicationController
   def provide_payment_information
     if session[:user_id]
       @user = User.find_by_id(session[:user_id])
-      flash[:notice] = "Por favor completa tu registro"
+      flash[:notice] = "Please complete registration"
       redirect_to new_user_payment_information_path(@user)
       return false
     end

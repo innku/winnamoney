@@ -1,5 +1,7 @@
 class SubcategoriesController < ApplicationController
   
+  before_filter :find_store, :only => [:show]
+  
   def index
     if params[:category_id]
       @subcategories = Category.find(params[:category_id]).subcategories
@@ -7,6 +9,12 @@ class SubcategoriesController < ApplicationController
         format.js { render :json => @subcategories.collect {|sc| {:id => sc.id, :name => sc.name } }.to_json }
       end
     end
+  end
+  
+  def show
+    @subcategory = Subcategory.find(params[:id])
+    @products = Product.tag_subcategory_id_is(params[:id]).all.paginate(:page => params[:page], :per_page => 12)
+    render 'stores/show', :layout => 'stores'
   end
   
 end

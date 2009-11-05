@@ -1,32 +1,31 @@
 <% title "Winnamoney | Registro" %>
 
-<h1>Informaci&oacute;n de mi suscripci&oacute;n</h1>
+<h1>Suscription information</h1>
 <table style="text-align:left;border:1px solid black;">
 	<tr>
-		<th>Nombre de tu tienda</th>
-		<th>Tiempo de suscripci&oacute;n</th>
-		<th>Cantidad a pagar</th>
+		<th>Store name</th>
+		<th>Suscription time</th>
+		<th>Amount</th>
 	</tr>
 	<tr>
 		<td>http://<%= @user.store.name %>.winnamoney.com</th>
-		<td>1 a&ntilde;o</th>
-		<td>100.00 US$</th>
+		<td>1 year</th>
+		<td>189.00 US$</th>
 	</tr>
 </table>
 
 <div class="tabs">
   <!-- tabs -->
 <br />
-  <strong>Tipo de pago:</strong>
+  <strong>Payment type:</strong>
   <ul class="tabNavigation" >
     <li><a href="#paypal">Paypal</a></li>
-    <li><a href="#deposit">Dep&oacute;sito Bancario</a></li>
+    <li><a href="#deposit">Bank deposit</a></li>
 	<li><a href="#other">Otro</a></li>
   </ul>
 
   <!-- tab containers -->
   <div id="paypal">
-	<p>Paypal es la manera m&aacute;s f&aacute;cil y r&aacute;pida de pagar por Internet</p>
     <%= render :partial => 'sandbox_subscription' %>
   </div>
   <div id="deposit">

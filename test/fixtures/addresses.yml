@@ -1,0 +1,13 @@
+one:
+  address_type: MyString
+  address1: MyString
+  address2: MyString
+  city_id: 1
+  zip: MyString
+
+two:
+  address_type: MyString
+  address1: MyString
+  address2: MyString
+  city_id: 1
+  zip: MyString

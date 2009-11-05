@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   def new
+    
   end
 
   def create
@@ -9,8 +10,12 @@ class SessionsController < ApplicationController
         current_user.remember_me unless current_user.remember_token?
         cookies[:auth_token] = { :value => self.current_user.remember_token , :expires => self.current_user.remember_token_expires_at }
       end
-      redirect_back_or_default('/')
       flash[:notice] = "Logged in successfully"
+      if current_user.is_admin?
+        redirect_back_or_default('/products')
+      else
+        redirect_back_or_default("http://#{current_user.store.name}.#{APP_CONFIG[:domain]}")
+      end
     else
       render :action => 'new'
     end

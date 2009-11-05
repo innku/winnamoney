@@ -1,0 +1,19 @@
+<%title "Winnamoney | Pending" %>
+
+<h1>Store pending setup</h1>
+
+<p>Your store is pending setup</p>
+
+<% if @store.status == "stand_by" %>
+	<p>As soon as we confirm your bank deposit, we'll activate your store and notify you by E-mail.</p>
+<% elsif @store.status == "contact_me" %>
+	<p>One of our representatives well get in touch with you to complete your subscription, as soon as this is done, we will activate your store and notify you by E-mail.</p>
+<% else %>
+	<p>
+		As soon as you complete your subscription with paypal or bank deposit, we will activate your account.
+	</p>
+<% end %>
+
+	<p>
+		If you have any doubts, please write us at <%= link_to "support@#{APP_CONFIG[:domain]}", "mailto:support@#{APP_CONFIG[:domain]}" %>.
+	</p>

@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title><%= h(yield(:title) || "Untitled") %></title>
+    <%= stylesheet_link_tag 'application', 'jquery-ui-1.7.2.custom' %>
+	<%= stylesheet_link_tag 'jquery.autocomplete' %>
+	<%= stylesheet_link_tag 'rte' %>
+	<%= javascript_include_tag 'jquery' %>
+	<%= javascript_include_tag 'jquery.autocomplete' %>
+	<%= javascript_include_tag 'jquery.rte', 'jquery-ui-1.7.2.custom.min' %>
+	<%= javascript_include_tag 'application' %>
+    <%= yield(:head) %>
+  </head>
+  <body>
+    <div id="container">
+      <%- flash.each do |name, msg| -%>
+        <%= content_tag :div, msg, :id => "flash_#{name}" %>
+      <%- end -%>
+	
+		<%= render :partial => "layouts/menu" %>
+		
+		<div id="categories">
+	  		<%= render :partial => 'layouts/categories' %>
+		</div>
+		
+      	<div id="content">
+      		<%= yield %>
+		</div>
+		
+		<div class="clear"></div>
+
+    </div>
+  </body>
+</html>

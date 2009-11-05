@@ -1,4 +1,15 @@
-<% title "Editar mi tienda" %>
+<% title "Winnamoney | My information" %>
+<h1>My information</h1>
+<% form_for @store do |f| %>
+  <%= error_messages_for @store %>
+  <p>
+    <%= f.label :language, "Language" %><br />
+    <%= f.select :language, Store::LANGUAGES  %>
+  </p>
+  <p>
+    <%= f.label :positioning, "Positioning" %><br />
+    <%= f.select :positioning, Store::POSITIONING %>
+  </p>
+  <p><%= f.submit "Update" %></p>
 
-<%= render :partial => 'form' %>
-
+<% end %>

@@ -17,4 +17,4 @@ end
 
 User.create(:names => 'Rafael', :last_names => 'Rosas', :email => 'rrosa@gmx.us', :city_name => 'Monterrey', :address_1 => 'San Pedro', :address_2 => 'Nuevo Leon', :phone => '8182441327', :password => 'winnamoney', :password_confirmation => 'winnamoney', :parent_id => nil)
 
-User.first.create_store(:name => 'www', :language => 'spanish', :sponsor_id => nil, :parent_id => nil, :positioning => 'automatic', :status => 'activated')
+User.first.create_store(:name => 'store', :language => 'spanish', :sponsor_id => nil, :parent_id => nil, :positioning => 'automatic', :status => 'activated')

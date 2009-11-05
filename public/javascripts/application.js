@@ -53,7 +53,7 @@ $(document).ready(function(){
 		return row[0] + ", " + row[1] ;
 	}
 
-	$("#user_city_name").autocomplete(
+	$("input.city_autocomplete").autocomplete(
 	"/cities",
 	{
 		matchSubset:true,
@@ -113,6 +113,66 @@ $(document).ready(function(){
 		formatItem:formatPerson,
 	}
 	);
+	
+	$("input#add_product_to_cart").click(
+		function(element){
+			$.post("/cart_items", { product_id: $("input#product_id").val() }, 
+			function(data){
+				$("div#cart").html(data);
+			});
+			return false;
+	});
+	
+	$("a.increase_cart_item").click(
+		function(){
+			$.post("/cart_items/" + $(this).closest("td").find("input").val(), 
+				   { update_action: "increase", _method: "put"  }, 
+					function(data){
+						$( "tr#"+ data.id + " span.item_quantity").html(data.new_quantity);
+						$("big#cart_total_price").html(data.new_total);
+					}, "json");
+			return false;	
+	});
+	
+	$("a.decrease_cart_item").click(
+		function(){
+			$.post("/cart_items/" + $(this).closest("td").find("input").val(), 
+				   { update_action: "decrease", _method: "put"  }, 
+					function(data){
+						if(parseInt(data.new_quantity) > 0){
+							$( "tr#"+ data.id + " span.item_quantity").html(data.new_quantity);
+						}else{
+							$( "tr#"+ data.id).remove();
+							if(data.redirect_cart)
+								history.go(-1);
+						}
+						$("big#cart_total_price").html(data.new_total);
+					}, "json");
+			return false;	
+	});
+	
+	$("a.remove_item_from_cart").click(
+		function(){
+			if(confirm("Are you sure?")){
+				$.post("/cart_items/" + $(this).closest("td").find("input").val(), 
+					   { _method: "delete"  }, 
+						function(data){
+							$( "tr#"+ data.id).remove();
+							$("big#cart_total_price").html(data.new_total);
+							if(data.redirect_cart)
+								history.go(-1);
+						}, "json");
+				return false;
+			}
+	});
+	
+	$("input#shipping_address_same_for_billing").change(function(){
+		if(!$(this).attr("checked")){
+			$("div#billing_address_form").show();
+		}else{
+			$("div#billing_address_form").hide();
+		}
+	});
 	
 	// --
 	

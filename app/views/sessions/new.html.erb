@@ -1,17 +1,17 @@
 <% title "Winnamoney" %>
-<h1>Entrar</h1>
+<h1>Login</h1>
 <% form_tag session_path do -%>
 
-<p><label for="login">Correo Electr&oacute;nico</label><br/>
+<p><label for="login">E-mail</label><br/>
 <%= text_field_tag 'email' %></p>
 
 <p><label for="password">Password</label><br/>
 <%= password_field_tag 'password' %></p>
 
-<p><label for="remember_me">Recordarme:</label>
+<p><label for="remember_me">Remember me:</label>
 <%= check_box_tag 'remember_me' %></p>
 
-<p><%= submit_tag 'Entrar' %></p>
+<p><%= submit_tag 'login' %></p>
 
-<p><%= link_to 'Registrarme', new_store_path %></p>
+<p><%= link_to 'Register', new_store_path %></p>
 <% end -%>

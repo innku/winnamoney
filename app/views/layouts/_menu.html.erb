@@ -1,0 +1,18 @@
+<p>
+<% if @current_user and @current_user.is_admin? %>
+  	<%= link_to "Products", products_path %> &nbsp;
+  	<%= link_to "Clients", users_path %> &nbsp;
+<%	elsif @current_user %>
+	<%= link_to "My store", "http://#{@current_user.store.name}.#{APP_CONFIG[:domain]}" %> &nbsp;
+	<%= link_to "Unsubscribe", edit_user_path(@current_user, :edit_action => 'unsubscribe') %> &nbsp; 
+	<%= link_to "My information", user_path(@current_user) %> &nbsp; 
+	<%= link_to "Change Password", edit_user_path(@current_user, :edit_action => 'change_password') %> &nbsp; 
+<% elsif controller_name != "sessions" %>
+	<%= link_to "Login", login_path %>
+<% end %>
+
+<%if @current_user%>
+	<%= link_to "Logout", logout_path %> &nbsp; 
+<% end %>
+
+</p>

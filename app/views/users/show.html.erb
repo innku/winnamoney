@@ -1,0 +1,55 @@
+<% title "Winnamoney | My information" %>
+
+<h1>My information</h1>
+
+<p>
+	<strong>Store location</strong><br />
+	<%= link_to "http://#{@user.store.name}.#{APP_CONFIG[:domain]}", "http://#{@user.store.name}.#{APP_CONFIG[:domain]}" %>
+</p>
+
+<p>
+	<strong>Store language</strong><br />
+	<%= @user.store.language.titleize %>
+</p>
+
+<p>
+	<strong>New account positioning</strong><br />
+	<%= @user.store.positioning.titleize %>
+</p>
+
+<p>
+	<%= link_to "Edit", edit_store_path(@user.store) %>
+</p>
+
+<hr />
+
+<p>
+	<strong>Name</strong><br />
+	<%= @user.full_name %>
+</p>
+
+<p>
+	<strong>Address</strong><br />
+	<%= format_address(@user.address1, @user.address2, @user.city_name, @user.zip) %>
+</p>
+
+<p>
+	<strong>Phone Number</strong><br />
+	<%= format_phone(@user.phone, @user.phone_extension) %>
+</p>
+
+<% if @user.fax %>
+	<p>
+		<strong>Fax Number</strong><br />
+		<%= format_phone(@user.fax, @user.fax_extension) %>
+	</p>
+<% end %>
+
+<p>
+	<strong>E-mail</strong><br />
+	<%= @user.email %>
+</p>
+
+<p>
+	<%= link_to "Edit", edit_user_path(@user) %>
+</p>

@@ -2,6 +2,10 @@ class Product < ActiveRecord::Base
   require 'fastercsv'
   FILE_PATH = File.join(RAILS_ROOT, "public/files", "products.csv")
   
+  belongs_to  :state
+  belongs_to  :tag
+  has_many    :cart_items
+  
   attr_accessible :name, :product_key, :description, :existence, :local_transport, :international_transport, :cost, :discount, :selling_price, :image_url, :handling, :state_name, :tag_id
   
   validates_presence_of     :name,
@@ -25,10 +29,15 @@ class Product < ActiveRecord::Base
   validates_numericality_of   :cost, :allow_nil => true,
                               :message => 'El costo debe ser num&eacute;rico'
 
-  belongs_to  :state
-  belongs_to  :tag
-  
+  named_scope                 :like, lambda {|q| {:include => :tag, :conditions => ["products.name LIKE '%%#{q}%%' or tags.name LIKE '%%#{q}%%'"]} }
+  named_scope                 :tag_group, {:group => 'tag_id'}
+  named_scope                 :category_group, {:include => {:tag => :subcategory}, :group => 'subcategory_id'}
+    
   attr_accessor :category_id, :subcategory_id
+  
+  def self.featured
+    Category.all.collect {|c| c.subcategories.first.tags.first.products.first if (not c.subcategories.first.nil? and not c.subcategories.first.tags.first.nil?) } - [nil]
+  end
   
   def category_id
     if tag

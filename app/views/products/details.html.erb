@@ -1,0 +1,30 @@
+<% title "Winnamoney | #{@product.name}" %>
+
+<div id="picture">
+	
+	<%= image_tag @product.small_image_url %>
+	
+	<div id="cart">
+		<%= render :partial => 'cart' %>
+	</div>
+	
+</div>
+
+<div id="description">
+	<h1><%= @product.name %></h1>
+	<p><%= @product.description %></p>
+	<p>Price: <%= number_to_currency @product.selling_price %></p>
+	<p>Product Key: <%= @product.product_key %></p>
+	
+	<% form_tag cart_items_path do  %>
+		<%= hidden_field_tag :product_id, @product.id %>
+		<%= submit_tag "Add Product", :id => 'add_product_to_cart' %>
+	<% end %>
+	
+</div>
+
+<div class="clear"></div>
+
+<p>
+	<%= link_to " &laquo;&nbsp;Back", :back %>
+</p>

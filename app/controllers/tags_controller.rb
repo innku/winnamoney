@@ -1,4 +1,7 @@
 class TagsController < ApplicationController
+  
+  before_filter :find_store, :only => [:show]
+  
   def index
     if params[:subcategory_id]
       @tags = Subcategory.find(params[:subcategory_id]).tags
@@ -7,4 +10,11 @@ class TagsController < ApplicationController
       end
     end
   end
+  
+  def show
+    @tag = Tag.find(params[:id])
+    @products = Product.tag_id_is(params[:id]).all.paginate(:page => params[:page], :per_page => 12)
+    render 'stores/show', :layout => 'stores'
+  end
+  
 end

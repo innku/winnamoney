@@ -1,0 +1,5 @@
+<div class="product">
+	<%= link_to image_tag(product.small_image_url), product_path(product) %><br />
+	<span class="name"><%= link_to product.name, product_path(product) %></span><br />
+	<span><em><%= number_to_currency product.selling_price %></em></span><br />
+</div>

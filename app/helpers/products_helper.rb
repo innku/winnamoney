@@ -5,4 +5,9 @@ module ProductsHelper
    options += "<option value='0'>Nueva categor&iacute;a...</option>"
    options
   end
+  
+  def all_categories_option
+    "<option value='0'>All categories</option>"
+  end
+  
 end

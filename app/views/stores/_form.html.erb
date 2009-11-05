@@ -1,21 +1,21 @@
 <% form_for @store do |f| %>
   <%= error_messages_for @store %>
   <p>
-    <%= f.label :name, "Nombre de la tienda" %><br />
+    <%= f.label :name, "Store name" %><br />
     http://&nbsp;<%= f.text_field :name %>.winnamoney.com<br />
 	<small style="display:none;color:red;" id="store_taken_warning">El nombre ya esta ocupado por alguien m&aacute;s</small>
   </p>
   <p>
-    <%= f.label :language, "Idioma" %><br />
+    <%= f.label :language, "Language" %><br />
     <%= f.select :language, Store::LANGUAGES  %>
   </p>
   <p>
-    <%= f.label :sponsor_name, "Nombre o ID de tu sponsor (Si tienes uno)" %><br />
+    <%= f.label :sponsor_name, "Sponsor Name or ID (If you have one)" %><br />
     <%= f.text_field :sponsor_name %>
   </p>
   <p>
-    <%= f.label :positioning, "Tipo de posicionamiento" %><br />
+    <%= f.label :positioning, "Positioning" %><br />
     <%= f.select :positioning, Store::POSITIONING %>
   </p>
-  <p><%= f.submit "Guardar" %></p>
+  <p><%= f.submit "Save" %></p>
 <% end %>

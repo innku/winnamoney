@@ -1,0 +1,21 @@
+<% unless @cart.empty? %>
+	<h2>Cart</h2>
+	<table>
+		<% @cart.items.each do |item| %>
+			<tr>
+				<td><%= truncate item.name, 15 	  %></td>
+				<td><%= item.quantity %></td>
+				<td><%= number_to_currency item.price %></td>
+			</tr>
+		<% end %>
+		<tr>
+			<td colspan="2">Total</td>
+			<td><strong><%= number_to_currency @cart.price %></strong></td>
+		</tr>
+	</table>
+	<p><%= link_to "Checkout", @cart %></p>
+<% else %>
+	<p>
+		You have no items on your cart.
+	</p>
+<% end %>

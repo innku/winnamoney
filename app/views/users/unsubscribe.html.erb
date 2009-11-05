@@ -1,0 +1,20 @@
+<% title "Winnamoney | Unsubscribe"%>
+<h1>Unsubscribe</h1>
+
+<% unless @current_user.already_requested? %>
+
+	<p>
+		If you are sure you want to unsubscribe from Winnamoney, please click the following button:
+	</p>
+
+	<% form_for @current_user do |f| %>
+		<%= hidden_field_tag :update_action, 'unsubscribe' %>
+		<%= f.submit "Unsubscribe" %>
+	<% end %>
+<% else %>
+	<p>Your request to unsubscribe is now been processed by our agents at Winnamoney.</p>
+	
+	<p>Until this request completes, your store will still be active</p>
+	
+	<p>As soon as it is complete you will receive an e-mail. Thank you</p>
+<% end %>

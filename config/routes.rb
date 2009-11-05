@@ -1,10 +1,18 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :addresses
+
   map.resources :payment_notifications
 
   map.resources :stores
 
   map.resources :users do |user|
     user.resource :payment_information, :controller => 'payment_information'
+  end
+  
+  map.resources :cart_items
+  
+  map.resources :carts do |cart|
+    cart.resources :addresses
   end
   
   map.resource  :session
@@ -15,7 +23,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :subcategories
   map.resources :tags
   
-  map.home '/', :controller => 'sessions', :action => 'new'
+  map.home '/', :controller => 'stores', :action => 'index', :index_action => 'redirect_to_store'
+  
   map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate', :activation_code => nil
   map.signup '/registro', :controller => 'users', :action => 'new'
   map.login '/login', :controller => 'sessions', :action => 'new'

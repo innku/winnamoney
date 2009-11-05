@@ -36,14 +36,10 @@ Rails::Initializer.run do |config|
   config.time_zone = 'UTC'
   config.gem 'will_paginate'
   config.gem "searchlogic"
+  config.gem 'mbleigh-subdomain-fu', :source => "http://gems.github.com", :lib => "subdomain-fu"
   config.active_record.observers = :user_observer
 
   # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
   # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
   # config.i18n.default_locale = :de
-  
-  if $0 == 'irb'
-    require 'hirb'
-    Hirb.enable
-  end  
 end
