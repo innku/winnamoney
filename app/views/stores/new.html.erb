@@ -1,7 +1,8 @@
 <% title "Winnamoney | Registro" %>
-
-<small>Step 1.</small><br />
-
-<h1>My Store</h1>
+<% if @current_user.nil?%>
+	<h1>My Store</h1>
+<%else%>
+	<h1>Store Information</h1>
+<% end %>
 
 <%= render :partial => 'form' %>

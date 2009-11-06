@@ -5,6 +5,8 @@ class ProductsController < ApplicationController
   before_filter :admin_required, :only => [:index, :new, :create, :edit, :update, :destroy]
   before_filter :find_store, :only => [:show]
   before_filter :find_cart, :only => [:show]
+  before_filter :clear_register_session, :only => [:show]
+  
   
   def index
     if params[:keyword]
@@ -16,7 +18,7 @@ class ProductsController < ApplicationController
   
   def show
     @product = Product.find(params[:id])
-    if @current_user.is_admin?
+    if @current_user and @current_user.is_admin?
       render 'show'
     else
       render 'details'

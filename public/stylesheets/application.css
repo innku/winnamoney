@@ -3,6 +3,7 @@
 	border: 1px solid #660000;
 	padding: .5em;
 	margin-bottom: 20px;
+	margin-top:10px;
 	background: #EBCCCC;
 	clear: both;
 	text-align: left;
@@ -146,6 +147,7 @@ div.clear{
 
 table{
 	text-align:left;
+	border:1px solid black;
 }
 
 td, th{
@@ -170,6 +172,16 @@ div.product{
 	float:left;
 	width:200px;
 	height:260px;
+}
+
+ul.tabNavigation{
+	list-style-type:none;
+	padding:0px;
+}
+
+ul.tabNavigation li{
+	float:left;
+	margin-right:15px;
 }
 
 div#picture{

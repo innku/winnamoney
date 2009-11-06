@@ -26,3 +26,15 @@ config.action_view.cache_template_loading            = true
 
 # Enable threaded mode
 # config.threadsafe!
+
+config.after_initialize do
+  ActiveMerchant::Billing::Base.mode = :production
+  paypal_options = {
+    :login => "wsell_1257058028_biz_api1.innku.com",
+    :password => "1257058061",
+    :signature => "A8vRYyLBrwgszDoaGl7GW6XElR-6Aco-MRZNFvTcS4QLMyKGEqUXHMg8"
+  }
+  
+  ::STANDARD_GATEWAY = ActiveMerchant::Billing::PaypalGateway.new(paypal_options)
+  ::EXPRESS_GATEWAY = ActiveMerchant::Billing::PaypalExpressGateway.new(paypal_options)
+end

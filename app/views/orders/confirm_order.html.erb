@@ -1,0 +1,45 @@
+<% title "Winnamoney | Checkout | Payment Information" %>
+<h1>Payment Information</h1>
+<h2>Items in your Cart</h2>
+<table id="cart_detail">
+	<tr>
+		<th>Name</th>
+		<th>Quantity</th>
+		<th>Unit Price</th>
+		<th>Price</th>
+	</tr>
+	
+	<% @cart.items.each do |item|%>
+		<tr id="<%= item.id %>">
+			<td><%= truncate(item.name,30) %></td>
+			<td><%= item.quantity %></td>
+			<td><%= number_to_currency item.product.selling_price %></td>
+			<td><%= number_to_currency item.price %></td>
+		</tr>
+	<% end %>
+	
+</table>
+<h2>Order Summary</h2>
+<table>
+	<tr>
+		<td>Items Price</td>
+		<td><%= number_to_currency @cart.price %></td>
+	</tr>
+	<tr>
+		<td>Taxes</td>
+		<td><%= number_to_currency @cart.taxes %></td>
+	</tr>
+	<tr>
+		<td>Total</td>
+		<td><strong><%= number_to_currency @cart.total %></strong></td>
+	</tr>
+</table>
+<% if @express_checkout_order.express_token.blank? %>
+	<h2>Payment Information</h2>
+	<h3>Credit Card</h3>
+	<%= render :partial => 'payments_pro_form', :locals => {:order => @credit_card_order } %>
+	<h3>You can also checkout with Paypal Express Checkout</h3>
+	<%= link_to image_tag("http://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif"), express_new_order_path %>	
+<% else %>
+	<%= render :partial => 'paypal_express_form', :locals => {:order => @express_checkout_order } %>
+<% end %>

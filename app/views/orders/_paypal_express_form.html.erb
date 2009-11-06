@@ -1,0 +1,7 @@
+<h2>Order confirmation</h2>
+<p>Name: <%= h order.first_name %> <%= h order.last_name %></p>
+<% form_for order do |f| %>
+	<%= f.hidden_field :express_token %>
+	<%= f.hidden_field :order_type %>
+	<%= f.submit "Complete Transaction"%>
+<% end %>

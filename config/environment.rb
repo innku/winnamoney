@@ -37,6 +37,7 @@ Rails::Initializer.run do |config|
   config.gem 'will_paginate'
   config.gem "searchlogic"
   config.gem 'mbleigh-subdomain-fu', :source => "http://gems.github.com", :lib => "subdomain-fu"
+  config.gem 'activemerchant', :lib => 'active_merchant', :version => '1.4.2'
   config.active_record.observers = :user_observer
 
   # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.

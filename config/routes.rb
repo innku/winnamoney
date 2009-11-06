@@ -5,9 +5,8 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :stores
 
-  map.resources :users do |user|
-    user.resource :payment_information, :controller => 'payment_information'
-  end
+  map.resources :users
+  map.resources :orders, :new => {:express => :get}
   
   map.resources :cart_items
   

@@ -1,10 +1,13 @@
 class SessionsController < ApplicationController
+  
+  before_filter :find_store, :only => [:create]
+  
   def new
     
   end
 
   def create
-    self.current_user = User.authenticate(params[:email], params[:password])
+    self.current_user = User.authenticate(@store.id, params[:email], params[:password])
     if logged_in?
       if params[:remember_me] == "1"
         current_user.remember_me unless current_user.remember_token?
@@ -17,6 +20,7 @@ class SessionsController < ApplicationController
         redirect_back_or_default("http://#{current_user.store.name}.#{APP_CONFIG[:domain]}")
       end
     else
+      flash[:error] = "Your login information is incorrect"
       render :action => 'new'
     end
   end

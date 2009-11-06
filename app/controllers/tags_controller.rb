@@ -1,6 +1,7 @@
 class TagsController < ApplicationController
   
   before_filter :find_store, :only => [:show]
+  before_filter :clear_register_session, :only => [:show]
   
   def index
     if params[:subcategory_id]

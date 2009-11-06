@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   
   belongs_to                :city
   has_one                   :store
-  has_one                   :payment_information
+  has_many                  :orders
 
   validates_presence_of     :email, :message => 'Debes tener un correo electr&oacute;nico'
   validates_presence_of     :names, :message => 'Debes proporcionar tu(s) nombre(s)'
@@ -65,8 +65,13 @@ class User < ActiveRecord::Base
   end
 
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
-  def self.authenticate(email, password)
-    u = find :first, :conditions => ['email = ? and activated_at IS NOT NULL', email] # need to get the salt
+  def self.authenticate(store, email, password)
+    s = Store.find :first, :conditions => ['id = ?', store]
+    unless s.nil?
+      u = s.user if s.user.email == email and !s.user.activated_at.nil?
+    end
+    # u = find :first, :conditions => ['store_id email = ? and activated_at IS NOT NULL', email] # need to get the salt
+    logger.warn u.inspect
     u && u.authenticated?(password) ? u : nil
   end
 

@@ -15,3 +15,17 @@ config.action_controller.perform_caching             = false
 
 # Don't care if the mailer can't send
 config.action_mailer.raise_delivery_errors = false
+
+  
+config.after_initialize do
+  ActiveMerchant::Billing::Base.mode = :test
+  
+  paypal_options = {
+    :login => "wsell_1257058028_biz_api1.innku.com",
+    :password => "1257058061",
+    :signature => "A8vRYyLBrwgszDoaGl7GW6XElR-6Aco-MRZNFvTcS4QLMyKGEqUXHMg8"
+  }
+  
+  ::STANDARD_GATEWAY = ActiveMerchant::Billing::PaypalGateway.new(paypal_options)
+  ::EXPRESS_GATEWAY = ActiveMerchant::Billing::PaypalExpressGateway.new(paypal_options)
+end

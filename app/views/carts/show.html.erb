@@ -1,6 +1,8 @@
-<% title "Winnamoney | Checkout "%>
+<% title "Winnamoney | Checkout | Review your Order" %>
 
-<h1>My Cart</h1>
+<h1>Review your Order</h1>
+
+<h2>Cart</h2>
 
 <table id="cart_detail">
 	<tr>
@@ -28,10 +30,69 @@
 
 <p><strong>Total:</strong>&nbsp;<big id="cart_total_price"><%= number_to_currency @cart.price %></big></p>
 
-<p>
-	<%= link_to "Confirm and Checkout", new_cart_address_path(@cart) %>
-</p>
+<% if @cart.addresses.empty? %>
+	<h2>Delivery and Billing</h2>
 
+	<h3>Shipping Address</h3>
+
+	<% form_for :shipping_address, @shipping_address, :url => addresses_path do |f| %>
+
+	  <%= error_messages_for @shipping_address %>
+
+	  <p>
+	    <%= f.label :address1 , "Address"%><br />
+	    <%= f.text_field :address1 %><br /><br />
+	    <%= f.text_field :address2 %>
+	  </p>
+
+	  <p>
+	    <%= f.label :city_name %><br />
+	    <%= f.text_field :city_name, :class => 'city_autocomplete' %>
+	  </p>
+
+	  <p>
+	    <%= f.label :zip %><br />
+	    <%= f.text_field :zip %>
+	  </p>
+	
+	  <p>
+		<%= f.label 	:same_for_billing, "Same information for Billing" %> 
+		<%= f.check_box :same_for_billing %>
+	  </p>
+
+
+	  <div id="billing_address_form" style="<%= display?(!@shipping_address.same_for_billing?) %>">
+		<h3>Billing Address</h3>
+		<% fields_for :billing_address, @billing_address do |b| %>
+			<%= error_messages_for @billing_address %>
+			<%= b.hidden_field :address_type %>
+			<p>
+		    <%= b.label :address1 , "Address"%><br />
+		    <%= b.text_field :address1 %><br /><br />
+		    <%= b.text_field :address2 %>
+		  </p>
+
+		  <p>
+		    <%= b.label :city_name %><br />
+		    <%= b.text_field :city_name , :class => 'city_autocomplete' %>
+		  </p>
+
+		  <p>
+		    <%= b.label :zip %><br />
+		    <%= b.text_field :zip %>
+		  </p>
+		<% end %>
+	
+	  </div>
+
+	  <p><%= f.submit "Save" %></p>
+
+	<% end %>
+<% else %>
+	<p>
+		<%= link_to "Confirm Items and Pay", new_order_path %>
+	</p>
+<% end %>
 <p>
 	<%= link_to "&laquo;&nbsp;Back", :back %>
 </p>

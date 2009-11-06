@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   
   before_filter :cant_create_user_without_store, :only => [:new, :create]
-  before_filter :provide_payment_information, :only => [:new, :create]
 
   def index
     respond_to do |format|
@@ -28,9 +27,8 @@ class UsersController < ApplicationController
     @user.save
     if @user.errors.empty?
       Store.find(session[:store_id]).user_is!(@user)
-      session[:user_id] = @user.id
-      self.current_user = @user
-      redirect_to new_user_payment_information_path(@user)
+      session[:registered_user_id] = @user.id
+      redirect_to new_order_path()
       flash[:notice] = "Register successful!"
     else
       logger.warn @user.errors.full_messages
@@ -103,12 +101,4 @@ class UsersController < ApplicationController
     end
   end
   
-  def provide_payment_information
-    if session[:user_id]
-      @user = User.find_by_id(session[:user_id])
-      flash[:notice] = "Please complete registration"
-      redirect_to new_user_payment_information_path(@user)
-      return false
-    end
-  end
 end

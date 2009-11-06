@@ -2,6 +2,7 @@ class StoresController < ApplicationController
   
   before_filter      :cant_create_two_stores, :only => [:create]
   before_filter      :find_store, :only => [:show]
+  before_filter      :clear_register_session, :only => [:show]
   
   def index
     respond_to do |format|
@@ -32,7 +33,7 @@ class StoresController < ApplicationController
   def show
     products = params[:q].nil? ? Product.featured : Product.like(params[:q])
     @products = products.paginate(:page => params[:page], :per_page => 12)
-    if @current_user and @store.inactive?
+    if @current_user and @current_store.inactive?
       render :action => 'pending', :layout => 'application'
     else
       render
@@ -40,7 +41,8 @@ class StoresController < ApplicationController
   end
   
   def new
-    @store = Store.find_by_id(session[:store_id]) || Store.new(:sponsor_id => nil)
+    @store = Store.find_by_id(session[:store_id]) || Store.new()
+    @store.sponsor_id = @store.id if @current_user
     render :layout => 'application'
   end
   

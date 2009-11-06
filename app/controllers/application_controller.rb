@@ -15,8 +15,8 @@ class ApplicationController < ActionController::Base
   
   def current_store
     subdomain, domain = current_subdomain().split(".")
-    @store = Store.find_by_name("subdomain") || Store.first
-    @store
+    @current_store = Store.find_by_name("subdomain") || Store.first
+    @current_store
   end
   
   def admin_required
@@ -28,12 +28,12 @@ class ApplicationController < ActionController::Base
   end
   
   def find_store
-    @store = Store.with_subdomain(current_subdomain)
-    if @store.nil?
+    @current_store = Store.with_subdomain(current_subdomain)
+    if @current_store.nil?
       flash[:error] = "The store you were looking for doesn't exist"
       redirect_to new_session_path
       return false
-    elsif @store.inactive? and not (@current_user and @current_user.store == @store)
+    elsif @current_store.inactive? and not (@current_user and @current_user.store == @current_store)
       flash[:error] = "The store you are looking for is not active yet"
       redirect_to new_session_path
       return false
@@ -41,10 +41,24 @@ class ApplicationController < ActionController::Base
   end
   
   def find_cart
-    unless @current_user and @current_user.is_admin?
-      @cart = @store.carts.find_by_id(session[:cart_id])
-      session[:cart_id] = @store.carts.create().id if @cart.nil?
+    unless (@current_user and @current_user.is_admin?) or session[:register_user_id]
+      @cart = @current_store.carts.find_by_id(session[:cart_id])
+      session[:cart_id] = @current_store.carts.create().id if @cart.nil?
     end
+  end
+  
+  def in_register_process?
+    not session[:registered_user_id].nil?
+  end
+  
+  
+  def clear_register_session
+    session[:store_id] = nil
+    session[:registered_user_id] = nil
+  end
+  
+  def clear_shopping_session
+    session[:cart_id] = nil
   end
   
 end

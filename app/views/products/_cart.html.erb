@@ -1,4 +1,4 @@
-<% unless @cart.empty? %>
+<% if !@cart.nil? and !@cart.empty? %>
 	<h2>Cart</h2>
 	<table>
 		<% @cart.items.each do |item| %>

@@ -1,7 +1,7 @@
 class CreateCarts < ActiveRecord::Migration
   def self.up
     create_table :carts do |t|
-      t.string :status, :default => 'new'
+      t.string :status, :default => 'in_process'
       t.timestamps
     end
   end

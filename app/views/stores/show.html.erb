@@ -4,7 +4,7 @@
 
 <%= list_tags %>
 
-<% form_tag(@store, :method => :get) do %>
+<% form_tag(@current_store, :method => :get) do %>
 	<%= text_field_tag :q, params[:q] %>
 	<%= submit_tag "Search" %>
 <% end %>

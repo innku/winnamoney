@@ -9,10 +9,14 @@
     <%= f.label :language, "Language" %><br />
     <%= f.select :language, Store::LANGUAGES  %>
   </p>
-  <p>
-    <%= f.label :sponsor_name, "Sponsor Name or ID (If you have one)" %><br />
-    <%= f.text_field :sponsor_name %>
-  </p>
+  <% if @current_user.nil? %>
+	  <p>
+	    <%= f.label :sponsor_name, "Sponsor Name or ID (If you have one)" %><br />
+	    <%= f.text_field :sponsor_name %>
+	  </p>
+  <% else %>
+	  <%= f.hidden_field :sponsor_id %>
+  <% end %>
   <p>
     <%= f.label :positioning, "Positioning" %><br />
     <%= f.select :positioning, Store::POSITIONING %>

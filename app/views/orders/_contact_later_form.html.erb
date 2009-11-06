@@ -1,0 +1,5 @@
+<% form_for order, :url => orders_path() do |f| %>
+	<%= f.hidden_field :payment_method %>
+	<%= f.hidden_field :order_type %>
+	<%= f.submit "Finalizar Registro" %>
+<% end %>

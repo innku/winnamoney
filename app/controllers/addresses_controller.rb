@@ -1,11 +1,6 @@
 class AddressesController < ApplicationController
   
-  before_filter :find_store, :find_cart, :cant_create_more_addresses
-  
-  def new
-    @shipping_address = Address.new(:same_for_billing => true)
-    @billing_address = Address.new(:address_type => 'billing')
-  end
+  before_filter :find_store, :find_cart, :already_has_address
   
   def create
     @shipping_address = @cart.addresses.build(params[:shipping_address])
@@ -14,18 +9,18 @@ class AddressesController < ApplicationController
       @shipping_address.save
       @billing_address.save if @billing_address
       flash[:notice] = "Successfully saved addresses."
-      redirect_to current_store
+      redirect_to new_order_path
     else
-      @billing_address ||= @cart.addresses.build(:address_type => 'billing')
-      render :action => 'new'
+      flash[:error] = "Please enter a correct address"
+      redirect_to @cart
     end
   end
   
   protected
   
-  def cant_create_more_addresses
+  def already_has_address
     unless @cart.addresses.empty?
-      redirect_to current_store
+      redirect_to @cart
       return false
     end
   end
