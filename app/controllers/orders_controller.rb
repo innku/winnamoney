@@ -45,6 +45,7 @@ class OrdersController < ApplicationController
     if not in_register_process?
       @order = @cart.orders.build
     else
+      @user = User.find(session[:registered_user_id])
       @order = @user.orders.build
     end
     response = EXPRESS_GATEWAY.setup_purchase(@order.price_in_cents, 

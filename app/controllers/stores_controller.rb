@@ -1,7 +1,7 @@
 class StoresController < ApplicationController
   
   before_filter      :cant_create_two_stores, :only => [:create]
-  before_filter      :find_store, :only => [:show]
+  before_filter      :find_store, :only => [:index, :new, :show]
   before_filter      :clear_register_session, :only => [:show]
   
   def index
@@ -23,6 +23,12 @@ class StoresController < ApplicationController
             flash[:error] = "The store you're looking for doesn't exist"
             format.html { redirect_to new_session_path }
           end
+        when "referrals"
+          @stores = @current_store.referrals.paginate(:page => params[:page], :per_page => 20)
+          format.html { render :layout => 'application'}
+        when "downline"
+          @stores = @current_store.downline(3)
+          format.html {render :action => 'downline', :layout => 'application'}
         else
           @stores = Store.all.paginate(:page => params[:page], :per_page => 20)
           format.html { }
@@ -42,7 +48,8 @@ class StoresController < ApplicationController
   
   def new
     @store = Store.find_by_id(session[:store_id]) || Store.new()
-    @store.sponsor_id = @store.id if @current_user
+    @store.sponsor_id = @current_store.id if @current_store
+    logger.warn @current_store.inspect
     render :layout => 'application'
   end
   

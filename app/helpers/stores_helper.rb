@@ -14,7 +14,7 @@ module StoresHelper
     elsif @tag
       return @tag.subcategory.name + " &raquo; " + @tag.name
     else
-      return "#{@store.name.titleize} Store"
+      return "#{@current_store.name.titleize} Store"
     end
   end
   

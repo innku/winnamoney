@@ -50,7 +50,7 @@ class Order < ActiveRecord::Base
   def complete!
     self.status = 'complete'
     self.cart.complete! if self.product_purchase?
-    self.store.activate! if self.suscription?
+    self.user.store.activate! if self.suscription?
     self.save
   end
   

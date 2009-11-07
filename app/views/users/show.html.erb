@@ -17,8 +17,12 @@
 	<%= @user.store.positioning.titleize %>
 </p>
 
-<p>
-	<%= link_to "Edit", edit_store_path(@user.store) %>
+<p>	
+	<%= link_to "Edit Store", edit_store_path(@user.store) %> &nbsp; 
+	<%= link_to "Change Password", edit_user_path(@current_user, :edit_action => 'change_password') %> 
+	 &nbsp; 
+	<%= link_to "Unsubscribe", edit_user_path(@current_user, :edit_action => 'unsubscribe') %>
+	
 </p>
 
 <hr />

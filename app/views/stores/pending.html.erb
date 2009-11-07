@@ -4,9 +4,9 @@
 
 <p>Your store is pending setup</p>
 
-<% if @store.status == "stand_by" %>
+<% if @current_store.status == "stand_by" %>
 	<p>As soon as we confirm your bank deposit, we'll activate your store and notify you by E-mail.</p>
-<% elsif @store.status == "contact_me" %>
+<% elsif @current_store.status == "contact_me" %>
 	<p>One of our representatives well get in touch with you to complete your subscription, as soon as this is done, we will activate your store and notify you by E-mail.</p>
 <% else %>
 	<p>

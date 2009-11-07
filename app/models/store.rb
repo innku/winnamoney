@@ -18,7 +18,8 @@ class Store < ActiveRecord::Base
   
   LANGUAGES=[['Español', 'spanish'],['English', 'english']]
   POSITIONING= [['Automatic','automatic'],['Right','right'],['Left','left']]
-  attr_accessible :name, :language, :sponsor_id, :positioning, :sponsor_name
+  attr_accessible :name, :language, :sponsor_id, :positioning, :sponsor_name, :parent_id
+  attr_accessor   :level
   
   def self.with_subdomain(sub)
     subdomain, domain = sub.split(".")
@@ -105,6 +106,38 @@ class Store < ActiveRecord::Base
   def toggle_position!
     self.auto_turn = (self.auto_turn == 'right') ? 'left' : 'right'
     self.save
+  end
+  
+  def referrals
+    Store.sponsor_id_is(self.id)
+  end
+  
+  def downline(levels)
+    q = Queue.new
+    q << self.set_level(0)
+    result = []
+    while !q.empty? do
+      node = q.pop
+      result << node
+      if node.level < levels and !node.new_record?
+        unless node.left.nil?
+          q << node.left.set_level(node.level + 1)
+        else
+          q << Store.new(:parent_id => node.id).set_level(node.level + 1)
+        end
+        unless node.right.nil?  
+          q << node.right.set_level(node.level + 1) 
+        else
+          q << Store.new(:parent_id => node.id).set_level(node.level + 1)
+        end
+      end
+    end
+    result
+  end
+  
+  def set_level(l)
+    self.level = l
+    self
   end
   
   protected
