@@ -26,16 +26,16 @@
 	    <th>Cliente</th>
 	    <th>Tienda</th>
 		<th>Status</th>
-	    <th>Editar</th>
-	    <th>Borrar</th>
+	    <th></th>
+	    <th></th>
 	  </tr>
 	  <% for user in @users %>
 	    <tr>
 			<td><%= link_to h(user.full_name), user %></td>
 			<td><%= h user.store.name %></td>
 			<td><%= h user.store.status %></td>
-			<td><%= link_to "Editar", edit_user_path(user) %></td>
-	      	<td><%= link_to "Borrar", user, :confirm => 'Estas seguro?', :method => :delete %></td>
+			<td><%= link_to "Edit", edit_user_path(user) %></td>
+	      	<td><%= link_to "Delete", user, :confirm => 'Estas seguro?', :method => :delete %></td>
 	    </tr>
 	  <% end %>
 	</table>

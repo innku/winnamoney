@@ -14,6 +14,9 @@
 	<h1><%= @product.name %></h1>
 	<p><%= @product.description %></p>
 	<p>Price: <%= number_to_currency @product.selling_price %></p>
+	<% if @current_store.owner?(@current_user) %>
+	<p>Winamonney Special Price : <%= number_to_currency @product.price_for_owner %></p>
+	<% end %>
 	<p>Product Key: <%= @product.product_key %></p>
 	
 	<% form_tag cart_items_path do  %>

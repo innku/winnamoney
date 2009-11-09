@@ -1,6 +1,17 @@
 <% title "Winnamoney | My information" %>
 
-<h1>My information</h1>
+<% if @current_user and @current_user.is_admin? %>
+	<h1>User information</h1>
+	<% if @user.store.payment_due? %>
+		<p>
+			<strong>Store Status</strong><br />
+			<%= @user.store.status %><br />
+			<%= link_to "Complete Payment", new_order_payment_path(@user.orders.order_type_like("suscription")) %>
+		</p>
+	<% end %>
+<% else %>
+	<h1>My information</h1>
+<% end %>
 
 <p>
 	<strong>Store location</strong><br />

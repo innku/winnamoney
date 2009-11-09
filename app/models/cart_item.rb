@@ -7,7 +7,11 @@ class CartItem < ActiveRecord::Base
   end
   
   def price
-    self.quantity * self.product.selling_price
+    self.quantity * (self.cart.owner_purchase? ? self.product.price_for_owner : self.product.selling_price)
+  end
+  
+  def unit_price
+    (self.cart.owner_purchase? ? self.product.price_for_owner : self.product.selling_price)
   end
   
   def increase!

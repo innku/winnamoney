@@ -1,8 +1,6 @@
 class OrdersController < ApplicationController
   before_filter :find_store, :only => [:new, :create, :express]
   before_filter :find_cart, :only => [:new, :create, :express]
-  after_filter  :clear_register_session, :only => [:create]
-  after_filter  :clear_shopping_session, :only => [:create]
   
   def new
     if not in_register_process?
@@ -25,6 +23,8 @@ class OrdersController < ApplicationController
     end
     @order.ip_address = request.remote_ip
     if @order.save
+      clear_register_session
+      clear_shopping_session
       case @order.payment_method
         when "credit_card"
           if @order.purchase!
@@ -34,6 +34,12 @@ class OrdersController < ApplicationController
             @order.decline!
             render 'failure_credit_card'
           end
+        when "deposit"
+          @order.user.store.stand_by!
+          render 'success_deposit'
+        when "contact_later"
+          @order.user.store.contact_me!
+          render 'success_contact'
       end
     else
       build_all_order_types(@order)

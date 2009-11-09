@@ -5,9 +5,13 @@ class Cart < ActiveRecord::Base
   has_many    :products, :through => :cart_items
   has_many    :addresses
   has_many    :orders
-  
+    
   def empty?
     self.items.empty?
+  end
+  
+  def owner_purchase?
+    self.owner_purchase
   end
   
   def price
@@ -22,7 +26,7 @@ class Cart < ActiveRecord::Base
     taxes=0
     shipping_state = self.addresses.find_by_address_type("shipping").city.state
     self.items.each do |item|
-      taxes+= item.product.tax if shipping_state == item.product.state
+      taxes+= (item.price * (item.product.tax/100)) if shipping_state == item.product.state
     end
     taxes
   end

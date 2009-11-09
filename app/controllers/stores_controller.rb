@@ -1,7 +1,6 @@
 class StoresController < ApplicationController
   
-  before_filter      :cant_create_two_stores, :only => [:create]
-  before_filter      :find_store, :only => [:index, :new, :show]
+  before_filter      :find_store, :only => [:index, :new, :show, :edit, :update]
   before_filter      :clear_register_session, :only => [:show]
   
   def index
@@ -27,7 +26,9 @@ class StoresController < ApplicationController
           @stores = @current_store.referrals.paginate(:page => params[:page], :per_page => 20)
           format.html { render :layout => 'application'}
         when "downline"
-          @stores = @current_store.downline(3)
+          @levels = 3
+          @store = Store.find_by_id(params[:id]) || @current_store
+          @stores = @store.downline(:levels => @levels)
           format.html {render :action => 'downline', :layout => 'application'}
         else
           @stores = Store.all.paginate(:page => params[:page], :per_page => 20)
@@ -47,9 +48,10 @@ class StoresController < ApplicationController
   end
   
   def new
-    @store = Store.find_by_id(session[:store_id]) || Store.new()
+    @store = Store.new()
     @store.sponsor_id = @current_store.id if @current_store
-    logger.warn @current_store.inspect
+    @store.parent_id = params[:parent_id]
+    @store.side = params[:side]
     render :layout => 'application'
   end
   
@@ -66,18 +68,18 @@ class StoresController < ApplicationController
   end
   
   def edit
-    @store = Store.find(params[:id])
+    @store = @current_user.is_admin? ? Store.find(params[:id]) : @current_store
     render :layout => 'application'
   end
   
   def update
-    @store = Store.find(params[:id])
+    @store = @current_user.is_admin? ? Store.find(params[:id]) : @current_store
     if @store.update_attributes(params[:store])
       flash[:notice] = "The store was updated"
       unless @current_user
         redirect_to new_user_path()
       else
-        redirect_to @current_user
+        redirect_to @store.user
       end
     else
       render :action => 'edit', :layout => 'application'
@@ -89,15 +91,6 @@ class StoresController < ApplicationController
     @store.destroy
     flash[:notice] = "The store was deleted"
     redirect_to stores_url
-  end
-  
-  private
-  
-  def cant_create_two_stores
-    if session[:store_id]
-      redirect_to new_user_path
-      return false
-    end
   end
   
 end

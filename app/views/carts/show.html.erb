@@ -14,7 +14,7 @@
 	<% @cart.items.each do |item|%>
 		<tr id="<%= item.id %>">
 			<td><%= link_to truncate(item.name,30), item.product %></td>
-			<td><%= number_to_currency item.product.selling_price %></td>
+			<td><%= number_to_currency item.unit_price %></td>
 			<td>
 				
 				<span><%= link_to "-", "#", :class => "decrease_cart_item"%></span>

@@ -1,0 +1,9 @@
+one:
+  order_id: 1
+  amount: 1.5
+  payment_method: MyString
+
+two:
+  order_id: 1
+  amount: 1.5
+  payment_method: MyString

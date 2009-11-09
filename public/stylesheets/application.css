@@ -217,4 +217,10 @@ table#cart_detail span.quantity a{
 	text-decoration:none;
 }
 
+table.downline_tree td{
+	text-align:center;
+}
+
 /**/
+
+

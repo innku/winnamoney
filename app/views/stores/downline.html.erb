@@ -1,1 +1,20 @@
 <% title "Winnamoney | Downline" %>
+<p>To navigate in the tree click on the store you want to switch as the root.</p>
+<%= link_to("Back to root",stores_path(:index_action => 'downline' )) if params[:id] %>
+<table class="downline_tree">
+	<% for level in 0..@levels do %>
+		<tr>
+		<% @stores.select {|s| s.level == level }.each do |store| %>
+			<td colspan="<%= colspan_for_tree(:total_levels => @levels, :current_level => level)%>">
+			<% if store.dummy? %>
+				&nbsp;
+			<% elsif store.new_record? %>
+				<%= link_to "New store", new_store_path(:parent_id => store.parent_id, :side => store.side) %>
+			<% else %>
+				<%= link_to store.name.titleize, stores_path(:index_action => 'downline', :id => store.id	) %>
+			<% end %>
+			</td>
+		<% end %>
+		</tr>
+	<% end %>
+</table>

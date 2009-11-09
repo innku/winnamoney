@@ -17,19 +17,19 @@
 </div>
 
 <div id="content">
-	<h1>Productos</h1>
+	<h1>Products</h1>
 	<p>
 		Listando <b><%= @products.size %> de <%= @products.total_entries %></b> Productos
 	</p>
 	<table>
 	  <tr>
 	    <th>ID</th>
-	    <th>Clave Proveedor</th>
-		<th>Nombre</th>
-	    <th>Categor&iacute;a</th>
-	    <th>Precio</th>
-	    <th>Editar</th>
-	    <th>Borrar</th>
+	    <th>Key</th>
+		<th>Name</th>
+	    <th>Category</th>
+	    <th>Price</th>
+	    <th>Edit</th>
+	    <th>Delete</th>
 	  </tr>
 	  <% for product in @products %>
 	    <tr>
@@ -38,8 +38,8 @@
 	      <td><%= link_to truncate(product.name, 30), product %></td>
 	      <td><%=h product.tag.subcategory.category.name %></td>
 	      <td><%= number_to_currency product.selling_price %></td>
-	      <td><%= link_to "Editar", edit_product_path(product) %></td>
-	      <td><%= link_to "Borrar", product, :confirm => 'Estas seguro?', :method => :delete %></td>
+	      <td><%= link_to "Edit", edit_product_path(product) %></td>
+	      <td><%= link_to "Delete", product, :confirm => 'Estas seguro?', :method => :delete %></td>
 	    </tr>
 	  <% end %>
 	</table>
@@ -48,6 +48,6 @@
 	</p>
 	<div style="clear:both"></div>
 
-	<p><%= link_to "Nuevo Producto", new_product_path %></p>
-	<p><%= link_to "Subir productos en masa", new_product_path(:new_type => 'mass') %></p>
+	<p><%= link_to "New product", new_product_path %></p>
+	<p><%= link_to "Bulk create products", new_product_path(:new_type => 'mass') %></p>
 </div>

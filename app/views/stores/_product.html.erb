@@ -1,5 +1,10 @@
 <div class="product">
 	<%= link_to image_tag(product.small_image_url), product_path(product) %><br />
 	<span class="name"><%= link_to product.name, product_path(product) %></span><br />
-	<span><em><%= number_to_currency product.selling_price %></em></span><br />
+	<% if @current_store.owner?(@current_user) %>
+		<span><strike><%= number_to_currency product.selling_price %></strike></span><br />
+		<span><em><%= number_to_currency product.price_for_owner %></em></span><br />
+	<% else %>
+		<span><em><%= number_to_currency product.selling_price %></em></span>
+	<% end %>
 </div>

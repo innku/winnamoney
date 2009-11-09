@@ -1,0 +1,11 @@
+<% title "Winnamoney | Complete Register"%>
+<% form_for [@order,@payment] do |f| %>
+	<p>
+		<%= f.label :payment_method %> <br />
+		<%= f.select :payment_method, options_from_collection_for_select(Payment::METHODS, "second","first") %>
+		<%= f.hidden_field :amount %>
+	</p>
+	<p>
+		<%= f.submit "Finish register" %>
+	</p>
+<% end %>

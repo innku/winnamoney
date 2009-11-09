@@ -91,6 +91,10 @@ class Product < ActiveRecord::Base
     end
   end
   
+  def price_for_owner
+    self.selling_price * (1 - Store::OWNER_DISCOUNT)
+  end
+  
   def state_name=(state_name)
     write_attribute(:state_name, state_name)
     @states = State.find_by_full_name(state_name)

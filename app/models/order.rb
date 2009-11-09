@@ -5,6 +5,7 @@ class Order < ActiveRecord::Base
   belongs_to  :user
   belongs_to  :cart
   has_many    :transactions, :class_name => "OrderTransaction"
+  has_many    :payments
   
   validates_presence_of :account_number, :message => 'Debes proporcionar tu n&uacute;mero de cuenta',
                         :if => :deposit?
@@ -46,9 +47,10 @@ class Order < ActiveRecord::Base
     transactions.create!(:action => "purchase", :amount => price_in_cents, :response => response)
     response.success?
   end
-  
+
   def complete!
     self.status = 'complete'
+    self.payments.create(:payment_method => 'credit_card', :amount => price_in_cents)
     self.cart.complete! if self.product_purchase?
     self.user.store.activate! if self.suscription?
     self.save

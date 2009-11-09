@@ -39,4 +39,8 @@ module StoresHelper
     return links
   end
   
+  def colspan_for_tree(params)
+    2**(params[:total_levels] -  params[:current_level])
+  end
+  
 end

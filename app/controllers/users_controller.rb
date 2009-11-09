@@ -37,7 +37,7 @@ class UsersController < ApplicationController
   end
   
   def edit
-    @user = User.find(params[:id])
+    @user = @current_user.is_admin? ? User.find(params[:id]) : @current_user
     case params[:edit_action]
       when "unsubscribe"
         render 'unsubscribe'
@@ -49,12 +49,12 @@ class UsersController < ApplicationController
   end
   
   def update
-    @user = User.find(params[:id])
+    @user = @current_user.is_admin? ? User.find(params[:id]) : @current_user
     case params[:update_action]
       when "unsubscribe"
-        @current_user.unsubscribe!
+        @user.unsubscribe!
         flash[:notice] = "Your request was received successfully!"
-        redirect_to edit_user_path(@current_user, :edit_action => 'unsubscribe')
+        redirect_to edit_user_path(@user, :edit_action => 'unsubscribe')
       when "change_password"
         if User.authenticate(@user.email, params[:old_password])
           if not params[:user][:password].blank? and @user.update_attributes(params[:user])
@@ -79,7 +79,7 @@ class UsersController < ApplicationController
   end
   
   def show
-    @user = User.find(params[:id])
+    @user = @current_user.is_admin? ? User.find(params[:id]) : @current_user
   end
 
   def activate
@@ -89,6 +89,17 @@ class UsersController < ApplicationController
       flash[:notice] = "Register completed!"
     end
     redirect_back_or_default('/')
+  end
+  
+  def destroy
+    @user = User.find(params[:id])
+    unless @user.store.incomplete?
+      @user.store.unsubscribe!
+      redirect_to users_path
+    else
+      @user.destroy
+      redirect_to users_path
+    end
   end
   
   private

@@ -41,9 +41,10 @@ class ApplicationController < ActionController::Base
   end
   
   def find_cart
-    unless (@current_user and @current_user.is_admin?) or session[:register_user_id]
+    unless (@current_user and @current_user.is_admin?) or in_register_process?
       @cart = @current_store.carts.find_by_id(session[:cart_id])
-      session[:cart_id] = @current_store.carts.create().id if @cart.nil?
+      @cart ||= @current_store.carts.create(:owner_purchase => @current_store.owner?(@current_user))
+      session[:cart_id] = @cart.id
     end
   end
   
