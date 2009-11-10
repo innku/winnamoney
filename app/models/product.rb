@@ -6,7 +6,7 @@ class Product < ActiveRecord::Base
   belongs_to  :tag
   has_many    :cart_items
   
-  attr_accessible :name, :product_key, :description, :existence, :local_transport, :international_transport, :cost, :discount, :selling_price, :image_url, :handling, :state_name, :tag_id
+  attr_accessible :name, :product_key, :description, :existence, :local_transport, :international_transport, :cost, :discount, :selling_price, :small_image_url, :medium_image_url, :big_image_url, :handling, :state_name, :tag_id
   
   validates_presence_of     :name,
                             :message => 'El producto debe tener un nombre'

@@ -8,6 +8,7 @@ class SessionsController < ApplicationController
 
   def create
     self.current_user = User.authenticate(@current_store.id, params[:email], params[:password])
+    logger.warn params[:inspect]
     if logged_in?
       if params[:remember_me] == "1"
         current_user.remember_me unless current_user.remember_token?
