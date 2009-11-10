@@ -4,7 +4,7 @@ set :application, "winnamoney.innku.com"
 set :rails_env, "staging"
 set :base_path, "staging"
 set :use_sudo,  false
-s
+
 default_run_options[:pty] = true
 set :repository,  "git@github.com:fedegl/winnamoney.git"
 set :scm, "git"

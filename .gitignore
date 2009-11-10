@@ -1,7 +1,6 @@
 .DS_STORE
 log/*.log
 tmp/*.html
-config/database.yml
 public/system/*
 script/runner
 db/schema.rb
