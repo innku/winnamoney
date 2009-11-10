@@ -1,1 +1,1 @@
-SubdomainFu.tld_sizes[:staging] = 0
+SubdomainFu::DEFAULT_TLD_SIZES = {:test=>0, :development=>0, :production=>1, :staging => 0}
