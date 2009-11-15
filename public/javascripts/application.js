@@ -111,6 +111,7 @@ $(document).ready(function(){
 			$.post("/cart_items", { product_id: $(this).closest("div").find("input.product_id").val() }, 
 			function(data){
 				$("div#minicart div.content").html(data);
+				$("td#cart_total").effect("highlight", {color: "#fff"}, 1000);
 			});
 			return false;
 	});
@@ -173,6 +174,8 @@ $(document).ready(function(){
 	$("input#new_discount_for_all").click(function(){
 		$("img#indicator").show();
 	});
+	
+	$("div#cleft").scrollFollow();
 	
 	
 	$('.rte').rte({

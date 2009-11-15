@@ -170,9 +170,12 @@ body {
 	text-shadow: -1px -1px 0px #000;
 	font-size: 14px;
 }
+
 #menu a.active {
 	color: #99CC33;
 }
+
+
 .clear {
 	clear: both;
 	margin: 10px 0px;
@@ -260,6 +263,53 @@ a {
 	padding: 3px 6px;
 	font-family: lucida sans, lucida grande, arial;
 }
+
+#menutienda ul.sub {
+-moz-background-clip:border;
+-moz-background-inline-policy:continuous;
+-moz-background-origin:padding;
+background:#D8EEBE none repeat scroll 0 0;
+border-color:-moz-use-text-color -moz-use-text-color -moz-use-text-color #9AB881;
+border-style:none none none solid;
+border-width:medium medium medium 1px;
+float:left;
+margin:0;
+padding:0;
+position:absolute;
+width:144px;
+}
+
+#menutienda a.active {
+	-moz-background-clip:border;
+	-moz-background-inline-policy:continuous;
+	-moz-background-origin:padding;
+	background:#D8EEBE none repeat scroll 0 0;
+	border-left:1px solid #9AB881;
+}
+#menutienda ul.sub li {
+	border-color:-moz-use-text-color -moz-use-text-color #9AB881;
+	border-style:none none solid;
+	border-width:medium medium 1px;
+	float:left;
+	margin:0;
+	width:100%;
+}
+
+#menutienda ul.sub li:hover {
+	-moz-background-clip:border;
+	-moz-background-inline-policy:continuous;
+	-moz-background-origin:padding;
+	background:#E2FACA none repeat scroll 0 0;
+}
+
+#menutienda ul.sub li a {
+	float:left;
+	font-size:11px;
+	font-weight:normal;
+	padding:2px 10px 2px 6px;
+	width:140px;
+}
+
 /*TWO COLUMNS*/
 #rest {
 	width: 944px;
@@ -281,6 +331,7 @@ a {
 	float: left;
 	width: 200px;
 	margin: 10px;
+	position:relative;
 	_margin: 5px;
 }
 #cright {
@@ -305,10 +356,19 @@ a {
 
 #minicart table{
 	font-size:11px;
+	width:100%;
 }
 
 #minicart table td{
 	padding:5px 2px;
+}
+
+#minicart table td.cart_name{
+	width:140px;
+}
+
+#minicart table td.cart_qty,#minicart table td.cart_prc {
+	text-align:right;
 }
 
 /*BREAD*/
@@ -344,6 +404,7 @@ a {
 	padding: 7px;
 	text-align: center;
 	width: 150px;
+	height:280px;
 	_width: 164px;
 	float: left;
 	-webkit-border-radius: 4px;
@@ -360,12 +421,15 @@ a {
 .imageholder {
 	width: 150px;
 	height: 150px;
-	background: #EEE;
 	display: table-cell;
 	vertical-align: middle;
 	text-transform: uppercase;
 	font-size: 11px;
 	color: #CCC;
+}
+
+.imageholder img{
+	border:none;
 }
 
 .price {
@@ -377,6 +441,7 @@ a {
 }
 .name {
 	font-size: 12px;
+	height:35px;
 }
 
 /******NUEVO CSS FIN*******/

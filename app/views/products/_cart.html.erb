@@ -2,14 +2,14 @@
 	<table>
 		<% @cart.items.each do |item| %>
 			<tr>
-				<td class="cart_name"><%= truncate(item.name, 15) %></td>
-				<td class="cart_qty"><%= item.quantity %></td>
-				<td class="cart_prc"><%= number_to_currency item.price %></td>
+				<td class="cart_name product_<%=item.product.id%>"><%= truncate(item.name, 18) %></td>
+				<td class="cart_qty product_<%=item.product.id%>"><%= item.quantity %></td>
+				<td class="cart_prc product_<%=item.product.id%>"><%= number_to_currency item.price %></td>
 			</tr>
 		<% end %>
 		<tr>
 			<td colspan="2">Total</td>
-			<td><strong><%= number_to_currency @cart.price %></strong></td>
+			<td class="cart_prc" id="cart_total"><strong><%= number_to_currency @cart.price %></strong></td>
 		</tr>
 	</table>
 	<p><%= link_to "Checkout", @cart %></p>

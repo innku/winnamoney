@@ -2,6 +2,11 @@
 	<% Category.all.each do |category| %>
 		<li>
 			<%= link_to category.name, "#" %>
+			<ul class="sub">
+				<% category.subcategories.each do |subcategory| %>
+					<li><%= link_to subcategory.name, subcategory_path(subcategory) %></li>
+				<% end %>
+			</ul>
 		</li>
 	<% end %>
 </ul>
