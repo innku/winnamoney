@@ -1,7 +1,5 @@
 class SessionsController < ApplicationController
-  
-  before_filter :find_store, :only => [:create]
-  
+    
   def new
     
   end
@@ -21,7 +19,7 @@ class SessionsController < ApplicationController
         redirect_back_or_default("http://#{current_user.store.name}.#{APP_CONFIG[:domain]}")
       end
     else
-      flash[:error] = "Your login information is incorrect"
+      flash[:error] = "Your login information is incorrect or you haven't activated your account yet."
       render :action => 'new'
     end
   end

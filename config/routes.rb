@@ -29,7 +29,7 @@ ActionController::Routing::Routes.draw do |map|
   map.home '/', :controller => 'stores', :action => 'index', :index_action => 'redirect_to_store'
   
   map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate', :activation_code => nil
-  map.signup '/registro', :controller => 'users', :action => 'new'
+  map.register '/register', :controller => 'stores', :action => 'new'
   map.login '/login', :controller => 'sessions', :action => 'new'
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
   

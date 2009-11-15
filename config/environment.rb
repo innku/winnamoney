@@ -38,7 +38,22 @@ Rails::Initializer.run do |config|
   config.gem "searchlogic"
   config.gem 'mbleigh-subdomain-fu', :source => "http://gems.github.com", :lib => "subdomain-fu"
   config.gem 'activemerchant', :lib => 'active_merchant', :version => '1.4.2'
+  config.gem "thoughtbot-factory_girl",
+             :lib    => "factory_girl",
+             :source => "http://gems.github.com"
+  
   config.active_record.observers = :user_observer
+  
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :address  => "mail.innku.com",
+    :port  => 25, 
+    :domain  => "mail.innku.com",
+    :user_name  => "adrian@innku.com",
+    :password  => "bocatequiero",
+    :authentication  => :login
+  }
+  
 
   # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
   # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]

@@ -1,5 +1,5 @@
 <% form_for @store do |f| %>
-  <%= error_messages_for @store %>
+  <%= error_messages_for :store %>
   <p>
     <%= f.label :name, "Store name" %><br />
     http://&nbsp;<%= f.text_field :name %>.winnamoney.com<br />

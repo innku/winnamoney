@@ -7,12 +7,10 @@ class Order < ActiveRecord::Base
   has_many    :transactions, :class_name => "OrderTransaction"
   has_many    :payments
   
-  validates_presence_of :account_number, :message => 'Debes proporcionar tu n&uacute;mero de cuenta',
-                        :if => :deposit?
-  validates_presence_of :account_type, :message => 'Debes proporcionar tu tipo de cuenta',
-                        :if => :deposit?
-  validates_presence_of :routing, :message => 'Debes proporcionar el routing del banco',
-                        :if => :deposit? 
+  validates_presence_of :account_number, :if => :deposit?
+  validates_presence_of :account_type, :if => :deposit?
+  validates_presence_of :routing, :if => :deposit? 
+  validates_presence_of :ssn, :if => :deposit?
                              
   validate_on_create    :validate_card, :if => :credit_card?            
                         
@@ -20,7 +18,18 @@ class Order < ActiveRecord::Base
     
   def contact_me?
     contact_me
-  end  
+  end 
+  
+  def complete_with_user_info()
+    unless user.nil?
+      self.account_type = user.account_type
+      self.account_number = user.account_number
+      self.routing = user.routing
+      self.ssn = user.ssn
+      return self 
+    end
+    nil
+  end 
   
   def deposit?
     self.payment_method == "deposit"
@@ -43,21 +52,49 @@ class Order < ActiveRecord::Base
   end
   
   def purchase!
-    response = process_purchase
-    transactions.create!(:action => "purchase", :amount => price_in_cents, :response => response)
-    response.success?
+    if self.status != 'complete'
+      response = process_purchase
+      transactions.create!(:action => "purchase", :amount => price_in_cents, :response => response)
+      response.success?
+    else
+      return false
+    end
   end
 
   def complete!
     self.status = 'complete'
     self.payments.create(:payment_method => 'credit_card', :amount => price_in_cents)
-    self.cart.complete! if self.product_purchase?
-    self.user.store.activate! if self.suscription?
+    if self.product_purchase?
+      self.cart.complete!
+      UserMailer.deliver_product_purchase_confirmation(self.user, self)
+    elsif self.suscription?
+      self.user.store.activate!
+      UserMailer.deliver_suscription_confirmation(self.user, self)
+    end
     self.save
   end
   
-  def declined!
+  def stand_by!
+    self.status = 'stand_by'
+    self.user.store.stand_by! if suscription?
+    UserMailer.deliver_product_purchase_confirmation(self.user, self)
+    self.save
+  end
+  
+  def contact_me!
+    self.status = 'contact_me'
+    UserMailer.deliver_product_purchase_confirmation(self.user, self)
+    self.user.store.contact_me! if suscription?
+    self.save
+  end
+  
+  def decline!
     self.status = 'declined'
+    if self.product_purchase?
+      UserMailer.deliver_product_purchase_declined(self.user, self.cart)
+    elsif self.suscription?
+      UserMailer.deliver_suscription_declined(self.user)
+    end
     self.save
   end
   
@@ -75,7 +112,7 @@ class Order < ActiveRecord::Base
     if self.cart.nil?
       (SUSCRIPTION * 100).round
     else
-      (self.cart.total * 100).round
+      (self.cart.price * 100).round
     end
   end
   

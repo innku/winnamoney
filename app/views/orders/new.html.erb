@@ -15,48 +15,4 @@
 	</tr>
 </table>
 
-<% if @express_checkout_order.express_token.blank? %>
-	<div class="tabs">
-	  <!-- tabs -->
-	<br />
-	  <strong>Payment type:</strong>
-
-	  <ul class="tabNavigation" >
-	    <li><a href="#paypal">Credit Card</a></li>
-	    <li><a href="#deposit">Bank deposit</a></li>
-		<li><a href="#other">Otro</a></li>
-	  </ul>
-
-		<%= link_to image_tag("http://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif"), express_new_order_path %>
-
-	  <div class="clear"></div>
-
-	  <!-- tab containers -->
-	  <div id="paypal">
-	    <%= render :partial => 'payments_pro_form', :locals => {:order => @credit_card_order } %>
-	  </div>
-	  <div id="deposit">
-	    <%= render :partial => 'deposit_form', :locals => {:order => @deposit_order, :user => @user } %>
-	  </div>
-	  <div id="other">
-		<%= render :partial => 'contact_later_form', :locals => {:order => @contact_later_order } %>
-	  </div>
-	</div>
-
-	<script type="text/javascript" charset="utf-8">
-		$(function () {
-		    var tabContainers = $('div.tabs > div');
-
-		    $('div.tabs ul.tabNavigation a').click(function () {
-		        tabContainers.hide().filter(this.hash).show();
-
-		        $('div.tabs ul.tabNavigation a').removeClass('selected');
-		        $(this).addClass('selected');
-
-		        return false;
-		    }).filter(':first').click();
-		});
-	</script>
-<% else %>
-	<%= render :partial => 'paypal_express_form', :locals => {:order => @express_checkout_order } %>
-<% end %>
+<%= render :partial => 'payment_types', :locals => {:credit_card_order => @credit_card_order, :deposit_order => @deposit_order, :contact_later_order => @contact_later_order, :express_checkout_order => @express_checkout_order, :user => @user} %>

@@ -35,8 +35,26 @@ class Product < ActiveRecord::Base
     
   attr_accessor :category_id, :subcategory_id
   
+  def biggest_image_url
+    if !big_image_url.blank?
+      return big_image_url
+    elsif !medium_image_url.blank?
+      return medium_image_url
+    else
+      return small_image_url
+    end
+  end
+  
   def self.featured
     Category.all.collect {|c| c.subcategories.first.tags.first.products.first if (not c.subcategories.first.nil? and not c.subcategories.first.tags.first.nil?) } - [nil]
+  end
+  
+  def self.discount!(d)
+    discount = d.to_f
+    Product.all.each do |product|
+      product.discount = discount
+      product.save
+    end
   end
   
   def category_id

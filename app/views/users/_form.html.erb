@@ -1,0 +1,71 @@
+<% form_for user do |f| -%>
+
+<%= error_messages_for :user %>
+
+<%= hidden_field_tag :store_id, params[:store_id] %>
+
+<p><%= f.label :names, "Names" %><br/>
+<%= f.text_field :names %></p>
+
+<p><%= f.label :last_names, "Last names" %><br/>
+<%= f.text_field :last_names %></p>
+
+<p><%= f.label :city_name, "City" %><br/>
+<%= f.text_field :city_name, :class => 'city_autocomplete' %></p>
+
+<p><%= f.label :address1, "Address 1" %><br/>
+<%= f.text_field :address1 %> <br/>
+<%= f.label :address2, "Address 2" %><br/>
+<%= f.text_field :address2 %></p>
+
+<p>
+	<%= f.label :zip, "Zip Code" %><br/>
+	<%= f.text_field :zip %>
+</p>
+
+<p><%= f.label :phone, "Phone number" %><br/>
+<%= f.text_field :phone %> &nbsp; <small>Ext.</small> &nbsp;<%= f.text_field :fax_extension %></p>
+
+<p><%= f.label :cell, "Cell Phone number" %><br/>
+<%= f.text_field :cell %> &nbsp;</p>
+
+<p><%= f.label :fax, "Fax number" %><br/>
+<%= f.text_field :fax %> &nbsp; <small>Ext.</small> &nbsp;<%= f.text_field :fax_extension %></p>
+
+<% if user.new_record? %>
+
+<p><%= f.label :email, "E-mail" %><br/>
+<%= f.text_field :email %></p>
+
+<p><%= f.label :password, "Password" %><br/>
+<%= f.password_field :password %></p>
+
+<p><%= f.label :password_confirmation, "Confirm password" %><br/>
+<%= f.password_field :password_confirmation %></p>
+
+<% end %>
+
+<h2>Account Information</h2>
+<p>
+	<%= f.label :account_type, "Account Type" %> <br />
+	<%= f.label :account_type_check, "Check"%>
+	<%= f.radio_button :account_type, "check" %>
+	<%= f.label :account_type_savings, "Savings"%>
+	<%= f.radio_button :account_type, "savings" %>
+</p>
+<p>
+	<%= f.label :account_number, "Account number" %> <br />
+	<%= f.text_field :account_number %>
+</p>
+<p>
+	<%= f.label :routing, "Bank Routing" %> <br />
+	<%= f.text_field :routing %>
+</p>
+<p>
+	<%= f.label :ssn, "US. SSN or TIN / Mex. RFC" %> <br />
+	<%= f.text_field :ssn %>
+</p>
+
+<p><%= submit_tag 'Sign up' %></p>
+
+<% end -%>

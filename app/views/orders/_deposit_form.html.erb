@@ -19,17 +19,10 @@
 	<%= f.text_field :routing %>
 </p>
 
-<% if user.city.state.country.name == "United States"  %>
-	<p>
-		<%= f.label :ssn, "Social Security Number (SSN)" %> <br />
-		<%= f.text_field :ssn %>
-	</p>
-<% else %>
-	<p>
-		<%= f.label :rfc, "RFC" %> <br />
-		<%= f.text_field :rfc %>
-	</p>
-<% end %>
+<p>
+	<%= f.label :ssn, "SSN/TIN/RFC" %> <br />
+	<%= f.text_field :ssn %>
+</p>
 
 <p>
 	<%= f.submit "Finish sucription" %>

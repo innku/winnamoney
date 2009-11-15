@@ -1,0 +1,22 @@
+<div>
+	<p>
+		<strong>Full Name:</strong><br />
+		<%= address.names %> <%= address.last_names %>
+	</p>
+	
+	<p>
+		<strong>Address</strong><br />
+		<%= format_address(address.address1, address.address2, address.city_name, address.zip) %>
+	</p>
+	
+	<p>
+		<strong>E-mail:</strong><br />
+		<%= address.email %>
+	</p>
+	
+	<p>
+		<strong>Phone Number:</strong><br />
+		<%= address.phone %>
+	</p>
+
+</div>

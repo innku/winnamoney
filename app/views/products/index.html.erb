@@ -14,6 +14,14 @@
 		</p>
 		<%= submit_tag "Filter" %>
 	<% end %>
+	<h2>Modify Discount</h2>
+	<% form_tag products_path, :method => 'post' do %>
+		<%= label_tag :discount, "New Discount" %> <br />
+		<%= hidden_field_tag :create_type, "discount" %>
+		<%= text_field_tag :discount %>%
+		<%= submit_tag "Modify", :id => 'new_discount_for_all' %>
+	<% end %>
+	<%= image_tag "indicator.gif", :style => 'display:none;', :id => 'indicator' %>
 </div>
 
 <div id="content">

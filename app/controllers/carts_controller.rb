@@ -1,6 +1,6 @@
 class CartsController < ApplicationController
   
-  before_filter :find_store, :find_cart, :needs_to_have_items
+  before_filter :find_cart, :needs_to_have_items
   
   def show
     @shipping_address = Address.new(:same_for_billing => true)

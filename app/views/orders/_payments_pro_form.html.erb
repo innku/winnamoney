@@ -1,6 +1,6 @@
-<% form_for order, :url => orders_path() do |f| %>
+<% form_for order do |f| %>
 
-	<%= error_messages_for order %>
+	<%= error_messages_for :order %>
 		
 	<%= f.hidden_field :payment_method %>
 	<%= f.hidden_field :order_type %>

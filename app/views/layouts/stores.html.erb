@@ -5,31 +5,98 @@
     <title><%= h(yield(:title) || "Untitled") %></title>
     <%= stylesheet_link_tag 'application', 'jquery-ui-1.7.2.custom' %>
 	<%= stylesheet_link_tag 'jquery.autocomplete' %>
-	<%= stylesheet_link_tag 'rte' %>
+	<%= stylesheet_link_tag 'jquery.rte' %>
 	<%= javascript_include_tag 'jquery' %>
 	<%= javascript_include_tag 'jquery.autocomplete' %>
-	<%= javascript_include_tag 'jquery.rte', 'jquery-ui-1.7.2.custom.min' %>
+	<%= javascript_include_tag 'jquery.rte','jquery.rte.tb', 'jquery-ui-1.7.2.custom.min' %>
 	<%= javascript_include_tag 'application' %>
+	<%= javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery? %>
     <%= yield(:head) %>
   </head>
   <body>
-    <div id="container">
-      <%- flash.each do |name, msg| -%>
-        <%= content_tag :div, msg, :id => "flash_#{name}" %>
-      <%- end -%>
 	
-		<%= render :partial => "layouts/menu" %>
-		
-		<div id="categories">
-	  		<%= render :partial => 'layouts/categories' %>
+	<div id="header">
+		<div class="wrapper">
+			<!--LOGO-->
+			<div id="logo">
+				<img src="/images/logo.png" alt="Winnamoney"/>
+			</div>
+			<!--MENU-->
+			<div id="menu">
+				<ul>
+					<li><a href="#" class="active">News</a></li>
+					<li><a href="#">Company</a></li>
+					<li><a href="#">Opportunity</a></li>
+					<li><a href="#">Virtual office</a></li>
+					<li><a href="#">Go Shopping</a></li>
+					<li><a href="#">Join us</a></li>
+				</ul>
+			</div>
 		</div>
-		
-      	<div id="content">
-      		<%= yield %>
-		</div>
-		
-		<div class="clear"></div>
+	</div>
+	
+	<%- flash.each do |name, msg| -%>
+      <%= content_tag :div, msg, :id => "flash_#{name}" %>
+    <%- end -%>
 
-    </div>
+	<!--CONTENTENIDO-->
+	<div id="content">
+		<div class="wrapper">
+			<!--MAIN-->
+			<div id="main">
+				<!--SALUDO-->
+				<div id="hello">
+					<%= yield(:greeting)  %>
+				</div>
+				<!--SEARCH-->
+				<div id="search">
+					<% form_tag(@current_store, :method => :get) do %>
+						<%= text_field_tag :q, params[:q],:class => 'sbox' %>
+						<%= image_submit_tag "/images/buscar.png", :class => 'sbutton' %>
+					<% end %>
+
+				</div>
+			</div>
+				<!--MENU TIENDA-->
+				<div id="ribbon">
+					<!--HOME-->
+					<div id="menutienda">
+						<table width="100%" cellpadding="0" cellspacing="0">
+							<tr>
+								<td width="35px" style="background:url(/images/home.png) right center; text-align: right;">
+									<%= link_to image_tag("casa.gif", :alt => "home", :style => 'border:none;'), @current_store %>
+								</td>
+								<td>
+									<%= render :partial => '/layouts/categories' %>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<!--REST-->
+				<div id="rest">
+					<!--LEFT-->
+					<div id="cleft">
+						<!--MINI CART-->
+						<div id="minicart">
+							<div class="content">
+								<%= render :partial => '/products/cart' %>
+							</div>
+						</div>
+					</div>
+					<!--RIGHT-->
+					<div id="cright">
+						<%= yield %>
+					</div>
+				</div>
+		</div>
+	</div>
+	<!--FOOTER-->
+	<div id="footer">
+		<div class="wrapper">
+			
+		</div>
+	</div>	
+
   </body>
 </html>

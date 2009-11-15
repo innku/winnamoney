@@ -30,10 +30,7 @@
 
 <p>	
 	<%= link_to "Edit Store", edit_store_path(@user.store) %> &nbsp; 
-	<%= link_to "Change Password", edit_user_path(@current_user, :edit_action => 'change_password') %> 
-	 &nbsp; 
-	<%= link_to "Unsubscribe", edit_user_path(@current_user, :edit_action => 'unsubscribe') %>
-	
+	<%= link_to "Change Password", edit_user_path(@current_user, :edit_action => 'change_password') %> 	
 </p>
 
 <hr />
@@ -50,7 +47,7 @@
 
 <p>
 	<strong>Phone Number</strong><br />
-	<%= format_phone(@user.phone, @user.phone_extension) %>
+		<%= format_phone(@user.phone, @user.phone_extension) %>
 </p>
 
 <% if @user.fax %>
@@ -60,9 +57,38 @@
 	</p>
 <% end %>
 
+<% if @user.cell %>
+	<p>
+		<strong>Cell Phone number</strong><br />
+		<%= format_phone(@user.cell, nil) %>
+	</p>
+<% end %>
+
 <p>
 	<strong>E-mail</strong><br />
 	<%= @user.email %>
+</p>
+
+<h3>Account Information</h3>
+
+<p>
+	<strong>Account Type</strong><br />
+	<%= @user.account_type.titleize %>
+</p>
+
+<p>
+	<strong>Account Number</strong><br />
+	<%= @user.account_number %>
+</p>
+
+<p>
+	<strong>Bank Routing</strong><br />
+	<%= @user.routing %>
+</p>
+
+<p>
+	<strong>SSN/TIN/RFC</strong><br />
+	<%= @user.routing %>
 </p>
 
 <p>

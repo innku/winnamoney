@@ -10,6 +10,7 @@
 	<%= link_to "My Downline", stores_path(:index_action => 'downline') %> &nbsp; 
 <% elsif controller_name != "sessions" %>
 	<%= link_to "Login", login_path %>
+	<%= link_to "Register", register_path %>
 <% end %>
 
 <%if @current_user%>

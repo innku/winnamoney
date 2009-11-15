@@ -24,6 +24,14 @@ class Store < ActiveRecord::Base
   attr_accessible :name, :language, :sponsor_id, :positioning, :sponsor_name, :parent_id, :level, :dummy,:side
   attr_accessor   :level, :side, :dummy
   
+  def self.find_and_edit(id, params)
+    store = find_by_id(id)
+    unless store.nil?
+      store.attributes = params
+    end
+    store
+  end
+  
   def self.with_subdomain(sub)
     subdomain, domain = sub.split(".")
     if ["www", "winnamoney"].include?(subdomain)

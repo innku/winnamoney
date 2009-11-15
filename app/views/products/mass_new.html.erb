@@ -6,13 +6,18 @@
 	<%= select_tag 	:category_mass, categories_for_select %>
 </p>
 
-<p>
+
+<p style="float:left;">
 	<%= hidden_field_tag :create_type, "mass" %>
 	<%= label_tag	:products_csv, "Archivo CSV" %> <br />
 	<%= file_field_tag :products_csv %>
 </p>
+
+<%= image_tag "indicator.gif", :style => 'float:left;margin-top:22px;display:none', :id => 'indicator' %>
+
+<div class="clear"></div>
 <p>
-	<%= submit_tag "Subir archivo" %>
+	<%= submit_tag "Subir archivo", :id => 'upload_csv_file' %>
 </p>
 <% end %>
 

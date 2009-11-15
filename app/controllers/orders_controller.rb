@@ -1,20 +1,20 @@
 class OrdersController < ApplicationController
-  before_filter :find_store, :only => [:new, :create, :express]
   before_filter :find_cart, :only => [:new, :create, :express]
+  before_filter :can_create_order, :only => [:new, :create]
   
   def new
-    if not in_register_process?
-      build_cart_order_types(:current_order => nil, :is_suscription => false)
-      render 'confirm_order'
-    else
+    if in_register_process?
       @user = User.find(session[:registered_user_id])
-      build_all_order_types(:current_order => nil)
+      build_order_types(:current_order => nil, :payment_type => 'suscription')
       render
+    else
+      build_order_types(:current_order => nil, :payment_type => 'product_purchase')
+      render 'confirm_order'
     end
   end
   
   def create
-    if not in_register_process?
+    if !in_register_process?
       @order = @cart.orders.build(params[:order])
       @order.user = @current_user
     else
@@ -35,15 +35,30 @@ class OrdersController < ApplicationController
             render 'failure_credit_card'
           end
         when "deposit"
-          @order.user.store.stand_by!
-          render 'success_deposit'
+          if @order.suscription?
+            @order.user.store.stand_by!
+            render 'success_deposit'
+          else
+            @order.stand_by!
+            render 'success_deposit'
+          end
         when "contact_later"
-          @order.user.store.contact_me!
-          render 'success_contact'
+          if @order.suscription?
+            @order.user.store.contact_me!
+            render 'success_contact'
+          else
+            @order.contact_me!
+            render 'success_contact'
+          end
       end
     else
-      build_all_order_types(@order)
-      render 'new'
+      if in_register_process?
+        build_order_types(:current_order => @order, :payment_type => 'suscription')
+        render 'new'
+      else
+        build_order_types(:current_order => @order, :payment_type => 'product_purchase')
+        render 'confirm_order'
+      end
     end
   end
   
@@ -73,10 +88,30 @@ class OrdersController < ApplicationController
       end
   end
   
-  def build_all_order_types(options)
-    build_cart_order_types(:current_order => options[:current_order], :is_suscription => true)
-    @deposit_order = (not options[:current_order].nil? and options[:current_order].deposit?) ? options[:current_order] : Order.new(:payment_method => 'deposit', :order_type => 'suscription')
-    @contact_later_order = (not options[:current_order].nil? and options[:current_order].contact_later?) ? options[:current_order] : Order.new(:payment_method => 'contact_later', :order_type => 'suscription')
+  def build_order_types(options)
+      @deposit_order = build_order(options[:current_order], 'deposit', options[:payment_type]) 
+      @contact_later_order = build_order(options[:current_order], 'contact_later', options[:payment_type])
+      @credit_card_order = build_order(options[:current_order], 'credit_card',options[:payment_type])
+      @express_checkout_order = build_order(options[:current_order], 'express_checkout',options[:payment_type])
+  end
+  
+  def build_order(current_order, payment_method, order_type)
+    if (!current_order.nil? and current_order.payment_method == payment_method)
+      return current_order
+    else
+      order =  Order.new(:payment_method => payment_method, :order_type => order_type)
+      order.express_token = params[:token] if payment_method == 'express_checkout'
+      order.order_type = order_type
+      order
+    end
+  end
+  
+  def can_create_order
+    logger.warn in_shopping_process?.inspect
+    unless (in_register_process? or in_shopping_process?)
+      redirect_to @current_store
+      return false
+    end
   end
   
 end

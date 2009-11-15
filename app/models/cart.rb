@@ -22,23 +22,29 @@ class Cart < ActiveRecord::Base
     total
   end
   
-  def taxes
-    taxes=0
-    shipping_state = self.addresses.find_by_address_type("shipping").city.state
-    self.items.each do |item|
-      taxes+= (item.price * (item.product.tax/100)) if shipping_state == item.product.state
-    end
-    taxes
-  end
-  
-  def total
-    price + taxes
-  end
-  
   def complete!
     self.status = "complete"
     self.purchased_at = Time.now
     self.save
+  end
+  
+  def shipping_state
+    shipping.city.state
+  end
+  
+  def billing
+    self.addresses.find_by_address_type("billing")
+  end
+  
+  def shipping
+    self.addresses.find_by_address_type("shipping")
+  end
+  
+  def has_addresses?
+    unless self.addresses.empty?
+      return true if addresses.first.valid? and addresses.second.valid?
+    end
+    return false
   end
   
   def add_product!(product)

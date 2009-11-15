@@ -1,8 +1,12 @@
 class Address < ActiveRecord::Base
   belongs_to      :cart
   belongs_to      :city
-  attr_accessible :address_type, :address1, :address2, :city_name,:city_id, :zip, :same_for_billing
+  attr_accessible :address_type, :address1, :address2, :city_name,:city_id, :zip, :same_for_billing, :names, :last_names, :email, :phone
   
+  validates_presence_of   :names
+  validates_presence_of   :last_names
+  validates_presence_of   :email
+  validates_presence_of   :phone
   validates_presence_of   :address_type, :message => "The address should be for billing or shipping"
   validates_presence_of   :address1,:message =>  "Please enter your address"
   validates_presence_of   :city_id,:message =>  "Please enter your city"
@@ -32,7 +36,11 @@ class Address < ActiveRecord::Base
   end
   
   def same_for_billing?
-    self.same_for_billing or self.same_for_billing == "0"
+    if self.same_for_billing == true or self.same_for_billing.to_i == 1
+      return true
+    else
+      return false
+    end
   end
   
   def shipping?

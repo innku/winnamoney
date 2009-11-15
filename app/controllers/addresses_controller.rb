@@ -1,6 +1,6 @@
 class AddressesController < ApplicationController
   
-  before_filter :find_store, :find_cart, :already_has_address
+  before_filter :find_cart, :already_has_address
   
   def create
     @shipping_address = @cart.addresses.build(params[:shipping_address])
@@ -11,8 +11,7 @@ class AddressesController < ApplicationController
       flash[:notice] = "Successfully saved addresses."
       redirect_to new_order_path
     else
-      flash[:error] = "Please enter a correct address"
-      redirect_to @cart
+      render "carts/show"
     end
   end
   

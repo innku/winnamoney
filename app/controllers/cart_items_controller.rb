@@ -1,13 +1,13 @@
 class CartItemsController < ApplicationController
   HELPER = Object.new.extend(ActionView::Helpers::NumberHelper)
   
-  before_filter :find_store, :find_cart
+  before_filter :find_cart
   
   def create
     product = Product.find(params[:product_id])
     respond_to do |format|
       if @cart.add_product!(product)
-        format.js { render :partial => '/products/cart' }
+        format.js   { render :partial => '/products/cart' }
         format.html { redirect_to product }
       end
     end

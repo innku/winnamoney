@@ -1,12 +1,16 @@
 <% title "Winnamoney | My information" %>
 <h1>My information</h1>
 <% form_for @store do |f| %>
-  <%= error_messages_for @store %>
+  <%= error_messages_for :store %>
+  <p>
+    <%= f.label :name, "Store Location" %><br />
+    http://<%= f.text_field :name  %>.winnnamoney.com
+  </p>
   <p>
     <%= f.label :language, "Language" %><br />
     <%= f.select :language, Store::LANGUAGES  %>
   </p>
-  <p>
+  <p> 
     <%= f.label :positioning, "Positioning" %><br />
     <%= f.select :positioning, Store::POSITIONING %>
   </p>

@@ -7,13 +7,20 @@ class User < ActiveRecord::Base
   has_one                   :store
   has_many                  :orders
 
-  validates_presence_of     :email, :message => 'Debes tener un correo electr&oacute;nico'
-  validates_presence_of     :names, :message => 'Debes proporcionar tu(s) nombre(s)'
-  validates_presence_of     :last_names, :message => 'Debes proporcionar tu(s) apellido(s)'
-  validates_presence_of     :city_id, :message => 'Debes proporcionar tu ciudad'
-  validates_presence_of     :address1, :message => 'Debes proporcionar tu direcci&oacute;n'
-  validates_presence_of     :phone, :message => 'Debes proporcionar tu tel&eacute;fono'
-  
+  validates_presence_of     :email
+  validates_presence_of     :names
+  validates_presence_of     :last_names
+  validates_presence_of     :city_id
+  validates_presence_of     :address1
+  validates_presence_of     :phone
+  validates_presence_of     :account_type
+  validates_presence_of     :account_number
+  validates_presence_of     :routing
+  validates_presence_of     :ssn
+
+  validates_numericality_of :phone
+  validates_numericality_of :fax, :allow_blank => true
+  validates_numericality_of :cell, :allow_blank => true
   validates_presence_of     :password,                   :if => :password_required?,
                             :message => 'Debes proporcionar un password'
   validates_presence_of     :password_confirmation,      :if => :password_required?,
@@ -28,9 +35,21 @@ class User < ActiveRecord::Base
   before_save               :encrypt_password
   before_create             :make_activation_code
   
-  attr_accessible :names, :last_names, :city_name, :address1, :address2,:zip, :phone, :phone_extension, :fax, :fax_extension, :email, :password, :password_confirmation
+  attr_accessible :names, :last_names, :city_name, :address1, :address2,:zip, :phone, :phone_extension, :fax, :fax_extension, :email, :password, :password_confirmation,:cell,:account_type, :account_number, :routing , :ssn
     
   after_validation :validate_cities
+  
+  def self.admin
+    User.find_by_email("rrosa@gmx.us")
+  end
+  
+  def self.find_and_edit(id, params)
+    user = find_by_id(id)
+    unless user.nil?
+      user.attributes = params
+    end
+    user
+  end
   
   def full_name
     self.names + " " + self.last_names
@@ -121,12 +140,6 @@ class User < ActiveRecord::Base
   
   def is_admin?
     is_admin
-  end
-  
-  def unsubscribe!
-    store = self.store
-    store.unsubscribe_request!
-    UserMailer.deliver_unsubscribe_request(self)
   end
   
   def already_requested?

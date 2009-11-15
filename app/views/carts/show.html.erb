@@ -30,14 +30,34 @@
 
 <p><strong>Total:</strong>&nbsp;<big id="cart_total_price"><%= number_to_currency @cart.price %></big></p>
 
-<% if @cart.addresses.empty? %>
+<% unless @cart.has_addresses? %>
 	<h2>Delivery and Billing</h2>
 
 	<h3>Shipping Address</h3>
 
 	<% form_for :shipping_address, @shipping_address, :url => addresses_path do |f| %>
 
-	  <%= error_messages_for @shipping_address %>
+	  <%= error_messages_for :shipping_address %>
+	  
+	  <p>
+	    <%= f.label :names %><br />
+	    <%= f.text_field :names %>
+	  </p>
+	
+	  <p>
+	    <%= f.label :last_names %><br />
+	    <%= f.text_field :last_names %>
+	  </p>
+
+	  <p>
+	    <%= f.label :email %><br />
+	    <%= f.text_field :email %>
+	  </p>
+	
+	  <p>
+	    <%= f.label :phone %><br />
+	    <%= f.text_field :phone %>
+	  </p>
 
 	  <p>
 	    <%= f.label :address1 , "Address"%><br />
@@ -59,13 +79,33 @@
 		<%= f.label 	:same_for_billing, "Same information for Billing" %> 
 		<%= f.check_box :same_for_billing %>
 	  </p>
-
-
+				
 	  <div id="billing_address_form" style="<%= display?(!@shipping_address.same_for_billing?) %>">
 		<h3>Billing Address</h3>
 		<% fields_for :billing_address, @billing_address do |b| %>
-			<%= error_messages_for @billing_address %>
+			<%= error_messages_for :billing_address %>
 			<%= b.hidden_field :address_type %>
+			
+		  <p>
+		    <%= b.label :names %><br />
+		    <%= b.text_field :names %>
+		  </p>
+
+		  <p>
+		    <%= b.label :last_names %><br />
+		    <%= b.text_field :last_names %>
+		  </p>
+
+		  <p>
+		    <%= b.label :email %><br />
+		    <%= b.text_field :email %>
+		  </p>
+
+		  <p>
+		    <%= b.label :phone %><br />
+		    <%= b.text_field :phone %>
+		  </p>
+
 			<p>
 		    <%= b.label :address1 , "Address"%><br />
 		    <%= b.text_field :address1 %><br /><br />

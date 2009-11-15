@@ -23,10 +23,10 @@ class UsersController < ApplicationController
 
   def create
     cookies.delete :auth_token
-    @user = User.new(params[:user])
+    @user = User.find_and_edit(session[:registered_user_id], params[:user]) || User.new(params[:user])
     @user.save
     if @user.errors.empty?
-      Store.find(session[:store_id]).user_is!(@user)
+      Store.find(session[:registered_store_id]).user_is!(@user)
       session[:registered_user_id] = @user.id
       redirect_to new_order_path()
       flash[:notice] = "Register successful!"
@@ -51,10 +51,6 @@ class UsersController < ApplicationController
   def update
     @user = @current_user.is_admin? ? User.find(params[:id]) : @current_user
     case params[:update_action]
-      when "unsubscribe"
-        @user.unsubscribe!
-        flash[:notice] = "Your request was received successfully!"
-        redirect_to edit_user_path(@user, :edit_action => 'unsubscribe')
       when "change_password"
         if User.authenticate(@user.email, params[:old_password])
           if not params[:user][:password].blank? and @user.update_attributes(params[:user])
@@ -105,7 +101,7 @@ class UsersController < ApplicationController
   private
   
   def cant_create_user_without_store
-    if session[:store_id].nil?
+    if session[:registered_store_id].nil?
       flash[:error] = "Please create a store first"
       redirect_to new_store_path
       return false

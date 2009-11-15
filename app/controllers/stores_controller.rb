@@ -1,7 +1,8 @@
 class StoresController < ApplicationController
   
-  before_filter      :find_store, :only => [:index, :new, :show, :edit, :update]
   before_filter      :clear_register_session, :only => [:show]
+  before_filter      :clear_shopping_session, :only => [:new]
+  before_filter      :find_cart, :only => [:show]
   
   def index
     respond_to do |format|
@@ -11,22 +12,18 @@ class StoresController < ApplicationController
           format.js { render :json => store.to_json }
         when "redirect_to_store"
           store = Store.with_subdomain(current_subdomain)
-          if store
-            if store.active? or (@current_user and @current_user.store == store)
-              flash[:error] = "The store you were looking for is not active yet" if params[:not_found]
-              format.html { redirect_to store }
-            else
-              format.html{ redirect_to "http://#{APP_CONFIG[:domain]}?not_found=true" }
-            end
+          if store.active? or (@current_user and @current_user.store == store)
+            flash[:error] = "The store you're looking for doesn't exist" if params[:not_found]
+            flash[:error] = "The store you're looking is not active yet" if params[:not_active]
+            format.html { redirect_to store }
           else
-            flash[:error] = "The store you're looking for doesn't exist"
-            format.html { redirect_to new_session_path }
+            format.html{ redirect_to "http://#{APP_CONFIG[:domain]}?not_found=true" }
           end
         when "referrals"
           @stores = @current_store.referrals.paginate(:page => params[:page], :per_page => 20)
           format.html { render :layout => 'application'}
         when "downline"
-          @levels = 3
+          @levels = 5
           @store = Store.find_by_id(params[:id]) || @current_store
           @stores = @store.downline(:levels => @levels)
           format.html {render :action => 'downline', :layout => 'application'}
@@ -56,11 +53,10 @@ class StoresController < ApplicationController
   end
   
   def create
-    @store = Store.new(params[:store])
+    @store = Store.find_and_edit(session[:registered_store_id], params[:store]) || Store.new(params[:store]) 
     if @store.save
-      session[:store_id] = @store.id
       flash[:notice] = "The store was created"
-      session[:store_id] = @store.id
+      session[:registered_store_id] = @store.id
       redirect_to new_user_path()
     else
       render :action => 'new', :layout => 'application'
@@ -76,11 +72,16 @@ class StoresController < ApplicationController
     @store = @current_user.is_admin? ? Store.find(params[:id]) : @current_store
     if @store.update_attributes(params[:store])
       flash[:notice] = "The store was updated"
-      unless @current_user
-        redirect_to new_user_path()
+      # unless @current_user
+      #   redirect_to new_user_path()
+      # else
+      if params[:update_action] == "change_positioning"
+        flash[:notice] = "The store positioning was updated"
+        redirect_to stores_path(:index_action => 'downline')
       else
-        redirect_to @store.user
+        redirect_and_keep_session(store_domain + user_path(@current_user))
       end
+      # end
     else
       render :action => 'edit', :layout => 'application'
     end

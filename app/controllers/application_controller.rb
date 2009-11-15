@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
-  before_filter :find_user
+  before_filter :find_user, :find_store
 
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
@@ -30,14 +30,23 @@ class ApplicationController < ActionController::Base
   def find_store
     @current_store = Store.with_subdomain(current_subdomain)
     if @current_store.nil?
-      flash[:error] = "The store you were looking for doesn't exist"
-      redirect_to new_session_path
+      redirect_to "http://#{APP_CONFIG[:domain]}?not_found=true"
       return false
     elsif @current_store.inactive? and not (@current_user and @current_user.store == @current_store)
       flash[:error] = "The store you are looking for is not active yet"
-      redirect_to new_session_path
+      redirect_to "http://#{APP_CONFIG[:domain]}?not_active=true"      
       return false
     end
+  end
+  
+  def store_domain
+    "http://#{@current_store.name}.#{APP_CONFIG[:domain]}"
+  end
+  
+  def redirect_and_keep_session(url)
+    old_session = session
+    redirect_to url
+    session = old_session
   end
   
   def find_cart
@@ -49,12 +58,15 @@ class ApplicationController < ActionController::Base
   end
   
   def in_register_process?
-    not session[:registered_user_id].nil?
+    !session[:registered_user_id].nil?
   end
   
+  def in_shopping_process?
+    @cart and !@cart.empty?
+  end
   
   def clear_register_session
-    session[:store_id] = nil
+    session[:registered_store_id] = nil
     session[:registered_user_id] = nil
   end
   

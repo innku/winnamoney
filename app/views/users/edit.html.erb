@@ -2,36 +2,4 @@
 
 <h1>My Information</h1>
 
-<%= error_messages_for @user %>
-
-<% form_for @user do |f| -%>
-
-<%= hidden_field_tag :store_id, params[:store_id] %>
-
-<p><%= f.label :names, "Names" %><br/>
-<%= f.text_field :names %></p>
-
-<p><%= f.label :last_names, "Last names" %><br/>
-<%= f.text_field :last_names %></p>
-
-<p><%= f.label :city_name, "City" %><br/>
-<%= f.text_field :city_name, :class => 'city_autocomplete' %></p>
-
-<p><%= f.label :address1, "Address" %><br/>
-<%= f.text_field :address1 %> <br/><br/>
-<%= f.text_field :address2 %></p>
-
-<p>
-	<%= f.label :zip, "Zip Code" %><br/>
-	<%= f.text_field :zip %>
-</p>
-
-<p><%= f.label :phone, "Phone number" %><br/>
-<%= f.text_field :phone %> &nbsp; <small>Ext.</small> &nbsp;<%= f.text_field :fax_extension %></p>
-
-<p><%= f.label :fax, "Fax number" %><br/>
-<%= f.text_field :fax %> &nbsp; <small>Ext.</small> &nbsp;<%= f.text_field :fax_extension %></p>
-
-<p><%= submit_tag 'Update' %></p>
-
-<% end -%>
+<%= render :partial => 'form', :locals => {:user => @user} %>

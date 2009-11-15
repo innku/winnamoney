@@ -1,0 +1,30 @@
+<h1>Product purchase declined</h1>
+
+<p>The following purchase could not be completed</p>
+
+<table id="cart_detail">
+	<tr>
+		<th>Name</th>
+		<th>Quantity</th>
+		<th>Unit Price</th>
+		<th>Price</th>
+	</tr>
+	
+	<% @cart.items.each do |item|%>
+		<tr id="<%= item.id %>">
+			<td><%= item.name %></td>
+			<td><%= item.quantity %></td>
+			<td><%= number_to_currency item.unit_price %></td>
+			<td><%= number_to_currency item.price %><%= "<sub>Tax included</sub>" if item.taxes_apply?  %></td>
+		</tr>
+	<% end %>
+	
+</table>
+
+<h2>Order Summary</h2>
+<table>
+	<tr>
+		<td>Total</td>
+		<td><strong><%= number_to_currency @cart.price %></strong></td>
+	</tr>
+</table>

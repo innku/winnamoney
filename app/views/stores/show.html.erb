@@ -1,27 +1,24 @@
 <% title store_title() %>
 
-<h1><%= store_heading %></h1>
-
-<%= list_tags %>
-
-<% form_tag(@current_store, :method => :get) do %>
-	<%= text_field_tag :q, params[:q] %>
-	<%= submit_tag "Search" %>
+<% content_for :greeting do %>
+	<p>Welcome to <span><%= @current_store.name.titleize %></span>, <%= link_to "Register", register_path() %> or <%= link_to "Sign In", login_path %> to shop</p>
 <% end %>
 
-<br />
+<!--BREAD + PAGES-->
+<div id="bread">
+	<ul>
+		<li><a href="#">Cell Phone</a></li>
+		<li><a class="active" href="#">Nokia</a></li>
+	</ul>
+</div>
 
-<%= results_description %>
+<div id="pages">
+	<p>Listing <b><%= @products.size %> of <%= @products.total_entries %></b> products</p>
+</div>
 
-
-<% @products.each do |product| %>
-		
-	<%= render :partial => 'stores/product', :object => product %>
-
-<% end %>
-
-<div class="clear"></div>
-
-<p>
-	<%= will_paginate @products %>
-</p>
+<!--PRODUCTOS-->
+<div class="clear">
+	<% @products.each do |product| %>
+		<%= render :partial => 'stores/product', :object => product %>
+	<% end %>
+</div>

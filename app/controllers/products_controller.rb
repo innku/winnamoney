@@ -3,7 +3,6 @@ require "will_paginate"
 class ProductsController < ApplicationController
   
   before_filter :admin_required, :only => [:index, :new, :create, :edit, :update, :destroy]
-  before_filter :find_store, :only => [:show]
   before_filter :find_cart, :only => [:show]
   before_filter :clear_register_session, :only => [:show]
   
@@ -36,27 +35,35 @@ class ProductsController < ApplicationController
   
   def create
     @product = Product.new(params[:product])
-    unless params[:create_type] == 'mass'
-      if @product.save
-        flash[:notice] = "El producto se cre&oacute; con &eacute;xito."
-        redirect_to @product
-      else
-        render :action => 'new'
-      end
-    else
-      if Product.upload_file(params[:products_csv])
-        if Product.read_from_file(params[:category_mass])
-          flash[:notice] = "Tu archivo se ley&oacute; con &eacute;xito"
+    case params[:create_type]
+      when 'mass'
+        if Product.upload_file(params[:products_csv])
+          if Product.read_from_file(params[:category_mass])
+            flash[:notice] = "Tu archivo se ley&oacute; con &eacute;xito"
+          else
+            flash[:error] = "Hubo un error al leer el archivo"
+          end
+            redirect_to products_path
         else
-          flash[:error] = "Hubo un error al leer el archivo"
+          flash[:error] = "Hubo un error al procesar tu archivo"
+          redirect_to new_product_path(:new_type => 'mass')
         end
-          redirect_to products_path
+      when 'discount'
+        if Product.discount!(params[:discount])
+          flash[:notice] = "All the products have now a discount of #{params[:discount]}%"
+        else
+          flash[:error] = "There was an error with the discount you provided"
+        end
+        redirect_to products_path
       else
-        flash[:error] = "Hubo un error al procesar tu archivo"
-        redirect_to new_product_path(:new_type => 'mass')
+        if @product.save
+          flash[:notice] = "El producto se cre&oacute; con &eacute;xito."
+          redirect_to @product
+        else
+          render :action => 'new'
+        end
       end
     end
-  end
   
   def edit
     @product = Product.find(params[:id])

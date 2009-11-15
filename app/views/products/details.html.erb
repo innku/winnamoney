@@ -2,7 +2,7 @@
 
 <div id="picture">
 	
-	<%= image_tag @product.small_image_url %>
+	<%= image_tag @product.biggest_image_url, :width => '280' %>
 	
 	<div id="cart">
 		<%= render :partial => 'cart' %>
@@ -17,11 +17,11 @@
 	<% if @current_store.owner?(@current_user) %>
 	<p>Winamonney Special Price : <%= number_to_currency @product.price_for_owner %></p>
 	<% end %>
-	<p>Product Key: <%= @product.product_key %></p>
+	<p>Product Key: <%= @product.id %></p>
 	
 	<% form_tag cart_items_path do  %>
-		<%= hidden_field_tag :product_id, @product.id %>
-		<%= submit_tag "Add Product", :id => 'add_product_to_cart' %>
+		<%= hidden_field_tag :product_id, @product.id, :class => 'product_id' %>
+		<%= submit_tag "Add Product", :class => 'add_product_to_cart' %>
 	<% end %>
 	
 </div>

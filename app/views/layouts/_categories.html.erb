@@ -1,13 +1,7 @@
-<h2>Categories</h2>
 <ul>
 	<% Category.all.each do |category| %>
 		<li>
-			<%= category.name %>
-			<ul>
-				<% category.subcategories.each do |subcat|%>
-					<li><%= link_to subcat.name, subcat %></li>
-				<% end %>
-			</ul>
+			<%= link_to category.name, "#" %>
 		</li>
 	<% end %>
 </ul>

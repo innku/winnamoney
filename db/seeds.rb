@@ -15,7 +15,7 @@ cities[1..-1].each do |city|
   City.create!(:id => city[0], :name => city[1], :state_id => city[2], :city_name => city[3], :priority => city[4])
 end
 
-user = User.create(:names => 'Rafael', :last_names => 'Rosas', :email => 'rrosa@gmx.us', :city_name => 'Monterrey', :address1 => 'San Pedro', :address2 => 'Nuevo Leon', :phone => '8182441327',:zip => '64833', :password => 'winnamoney', :password_confirmation => 'winnamoney', :parent_id => nil)
+user = User.create(:names => 'Rafael', :last_names => 'Rosas', :email => 'rrosa@gmx.us', :city_name => 'Monterrey', :address1 => 'San Pedro', :address2 => 'Nuevo Leon', :phone => '8182441327',:zip => '64833', :password => 'winnamoney', :password_confirmation => 'winnamoney', :parent_id => nil, :account_type => 'Checks', :account_number => '123456789', :bank_routing => '123456789', :ssn => '123456789')
 user.is_admin = true
 user.activate
 
