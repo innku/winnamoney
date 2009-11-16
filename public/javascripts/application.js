@@ -56,6 +56,18 @@ $(document).ready(function(){
 	}
 	);
 	
+	//CATEGORY MOUSEOVER
+	
+	$('li.category_list').mouseover(function(){
+		$(this).parent().find("ul").show();
+		$(this).find("a.topcategory").addClass("active");
+	});
+	
+	$('li.category_list').mouseout(function(){
+		$(this).parent().find("ul").hide();
+		$(this).find("a.topcategory").removeClass("active");
+	});
+	
 	// -- 
 
 	$("input#store_name").blur(function(element){

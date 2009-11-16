@@ -47,7 +47,7 @@
 			<div id="main">
 				<!--SALUDO-->
 				<div id="hello">
-					<%= yield(:greeting)  %>
+						<p>Welcome to <span><%= @current_store.name.titleize %></span>, <%= link_to "Register", register_path() %> or <%= link_to "Sign In", login_path %> to shop</p>
 				</div>
 				<!--SEARCH-->
 				<div id="search">
@@ -87,6 +87,14 @@
 					</div>
 					<!--RIGHT-->
 					<div id="cright">
+						
+						<!--BREAD + PAGES-->
+						<div id="bread">
+							<ul>
+								<%= breadcrumb_links %>
+							</ul>
+						</div>
+						
 						<%= yield %>
 					</div>
 				</div>

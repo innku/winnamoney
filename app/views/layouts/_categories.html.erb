@@ -1,8 +1,8 @@
 <ul>
 	<% Category.all.each do |category| %>
-		<li>
-			<%= link_to category.name, "#" %>
-			<ul class="sub">
+		<li class="category_list">
+			<%= link_to category.name, "#", :class => 'topcategory' %>
+			<ul class="sub" style="display:none;">
 				<% category.subcategories.each do |subcategory| %>
 					<li><%= link_to subcategory.name, subcategory_path(subcategory) %></li>
 				<% end %>

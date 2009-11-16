@@ -14,4 +14,25 @@ module ApplicationHelper
     address
   end
   
+  
+  def breadcrumb_links
+    links = ""
+    if controller_name == "stores"
+      links += "<li>#{link_to 'Store', @current_store, :class=> 'active'}</li>"
+    elsif controller_name == 'subcategories' || controller_name == 'tags'
+      subcategory = @subcategory || @tag.subcategory
+      links += "<li>#{link_to 'Store', @current_store}</li>"
+      links += "<li>#{link_to subcategory.name, subcategory}</li>"
+      subcategory.tags.each do |tag|
+        links += "<li>#{link_to tag.name, tag, :class=> 'active'}</li>"
+      end
+    elsif controller_name == "products"
+      links += "<li>#{link_to 'Store', @current_store}</li>"
+      links += "<li>#{link_to @product.tag.subcategory.name, @product.tag.subcategory}</li>"
+      links += "<li>#{link_to @product.tag.name, @product.tag}</li>"
+      links += "<li>#{link_to @product.name, @product,:class=> 'active'}</li>"
+    end
+    links
+  end
+  
 end

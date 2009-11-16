@@ -277,9 +277,10 @@ margin:0;
 padding:0;
 position:absolute;
 width:144px;
+z-index:1;
 }
 
-#menutienda a.active {
+#menutienda a.active{
 	-moz-background-clip:border;
 	-moz-background-inline-policy:continuous;
 	-moz-background-origin:padding;
@@ -340,6 +341,58 @@ width:144px;
 	margin: 10px;
 	_margin: 5px 5px 5px 10px;
 }
+
+div.left {
+	float:left;
+}
+
+.pic {
+	-moz-background-clip:border;
+	-moz-background-inline-policy:continuous;
+	-moz-background-origin:padding;
+	background:#FFFFFF none repeat scroll 0 0;
+	border:1px solid #CCCCCC;
+	color:#CCCCCC;
+	display:table-cell;
+	font-size:11px;
+	height:270px;
+	text-align:center;
+	text-transform:uppercase;
+	vertical-align:middle;
+	width:270px;
+}
+
+.pic img{
+	width:270px;
+}
+
+.descripcion {
+color:#333333;
+float:left;
+margin-left:30px;
+width:400px;
+}
+
+.descripcion h2 {
+font-family:arial;
+font-size:18px;
+}
+
+p.precio {
+-moz-background-clip:border;
+-moz-background-inline-policy:continuous;
+-moz-background-origin:padding;
+background:#CCFF99 none repeat scroll 0 0;
+color:#447733;
+float:left;
+font-size:18px;
+padding:0 10px;
+}
+
+div.clearb {
+clear:both;
+}
+
 /*MINI CART*/
 #minicart {
 	background: #24486E url(/images/sctop.png) no-repeat;

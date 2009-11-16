@@ -24,21 +24,6 @@ module StoresHelper
     end
   end
   
-  def list_tags
-    if controller_name == "subcategories"
-      links = "Categories: "
-      @subcategory.tags.each do |tag|
-        links+= link_to(tag.name, tag_path(tag))
-        unless tag == @subcategory.tags.last
-          links+= ", " 
-        else
-          links+= "<br /><br />" 
-        end
-      end
-    end
-    return links
-  end
-  
   def colspan_for_tree(params)
     2**(params[:total_levels] -  params[:current_level])
   end

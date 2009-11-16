@@ -1,6 +1,6 @@
 <div class="item">
 	<div class="imageholder">
-		<%= link_to(image_tag(product.small_image_url, :alt => "Imagen no disponible"),product_path(product) ) %>
+		<%= link_to(image_tag(product.small_image_url, :alt => "Picture Not Available"),product_path(product) ) %>
 	</div>
 	<p class="name"><%= link_to truncate(product.name,48), product_path(product) %></p>	
 	<% if @current_store.owner?(@current_user) %>

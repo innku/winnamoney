@@ -20,7 +20,7 @@ class ProductsController < ApplicationController
     if @current_user and @current_user.is_admin?
       render 'show'
     else
-      render 'details'
+      render :action => 'details', :layout => 'stores'
     end
   end
   

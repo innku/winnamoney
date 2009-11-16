@@ -1,24 +1,18 @@
 <% title store_title() %>
 
-<% content_for :greeting do %>
-	<p>Welcome to <span><%= @current_store.name.titleize %></span>, <%= link_to "Register", register_path() %> or <%= link_to "Sign In", login_path %> to shop</p>
-<% end %>
-
-<!--BREAD + PAGES-->
-<div id="bread">
-	<ul>
-		<li><a href="#">Cell Phone</a></li>
-		<li><a class="active" href="#">Nokia</a></li>
-	</ul>
-</div>
-
 <div id="pages">
 	<p>Listing <b><%= @products.size %> of <%= @products.total_entries %></b> products</p>
 </div>
 
 <!--PRODUCTOS-->
 <div class="clear">
-	<% @products.each do |product| %>
-		<%= render :partial => 'stores/product', :object => product %>
+	<% unless @products.empty? %>
+		<% @products.each do |product| %>
+			<%= render :partial => 'stores/product', :object => product %>
+		<% end %>
+	<% else%>
+		<p>There are no results with your search criteria. Please try navigating through our categories.</p>
+		
+		<p><%= link_to "Go back to the store home page", @current_store %></p>
 	<% end %>
 </div>
