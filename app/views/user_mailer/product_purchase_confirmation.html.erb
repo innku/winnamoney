@@ -2,6 +2,8 @@
 
 <p>Thank you for purchasing at Winnamoney</p>
 
+<p>Your order number is: <strong><%= @order.id %></strong></p>
+
 <% if @order.status == "complete" %>
 	<p>Your order is complete</p>
 <% elsif @order.status == "stand_by" %>

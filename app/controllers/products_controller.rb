@@ -40,9 +40,9 @@ class ProductsController < ApplicationController
       when 'mass'
         if Product.upload_file(params[:products_csv])
           if Product.read_from_file(params[:category_mass])
-            flash[:notice] = "Tu archivo se ley&oacute; con &eacute;xito"
+            flash[:notice] = "Your file was processed successfully"
           else
-            flash[:error] = "Hubo un error al leer el archivo"
+            flash[:error] = "There was an error reading your file"
           end
             redirect_to products_path
         else

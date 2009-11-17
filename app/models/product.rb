@@ -80,8 +80,12 @@ class Product < ActiveRecord::Base
   end
   
   def self.upload_file(csv_file)
-    File.new(FILE_PATH) unless ( not File.file?(FILE_PATH))
-    File.open(FILE_PATH, "wb") { |f| f.write(csv_file.read) }
+    unless (not File.file?(FILE_PATH) or csv_file.nil?)
+      File.new(FILE_PATH)
+      File.open(FILE_PATH, "wb") { |f| f.write(csv_file.read) }
+      return true
+    end
+    false
   end
   
   def self.read_from_file(category)
