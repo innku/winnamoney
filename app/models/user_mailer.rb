@@ -53,6 +53,7 @@ class UserMailer < ActionMailer::Base
       @from        = "contacto@#{APP_CONFIG[:domain]}"
       @subject     = "[Winnamoney] "
       @sent_on     = Time.now
+      @content_type = "text/html"
       @body[:user] = user
     end
 end

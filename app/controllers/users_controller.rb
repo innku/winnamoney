@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   
-  before_filter :cant_create_user_without_store, :only => [:new, :create]
-  before_filter      :login_required, :only => [:edit, :update]
+  before_filter       :cant_create_user_without_store, :only => [:new, :create]
+  before_filter       :login_required, :only => [:edit, :update]
+  skip_before_filter  :find_store, :only => [:activate]
 
   def index
     respond_to do |format|
@@ -53,7 +54,7 @@ class UsersController < ApplicationController
     @user = @current_user.is_admin? ? User.find(params[:id]) : @current_user
     case params[:update_action]
       when "change_password"
-        if User.authenticate(@user.email, params[:old_password])
+        if User.authenticate(@user.store, @user.email, params[:old_password])
           if not params[:user][:password].blank? and @user.update_attributes(params[:user])
             flash[:info] = "The password changed successfully!"
             redirect_to @user
@@ -83,7 +84,8 @@ class UsersController < ApplicationController
     self.current_user = params[:activation_code].blank? ? false : User.find_by_activation_code(params[:activation_code])
     if logged_in? && !current_user.active?
       current_user.activate
-      flash[:notice] = "Register completed!"
+      @current_store = current_user.store
+      flash[:notice] = "Register completed! You need to complete your payment before your store is ready to sell"
     end
     redirect_back_or_default('/')
   end
