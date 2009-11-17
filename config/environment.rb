@@ -46,11 +46,11 @@ Rails::Initializer.run do |config|
   
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    :address  => "mail.innku.com",
+    :address  => "mail.rutanet.com",
     :port  => 25, 
-    :domain  => "mail.innku.com",
-    :user_name  => "adrian@innku.com",
-    :password  => "bocatequiero",
+    :domain  => "mail.rutanet.com",
+    :user_name  => "no-responder+rutanet.com",
+    :password  => "paulaner1634",
     :authentication  => :login
   }
   

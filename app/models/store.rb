@@ -22,6 +22,7 @@ class Store < ActiveRecord::Base
   after_create              :set_parent_position
   
   attr_accessible :name, :language, :sponsor_id, :positioning, :sponsor_name, :parent_id, :level, :dummy,:side
+  
   attr_accessor   :level, :side, :dummy
   
   def self.find_and_edit(id, params)

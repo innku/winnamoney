@@ -22,7 +22,7 @@
 		<%= label_tag :discount, "New Discount" %> <br />
 		<%= hidden_field_tag :create_type, "discount" %>
 		<%= text_field_tag :discount, nil, :class => 'small' %>%
-		<%= submit_tag "Apply to all", :id => 'new_discount_for_all' %>
+		<%= submit_tag "Apply to all", :id => 'new_discount_for_all', :confirm => 'Are you sure?' %>
 	<% end %>
 	<%= image_tag "indicator.gif", :style => 'display:none;', :id => 'indicator' %>
 <% end %>
@@ -51,7 +51,7 @@
 	      <td><%=h product.tag.subcategory.category.name %></td>
 	      <td><%= number_to_currency product.selling_price %></td>
 	      <td><%= link_to "Edit", edit_product_path(product) %></td>
-	      <td><%= link_to "Delete", product, :confirm => 'Estas seguro?', :method => :delete %></td>
+	      <td><%= link_to "Delete", product, :confirm => 'Are you sure?', :method => :delete %></td>
 		  <td style="padding-left:10px;">
 			<% form_for product do |f| %>
 				<%= f.hidden_field :id %>

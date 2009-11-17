@@ -2,11 +2,11 @@
   <%= error_messages_for :product %>
   <p>
     <%= f.label :name, "Name" %><br />
-    <%= f.text_field :name %>
+    <%= f.text_field :name, :class => 'large' %>
   </p>
   <p>
     <%= f.label :product_key, "Provider Key" %><br />
-    <%= f.text_field :product_key %>
+    <%= f.text_field :product_key, :class => 'medium' %>
   </p>
   <p>
     <%= f.label :description, "Description"%><br />
@@ -15,18 +15,18 @@
 
   <p>
 	<%= f.label		:category_id, "Category" %> <br />
-	<%= f.select 	:category_id, [["", -1]] + Category.all.collect {|c| [c.name,c.id] } %>
+	<%= f.select 	:category_id, [["", -1]] + Category.all.collect {|c| [c.name,c.id] }, {}, :class => 'medium' %>
   </p>
 
   
 	<p>
 		<%= f.label		:subcategory_id, "Sub-category" %> <br />
-		<%= f.select 	:subcategory_id, [["", -1]] + Subcategory.siblings(@product.category_id).collect {|s| [s.name, s.id]} %>
+		<%= f.select 	:subcategory_id, [["", -1]] + Subcategory.siblings(@product.category_id).collect {|s| [s.name, s.id]}, {}, :class => 'medium' %>
 	</p>
 	
 	<p>
 		<%= f.label		:tag_id, "Sub-Sub-Category" %> <br />
-		<%= f.select 	:tag_id, [["", -1]] + Tag.siblings(@product.subcategory_id).collect {|t| [t.name, t.id]}  %>
+		<%= f.select 	:tag_id, [["", -1]] + Tag.siblings(@product.subcategory_id).collect {|t| [t.name, t.id]}, {}, :class => 'medium'  %>
 	</p>
 
 
@@ -36,7 +36,7 @@
 
   <p>
     <%= f.label :state_name, "Origin State" %><br />
-    <%= f.text_field :state_name %>
+    <%= f.text_field :state_name, :class => 'medium' %>
   </p>
 
 	<script type="text/javascript">
@@ -73,49 +73,49 @@
 
   <p>
     <%= f.label :existence, "In stock" %><br />
-    <%= f.text_field :existence %>
+    <%= f.text_field :existence, :class => 'small' %>
   </p>
 
   <p>
     <%= f.label :small_image_url, "Small Image URL" %><br />
-    <%= f.text_field :small_image_url %>
+    <%= f.text_field :small_image_url, :class => 'large' %>
   </p>
   <p>
     <%= f.label :medium_image_url, "Medium Image URL" %><br />
-    <%= f.text_field :medium_image_url %>
+    <%= f.text_field :medium_image_url, :class => 'large' %>
   </p>
   <p>
     <%= f.label :big_image_url, "Big Image URL" %><br />
-    <%= f.text_field :big_image_url %>
+    <%= f.text_field :big_image_url, :class => 'large' %>
   </p>
 
   <p>
     <%= f.label :cost, "Cost" %><br />
-    <%= f.text_field :cost %>
+    <%= f.text_field :cost, :class => 'small' %>
   </p>
   <p>
     <%= f.label :handling, "Handling" %><br />
-    <%= f.text_field :handling %>
+    <%= f.text_field :handling, :class => 'small' %>
   </p>
 	<p>
 	  <%= f.label :local_transport, "Local Transport" %><br />
-	  <%= f.text_field :local_transport %>
+	  <%= f.text_field :local_transport, :class => 'small' %>
 	</p>
 	<p>
 	  <%= f.label :international_transport, "International Transport" %><br />
-	  <%= f.text_field :international_transport %>
+	  <%= f.text_field :international_transport, :class => 'small' %>
 	</p>
 	<p>
-    <%= f.label :tax, "Tax" %><br />
-    <%= f.text_field :tax %>
+    <%= f.label :tax, "Tax" %>%<br />
+    <%= f.text_field :tax, :class => 'small' %>
   </p>
 	<p>
-    <%= f.label :discount, "Discount" %><br />
-    <%= f.text_field :discount %>
+    <%= f.label :discount, "Discount" %>%<br />
+    <%= f.text_field :discount, :class => 'small' %>
   </p>
   <p>
     <%= f.label :selling_price, "Selling Price" %><br />
-    <%= f.text_field :selling_price %>
+    <%= f.text_field :selling_price, :class => 'small' %>
   </p>
 
   <p><%= f.submit "Save Product" %></p>

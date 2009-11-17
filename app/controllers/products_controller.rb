@@ -46,7 +46,7 @@ class ProductsController < ApplicationController
           end
             redirect_to products_path
         else
-          flash[:error] = "Hubo un error al procesar tu archivo"
+          flash[:error] = "There was an error reading your file"
           redirect_to new_product_path(:new_type => 'mass')
         end
       when 'discount'
@@ -58,7 +58,7 @@ class ProductsController < ApplicationController
         redirect_to products_path
       else
         if @product.save
-          flash[:notice] = "El producto se cre&oacute; con &eacute;xito."
+          flash[:notice] = "The product was created successfully."
           redirect_to @product
         else
           render :action => 'new'
@@ -78,7 +78,7 @@ class ProductsController < ApplicationController
         format.js { render :nothing => true }
       else
         if @product.update_attributes(params[:product])
-          flash[:notice] = "El producto se edit&oacute; con &eacute;xito"
+          flash[:notice] = "The product was updated successfully"
           format.html { redirect_to @product } 
         else
           format.html { render :action => 'edit' } 
@@ -90,7 +90,7 @@ class ProductsController < ApplicationController
   def destroy
     @product = Product.find(params[:id])
     @product.destroy
-    flash[:notice] = "El producto se borr&oacute; con &eacute;xito"
+    flash[:notice] = "The product was deleted successfully"
     redirect_to products_url
   end
 end
