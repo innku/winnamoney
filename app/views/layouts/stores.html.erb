@@ -35,10 +35,6 @@
 			</div>
 		</div>
 	</div>
-	
-	<%- flash.each do |name, msg| -%>
-      <%= content_tag :div, msg, :id => "flash_#{name}" %>
-    <%- end -%>
 
 	<!--CONTENTENIDO-->
 	<div id="content">
@@ -55,7 +51,6 @@
 						<%= text_field_tag :q, params[:q],:class => 'sbox' %>
 						<%= image_submit_tag "/images/buscar.png", :class => 'sbutton' %>
 					<% end %>
-
 				</div>
 			</div>
 				<!--MENU TIENDA-->
@@ -87,7 +82,9 @@
 					</div>
 					<!--RIGHT-->
 					<div id="cright">
-						
+						<%- flash.each do |name, msg| -%>
+					      <%= content_tag :div, msg, :id => "flash_#{name}" %>
+					    <%- end -%>
 						<!--BREAD + PAGES-->
 						<div id="bread">
 							<ul>
