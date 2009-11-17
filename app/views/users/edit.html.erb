@@ -1,5 +1,14 @@
 <% title "Winnamoney | My information" %>
 
-<h1>My Information</h1>
+<h1>User Information</h1>
+
+<% content_for :sidebar do %>
+	<p>
+		<%= link_to	"Back to User Information", user_path(@user) + "#myinfo" %>
+	</p>
+	<p>
+		<%= link_to	"Back to Account Information", user_path(@user) + "#accountinfo" %>
+	</p>
+<% end %>
 
 <%= render :partial => 'form', :locals => {:user => @user} %>

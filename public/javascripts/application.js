@@ -171,6 +171,11 @@ $(document).ready(function(){
 			}
 	});
 	
+	$("input.add_product_to_home").click(function(){
+		$.post("/products/" + $(this).closest("td").find("input#product_id").val(),
+			   {_method: "put", update_type: "home_update", value: $(this).attr("checked")});
+	});
+	
 	$("input#shipping_address_same_for_billing").change(function(){
 		if(!$(this).attr("checked")){
 			$("div#billing_address_form").show();

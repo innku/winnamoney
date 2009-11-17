@@ -45,27 +45,29 @@
 
 <% end %>
 
-<h2>Account Information</h2>
-<p>
-	<%= f.label :account_type, "Account Type" %> <br />
-	<%= f.label :account_type_check, "Check"%>
-	<%= f.radio_button :account_type, "check" %>
-	<%= f.label :account_type_savings, "Savings"%>
-	<%= f.radio_button :account_type, "savings" %>
-</p>
-<p>
-	<%= f.label :account_number, "Account number" %> <br />
-	<%= f.text_field :account_number, :class=>'large' %>
-</p>
-<p>
-	<%= f.label :routing, "Bank Routing" %> <br />
-	<%= f.text_field :routing, :class=>'large' %>
-</p>
-<p>
-	<%= f.label :ssn, "US. SSN or TIN / Mex. RFC" %> <br />
-	<%= f.text_field :ssn, :class=>'large' %>
-</p>
+<div id="accountinfo">
+	<h2>Account Information</h2>
+	<p>
+		<%= f.label :account_type, "Account Type" %> <br />
+		<%= f.label :account_type_check, "Check"%>
+		<%= f.radio_button :account_type, "check" %>
+		<%= f.label :account_type_savings, "Savings"%>
+		<%= f.radio_button :account_type, "savings" %>
+	</p>
+	<p>
+		<%= f.label :account_number, "Account number" %> <br />
+		<%= f.text_field :account_number, :class=>'large' %>
+	</p>
+	<p>
+		<%= f.label :routing, "Bank Routing" %> <br />
+		<%= f.text_field :routing, :class=>'large' %>
+	</p>
+	<p>
+		<%= f.label :ssn, "SSN/TIN/RFC" %> <br />
+		<%= f.text_field :ssn, :class=>'large' %>
+	</p>
+</div>
 
-<p><%= submit_tag 'Sign up' %></p>
+<p><%= submit_tag 'Save User' %></p>
 
 <% end -%>

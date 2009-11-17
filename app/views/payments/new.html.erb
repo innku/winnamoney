@@ -1,4 +1,11 @@
-<% title "Winnamoney | Complete Register"%>
+<% title "Winnamoney | Complete Payment"%>
+
+<% content_for :sidebar do%>
+	<p>
+		<%= link_to	"Back to Store Information", user_path(@order.user) +  "#storeinfo" %>
+	</p>
+<% end %>
+
 <% form_for [@order,@payment] do |f| %>
 	<p>
 		<%= f.label :payment_method %> <br />
@@ -6,6 +13,6 @@
 		<%= f.hidden_field :amount %>
 	</p>
 	<p>
-		<%= f.submit "Finish register" %>
+		<%= f.submit "Complete Payment" %>
 	</p>
 <% end %>

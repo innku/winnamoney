@@ -1,4 +1,11 @@
 <% title "Winnamoney | My information" %>
+
+<% content_for :sidebar do %>
+	<p>
+		<%= link_to	"Back Store Information", user_path(@store.user) + "#storeinfo" %>
+	</p>
+<% end %>
+
 <h1>My information</h1>
 <% form_for @store do |f| %>
   <%= error_messages_for :store %>

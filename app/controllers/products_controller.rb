@@ -12,7 +12,8 @@ class ProductsController < ApplicationController
       keyword = params[:keyword].split.empty? ? nil : params[:keyword].split
     end
     category = params[:category] if params[:category] and params[:category].to_i > 0
-    @products = Product.name_or_product_key_like_all(keyword).tag_subcategory_category_id_like(category).paginate(:page => params[:page], :per_page => 10)
+    on_home = params[:on_home].nil? ? nil : 1
+    @products = Product.name_or_product_key_like_all(keyword).tag_subcategory_category_id_like(category).on_home_like(on_home).paginate(:page => params[:page], :per_page => 10)
   end
   
   def show
@@ -71,11 +72,18 @@ class ProductsController < ApplicationController
   
   def update
     @product = Product.find(params[:id])
-    if @product.update_attributes(params[:product])
-      flash[:notice] = "El producto se edit&oacute; con &eacute;xito"
-      redirect_to @product
-    else
-      render :action => 'edit'
+    respond_to do |format|
+      if params[:update_type] == "home_update"
+        params[:value] == "true" ? @product.add_to_home! : @product.remove_from_home!
+        format.js { render :nothing => true }
+      else
+        if @product.update_attributes(params[:product])
+          flash[:notice] = "El producto se edit&oacute; con &eacute;xito"
+          format.html { redirect_to @product } 
+        else
+          format.html { render :action => 'edit' } 
+        end
+      end
     end
   end
   

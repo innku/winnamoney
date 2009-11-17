@@ -1,6 +1,7 @@
 <% title "Winnamoney | Products" %>
 <% content_for :sidebar do %>
-
+<p><%= link_to "All products", products_path() %></p>
+<p><%= link_to "Products on Home Page", products_path(:on_home => true) %></p>
 <p><%= link_to "New product", new_product_path %></p>
 <p><%= link_to "Bulk create products", new_product_path(:new_type => 'mass') %></p>
 <hr/>
@@ -40,6 +41,7 @@
 	    <th>Price</th>
 	    <th>Edit</th>
 	    <th>Delete</th>
+		<th>On home?</th>
 	  </tr>
 	  <% for product in @products %>
 	    <tr>
@@ -50,6 +52,12 @@
 	      <td><%= number_to_currency product.selling_price %></td>
 	      <td><%= link_to "Edit", edit_product_path(product) %></td>
 	      <td><%= link_to "Delete", product, :confirm => 'Estas seguro?', :method => :delete %></td>
+		  <td style="padding-left:10px;">
+			<% form_for product do |f| %>
+				<%= f.hidden_field :id %>
+				<%= f.check_box :on_home, :class => 'add_product_to_home' %>
+			<% end %>
+		  </td>
 	    </tr>
 	  <% end %>
 	</table>

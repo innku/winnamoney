@@ -2,6 +2,18 @@
 
 <% content_for :sidebar do%>
 	<p>
+		<strong>Store Status</strong><br />
+	</p>
+	<%= @user.store.status %><br />
+	<% if @current_user and @current_user.is_admin? %>
+		<% if @user.store.payment_due? %>
+			<p>
+				<%= link_to "Complete Payment", new_order_payment_path(@user.orders.order_type_like("suscription")) %>
+			</p>
+		<% end %>
+	<% end %>
+	<hr />
+	<p>
 		<%= link_to	"Store Information", "#storeinfo" %>
 	</p>
 	<p>
@@ -16,17 +28,9 @@
 <% end %>
 
 
-<% if @current_user and @current_user.is_admin? %>
-	<% if @user.store.payment_due? %>
-		<p>
-			<strong>Store Status</strong><br />
-			<%= @user.store.status %><br />
-			<%= link_to "Complete Payment", new_order_payment_path(@user.orders.order_type_like("suscription")) %>
-		</p>
-	<% end %>
-<% end %>
 <div id="storeinfo">
 	<h2>Store information</h2>
+	
 	<p>
 		<strong>Store location</strong><br />
 		<%= link_to "http://#{@user.store.name}.#{APP_CONFIG[:domain]}", "http://#{@user.store.name}.#{APP_CONFIG[:domain]}" %>
@@ -111,6 +115,6 @@
 	</p>
 
 	<p>
-		<%= link_to "Edit Account Information", edit_user_path(@user) %>
+		<%= link_to "Edit Account Information", edit_user_path(@user) + "#accountinfo" %>
 	</p>
 </div>

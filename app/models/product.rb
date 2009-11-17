@@ -35,6 +35,16 @@ class Product < ActiveRecord::Base
     
   attr_accessor :category_id, :subcategory_id
   
+  def add_to_home!
+    self.on_home = true
+    self.save
+  end
+  
+  def remove_from_home!
+    self.on_home = false
+    self.save
+  end
+  
   def biggest_image_url
     if !big_image_url.blank?
       return big_image_url
@@ -46,7 +56,7 @@ class Product < ActiveRecord::Base
   end
   
   def self.featured
-    Category.all.collect {|c| c.subcategories.first.tags.first.products.first if (not c.subcategories.first.nil? and not c.subcategories.first.tags.first.nil?) } - [nil]
+    Product.on_home_is(true)
   end
   
   def self.discount!(d)
