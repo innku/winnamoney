@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
     if in_register_process?
       @user = User.find(session[:registered_user_id])
       build_order_types(:current_order => nil, :payment_type => 'suscription')
-      render
+      render :action => 'new', :layout => 'register'
     else
       build_order_types(:current_order => nil, :payment_type => 'product_purchase')
       render 'confirm_order'
@@ -29,32 +29,32 @@ class OrdersController < ApplicationController
         when "credit_card"
           if @order.purchase!
             @order.complete!
-            render 'success_credit_card'
+            render 'success_credit_card', :layout => 'confirmation'
           else
             @order.decline!
-            render 'failure_credit_card'
+            render 'failure_credit_card', :layout => 'confirmation'
           end
         when "deposit"
           if @order.suscription?
             @order.user.store.stand_by!
-            render 'success_deposit'
+            render 'success_deposit', :layout => 'confirmation'
           else
             @order.stand_by!
-            render 'success_deposit'
+            render 'success_deposit', :layout => 'confirmation'
           end
         when "contact_later"
           if @order.suscription?
             @order.user.store.contact_me!
-            render 'success_contact'
+            render 'success_contact', :layout => 'confirmation'
           else
             @order.contact_me!
-            render 'success_contact'
+            render 'success_contact', :layout => 'confirmation'
           end
       end
     else
       if in_register_process?
         build_order_types(:current_order => @order, :payment_type => 'suscription')
-        render 'new'
+        render :action => 'new', :layout => 'register'
       else
         build_order_types(:current_order => @order, :payment_type => 'product_purchase')
         render 'confirm_order'

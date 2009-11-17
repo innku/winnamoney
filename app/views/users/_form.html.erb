@@ -5,43 +5,43 @@
 <%= hidden_field_tag :store_id, params[:store_id] %>
 
 <p><%= f.label :names, "Names" %><br/>
-<%= f.text_field :names %></p>
+<%= f.text_field :names, :class=>'large' %></p>
 
 <p><%= f.label :last_names, "Last names" %><br/>
-<%= f.text_field :last_names %></p>
+<%= f.text_field :last_names, :class=>'large' %></p>
 
 <p><%= f.label :city_name, "City" %><br/>
-<%= f.text_field :city_name, :class => 'city_autocomplete' %></p>
+<%= f.text_field :city_name, :class => 'city_autocomplete large' %></p>
 
 <p><%= f.label :address1, "Address 1" %><br/>
-<%= f.text_field :address1 %> <br/>
+<%= f.text_field :address1, :class=>'large' %> <br/>
 <%= f.label :address2, "Address 2" %><br/>
-<%= f.text_field :address2 %></p>
+<%= f.text_field :address2, :class=>'large' %></p>
 
 <p>
 	<%= f.label :zip, "Zip Code" %><br/>
-	<%= f.text_field :zip %>
+	<%= f.text_field :zip, :class=>'small' %>
 </p>
 
 <p><%= f.label :phone, "Phone number" %><br/>
-<%= f.text_field :phone %> &nbsp; <small>Ext.</small> &nbsp;<%= f.text_field :fax_extension %></p>
-
-<p><%= f.label :cell, "Cell Phone number" %><br/>
-<%= f.text_field :cell %> &nbsp;</p>
+<%= f.text_field :phone, :class=>'medium' %> &nbsp; <small>Ext.</small> &nbsp;<%= f.text_field :phone_extension, :class=>'small'%></p>
 
 <p><%= f.label :fax, "Fax number" %><br/>
-<%= f.text_field :fax %> &nbsp; <small>Ext.</small> &nbsp;<%= f.text_field :fax_extension %></p>
+<%= f.text_field :fax, :class=>'medium' %> &nbsp; <small>Ext.</small> &nbsp;<%= f.text_field :fax_extension, :class=>'small' %></p>
+
+<p><%= f.label :cell, "Cell Phone number" %><br/>
+<%= f.text_field :cell, :class=>'medium' %> &nbsp;</p>
 
 <% if user.new_record? %>
 
 <p><%= f.label :email, "E-mail" %><br/>
-<%= f.text_field :email %></p>
+<%= f.text_field :email, :class=>'large' %></p>
 
 <p><%= f.label :password, "Password" %><br/>
-<%= f.password_field :password %></p>
+<%= f.password_field :password, :class=>'medium' %></p>
 
 <p><%= f.label :password_confirmation, "Confirm password" %><br/>
-<%= f.password_field :password_confirmation %></p>
+<%= f.password_field :password_confirmation, :class=>'medium' %></p>
 
 <% end %>
 
@@ -55,15 +55,15 @@
 </p>
 <p>
 	<%= f.label :account_number, "Account number" %> <br />
-	<%= f.text_field :account_number %>
+	<%= f.text_field :account_number, :class=>'large' %>
 </p>
 <p>
 	<%= f.label :routing, "Bank Routing" %> <br />
-	<%= f.text_field :routing %>
+	<%= f.text_field :routing, :class=>'large' %>
 </p>
 <p>
 	<%= f.label :ssn, "US. SSN or TIN / Mex. RFC" %> <br />
-	<%= f.text_field :ssn %>
+	<%= f.text_field :ssn, :class=>'large' %>
 </p>
 
 <p><%= submit_tag 'Sign up' %></p>

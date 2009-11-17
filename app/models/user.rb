@@ -22,16 +22,16 @@ class User < ActiveRecord::Base
   validates_numericality_of :fax, :allow_blank => true
   validates_numericality_of :cell, :allow_blank => true
   validates_presence_of     :password,                   :if => :password_required?,
-                            :message => 'Debes proporcionar un password'
+                            :message => "You must provide a password"
   validates_presence_of     :password_confirmation,      :if => :password_required?,
-                            :message => 'Debes proporionar la confirmaci&oacute;n de tu password'
+                            :message => "You must provide a password confirmation"
   validates_length_of       :password, :within => 4..40, :if => :password_required?,
-                            :message => 'Tu password debe tener de 4 a 40 caracteres de largo'
+                            :message => "The password you provided is too small"
   validates_confirmation_of :password,                   :if => :password_required?
   validates_length_of       :email,    :within => 3..100, 
-                            :message => 'Tu correo puede tener entre 3 y 100 caracteres de largo'
+                            :message => "Your email doesn't' have a correct format"
   validates_uniqueness_of   :email, :case_sensitive => false, 
-                            :message => 'Tu correo electr&oacute;nico ya existe en nuestra base de datos'
+                            :message => 'We already have that e-mail on our database'
   before_save               :encrypt_password
   before_create             :make_activation_code
   

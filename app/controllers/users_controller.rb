@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   
   before_filter :cant_create_user_without_store, :only => [:new, :create]
+  before_filter      :login_required, :only => [:edit, :update]
 
   def index
     respond_to do |format|
@@ -18,7 +19,8 @@ class UsersController < ApplicationController
   end
 
   def new
-    @user = User.new  
+    @user = User.new 
+    render :layout => 'register' 
   end
 
   def create
@@ -31,8 +33,7 @@ class UsersController < ApplicationController
       redirect_to new_order_path()
       flash[:notice] = "Register successful!"
     else
-      logger.warn @user.errors.full_messages
-      render :action => 'new'
+      render :action => 'new', :layout => 'register'
     end
   end
   

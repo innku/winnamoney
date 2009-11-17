@@ -1,13 +1,15 @@
 <% title "Winnamoney | Register" %>
-<% if @current_user.nil?%>
-	<h1>My Store</h1>
-<%else%>
-	<h1>Store Information</h1>
-	<% if params[:parent_id] %>
-		<small>* The position you selected for your referral will be taken as soon as payment is complete</small>
-	<% elsif @current_user and !@current_user.is_admin? %>
-		<small>* This user will be positioned automatically with your selected logic (<%= @current_store.positioning.titleize %>)</small>
+<% content_for :heading do %>
+	<% if @current_user.nil?%>
+		<h2>My Store</h2>
+	<%else%>
+		<h2>Store Information</h2>
+		<% if params[:parent_id] %>
+			<small>* The position you selected for your referral will be taken as soon as payment is complete</small>
+		<% elsif @current_user and !@current_user.is_admin? %>
+			<small>* This user will be positioned automatically with your selected logic (<%= @current_store.positioning.titleize %>)</small>
+		<% end %>
 	<% end %>
-<% end %>
+<%end%>
 
 <%= render :partial => 'form' %>

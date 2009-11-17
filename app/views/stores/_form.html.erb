@@ -2,17 +2,17 @@
   <%= error_messages_for :store %>
   <p>
     <%= f.label :name, "Store name" %><br />
-    http://&nbsp;<%= f.text_field :name %>.winnamoney.com<br />
-	<small style="display:none;color:red;" id="store_taken_warning">El nombre ya esta ocupado por alguien m&aacute;s</small>
+    http://&nbsp;<%= f.text_field :name, :class => 'medium' %>.winnamoney.com<br />
+	<small style="display:none;color:red;" id="store_taken_warning">This name is already taken</small>
   </p>
   <p>
     <%= f.label :language, "Language" %><br />
-    <%= f.select :language, Store::LANGUAGES  %>
+    <%= f.select :language, Store::LANGUAGES, {}, :class=> 'medium'  %>
   </p>
   <% if @current_user.nil? or (@current_user and @current_user.is_admin?) %>
 	  <p>
 	    <%= f.label :sponsor_name, "Sponsor Name or ID (If you have one)" %><br />
-	    <%= f.text_field :sponsor_name %>
+	    <%= f.text_field :sponsor_name, :class => 'large' %>
 	  </p>
   <% else %>
 	  <%= f.hidden_field :sponsor_id %>
@@ -21,7 +21,7 @@
   <%= f.hidden_field :side  %>
   <p>
     <%= f.label :positioning, "Positioning" %><br />
-    <%= f.select :positioning, Store::POSITIONING %>
+    <%= f.select :positioning, Store::POSITIONING,{}, :class=> 'medium' %>
   </p>
   <p><%= f.submit "Save" %></p>
 <% end %>

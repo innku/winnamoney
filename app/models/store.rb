@@ -2,7 +2,7 @@ class Store < ActiveRecord::Base
   
   STATUS = [["Activated", "activated"], ["Stand By", "stand_by"], ["Contact Me", "contact_me"], ["Incomplete", "incomplete"]]
   OWNER_DISCOUNT = 0.15
-  LANGUAGES=[['Español', 'spanish'],['English', 'english']]
+  LANGUAGES=[['English', 'english'],['Español', 'spanish']]
   POSITIONING= [['Automatic','automatic'],['Right','right'],['Left','left']]
   
   belongs_to                :user
@@ -12,10 +12,10 @@ class Store < ActiveRecord::Base
   belongs_to                :sponsor, :class_name => 'Store', :foreign_key => 'sponsor_id'
   has_many                  :carts
   
-  validates_presence_of     :name, :message => 'Tu tienda debe tener un nombre'
-  validates_uniqueness_of   :name, :message => 'Ya existe una tienda con ese nombre'
-  validates_presence_of     :language, :message => '&iquest;En que idioma estar&aacute; tu tienda?'
-  validates_presence_of     :positioning, :message => '&Debes elegir de que manera se posicionar&aacute;n tus inscritos'
+  validates_presence_of     :name, :message => 'Your store must have a name'
+  validates_uniqueness_of   :name, :message => 'There is another store with that name'
+  validates_presence_of     :language, :message => 'What language do you want your store to default to?'
+  validates_presence_of     :positioning, :message => 'You should select an automatic way for your referrals to position to'
   
   named_scope               :with_status, lambda {|status| {:conditions => ["status = '#{status}'"]} }
   named_scope               :complete, :conditions => ["user_id is not null"]
@@ -210,7 +210,7 @@ class Store < ActiveRecord::Base
   end
   
   def validate
-    errors.add(:sponsor_id, "No encontramos a tu patrocinador con la informaci&oacute;n que proporcionaste") if sponsor.nil? and not read_attribute(:sponsor_name).blank?
+    errors.add(:sponsor_id, "We could'nt find any sponsors with the information you provided") if sponsor.nil? and not read_attribute(:sponsor_name).blank?
   end
   
   def assign_position!

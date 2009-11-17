@@ -1,8 +1,10 @@
 <% title "Winnamoney | Register" %>
-<% if @current_user.nil? %>
-	<h1>My Information</h1>
-<% else %>
-	<h1>User Information</h1>
+<% content_for :heading do %>
+	<% if @current_user.nil? %>
+		<h2>My Information</h2>
+	<% else %>
+		<h2>User Information</h2>
+	<% end %>
 <% end %>
 
 <%= render :partial => 'form', :locals => {:user => @user} %>

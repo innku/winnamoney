@@ -5,6 +5,10 @@ module ApplicationHelper
     condition ? "" : "display:none"
   end
   
+  def display_string?(string, condition)
+    condition ? string : ""
+  end
+  
   def format_address(address1, address2, city_name, zip_code)
     address = ""
     address += "#{address1}"

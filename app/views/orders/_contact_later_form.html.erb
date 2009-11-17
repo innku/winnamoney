@@ -1,6 +1,10 @@
-<p>If you want us to contact you personally to finish your transaction. Please click on the finish register button.</p>
+<p>If you want us to contact you personally to complete your transaction.</p>
+
+<p>Please click on the following button.</p>
+
 <% form_for order, :url => orders_path() do |f| %>
+	<%= error_messages_for :contact_later_order %>
 	<%= f.hidden_field :payment_method %>
 	<%= f.hidden_field :order_type %>
-	<%= f.submit "Finish Register" %>
+	<%= f.submit "Contact Me" %>
 <% end %>

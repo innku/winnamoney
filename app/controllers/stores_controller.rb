@@ -3,6 +3,7 @@ class StoresController < ApplicationController
   before_filter      :clear_register_session, :only => [:show]
   before_filter      :clear_shopping_session, :only => [:new]
   before_filter      :find_cart, :only => [:show]
+  before_filter      :login_required, :only => [:edit, :update]
   
   def index
     respond_to do |format|
@@ -49,17 +50,17 @@ class StoresController < ApplicationController
     @store.sponsor_id = @current_store.id if @current_store
     @store.parent_id = params[:parent_id]
     @store.side = params[:side]
-    render :layout => 'application'
+    render :layout => 'register'
   end
   
   def create
     @store = Store.find_and_edit(session[:registered_store_id], params[:store]) || Store.new(params[:store]) 
     if @store.save
-      flash[:notice] = "The store was created"
+      flash[:notice] = "The store was created successfully"
       session[:registered_store_id] = @store.id
       redirect_to new_user_path()
     else
-      render :action => 'new', :layout => 'application'
+      render :action => 'new', :layout => 'register'
     end
   end
   

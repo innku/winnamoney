@@ -36,65 +36,20 @@
 		</div>
 	</div>
 	
-	<%- flash.each do |name, msg| -%>
-      <%= content_tag :div, msg, :id => "flash_#{name}" %>
-    <%- end -%>
-
 	<!--CONTENTENIDO-->
 	<div id="content">
 		<div class="wrapper">
 			<!--MAIN-->
-			<div id="main">
-				<!--SALUDO-->
-				<div id="hello">
-						<p>Welcome to <span><%= @current_store.name.titleize %></span>, <%= link_to "Register", register_path() %> or <%= link_to "Sign In", login_path %> to shop</p>
-				</div>
-				<!--SEARCH-->
-				<div id="search">
-					<% form_tag(@current_store, :method => :get) do %>
-						<%= text_field_tag :q, params[:q],:class => 'sbox' %>
-						<%= image_submit_tag "/images/buscar.png", :class => 'sbutton' %>
-					<% end %>
-
-				</div>
+			<div id="main" style="padding:5px 15px;">
+				<%= yield(:heading) %>
+				<%- flash.each do |name, msg| -%>
+			      <%= content_tag :div, msg, :id => "flash_#{name}" %>
+			    <%- end -%>
 			</div>
-				<!--MENU TIENDA-->
-				<div id="ribbon">
-					<!--HOME-->
-					<div id="menutienda">
-						<table width="100%" cellpadding="0" cellspacing="0">
-							<tr>
-								<td width="35px" style="background:url(/images/home.png) right center; text-align: right;">
-									<%= link_to image_tag("casa.gif", :alt => "home", :style => 'border:none;'), @current_store %>
-								</td>
-								<td>
-									<%= render :partial => '/layouts/categories' %>
-								</td>
-							</tr>
-						</table>
-					</div>
-				</div>
 				<!--REST-->
 				<div id="rest">
-					<!--LEFT-->
-					<div id="cleft">
-						<!--MINI CART-->
-						<div id="minicart">
-							<div class="content">
-								<%= render :partial => '/products/cart' %>
-							</div>
-						</div>
-					</div>
 					<!--RIGHT-->
-					<div id="cright">
-						
-						<!--BREAD + PAGES-->
-						<div id="bread">
-							<ul>
-								<%= breadcrumb_links %>
-							</ul>
-						</div>
-						
+					<div id="cright">		
 						<%= yield %>
 					</div>
 				</div>

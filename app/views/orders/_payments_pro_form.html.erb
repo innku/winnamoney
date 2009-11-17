@@ -1,38 +1,38 @@
 <% form_for order do |f| %>
 
-	<%= error_messages_for :order %>
+	<%= error_messages_for :credit_card_order %>
 		
 	<%= f.hidden_field :payment_method %>
 	<%= f.hidden_field :order_type %>
 	
 	<p>
 		<%= f.label :first_name %><br />
-		<%= f.text_field :first_name %>
+		<%= f.text_field :first_name, :class=>'large' %>
 	</p>
 
 	<p>
 		<%= f.label :last_name %><br />
-		<%= f.text_field :last_name %>
+		<%= f.text_field :last_name, :class=>'large' %>
 	</p>
 	
 	<p>
 		<%= f.label :card_type %><br />
-		<%= f.select :card_type, [["Visa", "visa"],["MasterCard","master"],["Discover","discover"],["American Express","american_express"]] %>
+		<%= f.select :card_type, [["Visa", "visa"],["MasterCard","master"],["Discover","discover"],["American Express","american_express"]], {}, :class=> 'medium' %>
 	</p>
 	
 	<p>
 		<%= f.label :card_number %><br />
-		<%= f.text_field :card_number %>
+		<%= f.text_field :card_number, :class=>'large' %>
 	</p>
 	
 	<p>
 		<%= f.label :card_verification, "Card Verification Value(CVV)" %><br />
-		<%= f.text_field :card_verification %>
+		<%= f.text_field :card_verification, :size => 3 %>
 	</p>
 	
 	<p>
 		<%= f.label :card_expires_on %><br />
-		<%= f.date_select :card_expires_on, :discard_day => true, :start_year => Date.today.year, :end_year => (Date.today.year + 10), :add_month_numbers => true %>
+		<%= f.date_select :card_expires_on, :discard_day => true, :start_year => Date.today.year, :end_year => (Date.today.year + 10), :add_month_numbers => true, :order => [:month, :year] %>
 	</p>
 	<p>
 		<%= f.submit %>

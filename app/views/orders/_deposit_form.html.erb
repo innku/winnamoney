@@ -1,4 +1,5 @@
 <% form_for order, :url => orders_path() do |f| %>
+<%= error_messages_for :deposit_order %>
 
 <%= f.hidden_field :payment_method %>
 <%= f.hidden_field :order_type %>
@@ -12,16 +13,16 @@
 </p>
 <p>
 	<%= f.label :account_number, "Account number" %> <br />
-	<%= f.text_field :account_number %>
+	<%= f.text_field :account_number, :class => 'large' %>
 </p>
 <p>
 	<%= f.label :routing, "Bank Routing" %> <br />
-	<%= f.text_field :routing %>
+	<%= f.text_field :routing, :class => 'large' %>
 </p>
 
 <p>
 	<%= f.label :ssn, "SSN/TIN/RFC" %> <br />
-	<%= f.text_field :ssn %>
+	<%= f.text_field :ssn, :class => 'large' %>
 </p>
 
 <p>

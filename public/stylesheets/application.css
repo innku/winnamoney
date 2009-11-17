@@ -110,6 +110,30 @@ border: 1px solid red;
   list-style: disc;
 }
 
+/******FORM STYLES*******/
+
+form label{
+	font-size:16px;
+}
+
+form input, form select{
+	font-size:14px;
+}
+
+form .small{
+	width:80px;
+}
+
+form .medium{
+	width:140px;
+}
+
+form .large{
+	width:250px;
+}
+
+/******FORM STYLES*******/
+
 /******NUEVO CSS INICIO*******/
 /******NUEVO CSS INICIO*******/
 /******NUEVO CSS INICIO*******/
@@ -196,6 +220,7 @@ body {
 	margin: 0px 8px;
 	_margin: 0px 4px;
 }
+
 /*GENERALES*/
 a {
 	color: #467933;
@@ -506,4 +531,17 @@ clear:both;
 /****IMPORTANTE TOOLBAR****/
 .rte-toolbar a.image,.rte-toolbar a.link, .rte-toolbar a.unlink, .rte-toolbar select.style{
 	display:none;
+}
+
+/****TAB NAVIGATION****/
+
+ul.tabNavigation{
+	list-style-type:none;
+	padding:0px;
+}
+
+ul.tabNavigation li{
+	float:left;
+	margin-right:20px;
+	font-size:16px;
 }

@@ -1,3 +1,11 @@
-<% title "Winnamoney | Success" %>
+<% title "Winnamoney | Payment Successful" %>
 
-SUCCESS!
+<% content_for :heading do %>
+	<h2>Your Payment was processed successfully!</h2>
+<% end %>
+
+<p>Your order confirmation number is: <%= @order.id %></p>
+
+<% if @order.suscription? %>
+	<p>You will receive a confirmation E-mail to activate your account and start selling</p>
+<% end %>
