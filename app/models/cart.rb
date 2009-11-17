@@ -14,6 +14,11 @@ class Cart < ActiveRecord::Base
     self.owner_purchase
   end
   
+  def owner_purchase!
+    self.owner_purchase =true
+    self.save
+  end
+  
   def price
     total=0
     self.items.each do |item|

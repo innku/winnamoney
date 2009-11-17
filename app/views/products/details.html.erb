@@ -15,9 +15,13 @@
 		<p><em>id:&nbsp;<%= @product.id %></em></p>
 		<p><%= @product.description %></p>
 
-		<p class="precio"><%= number_to_currency @product.selling_price %></p>
 		<% if @current_store.owner?(@current_user) %>
-			<p class="precio"><%= number_to_currency @product.price_for_owner %></p>
+			<p class="precio">
+				<small><strike><%= number_to_currency @product.selling_price %></strike></small><br />
+				<%= number_to_currency @product.price_for_owner %>
+			</p>
+		<% else %>
+			<p class="precio"><%= number_to_currency @product.selling_price %></p>
 		<% end %>
 		<div class="clearb">
 		<% form_tag cart_items_path do  %>

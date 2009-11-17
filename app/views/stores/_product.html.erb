@@ -4,8 +4,10 @@
 	</div>
 	<p class="name"><%= link_to truncate(product.name,48), product_path(product) %></p>	
 	<% if @current_store.owner?(@current_user) %>
-		<p class="price"><strike><%= number_to_currency product.selling_price %></strike></p>
-		<p class="price"><%= number_to_currency product.price_for_owner %></p>
+		<p class="price">
+			<small><strike><%= number_to_currency product.selling_price %></strike></small><br />
+			<strong><%= number_to_currency product.price_for_owner %></strong>
+		</p>
 	<% else %>
 		<p class="price"><%= number_to_currency product.selling_price %></p>
 	<% end %>

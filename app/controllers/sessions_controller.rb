@@ -1,5 +1,7 @@
 class SessionsController < ApplicationController
-    
+  
+  before_filter :find_cart
+  
   def new
     render :layout => 'stores'
   end
@@ -16,6 +18,7 @@ class SessionsController < ApplicationController
       if current_user.is_admin?
         redirect_back_or_default('/products')
       else
+        @cart.owner_purchase! if !@cart.owner_purchase?
         redirect_back_or_default("http://#{current_user.store.name}.#{APP_CONFIG[:domain]}")
       end
     else
