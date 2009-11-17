@@ -14,6 +14,10 @@ class Store < ActiveRecord::Base
   
   validates_presence_of     :name, :message => 'Your store must have a name'
   validates_uniqueness_of   :name, :message => 'There is another store with that name'
+  validates_format_of       :name,       
+                            :message => 'Your store subdomain can only contain alphanumeric characters',                  
+                            :with => /^[a-zA-Z0-9]+$/  
+                            
   validates_presence_of     :language, :message => 'What language do you want your store to default to?'
   validates_presence_of     :positioning, :message => 'You should select an automatic way for your referrals to position to'
   
