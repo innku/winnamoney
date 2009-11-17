@@ -1,7 +1,22 @@
-<% title "Winnamoney | My information" %>
+<% title "Winnamoney | My Account" %>
+
+<% content_for :sidebar do%>
+	<p>
+		<%= link_to	"Store Information", "#storeinfo" %>
+	</p>
+	<p>
+		<%= link_to	"User Information","#myinfo"  %>
+	</p>	
+	<p>
+		<%= link_to	"Account Information","#accountinfo"  %>
+	</p>
+	<p>
+		<%= link_to	"Change Password",edit_user_path(@current_user, :edit_action => 'change_password')  %>
+	</p>
+<% end %>
+
 
 <% if @current_user and @current_user.is_admin? %>
-	<h1>User information</h1>
 	<% if @user.store.payment_due? %>
 		<p>
 			<strong>Store Status</strong><br />
@@ -9,88 +24,93 @@
 			<%= link_to "Complete Payment", new_order_payment_path(@user.orders.order_type_like("suscription")) %>
 		</p>
 	<% end %>
-<% else %>
-	<h1>My information</h1>
 <% end %>
+<div id="storeinfo">
+	<h2>Store information</h2>
+	<p>
+		<strong>Store location</strong><br />
+		<%= link_to "http://#{@user.store.name}.#{APP_CONFIG[:domain]}", "http://#{@user.store.name}.#{APP_CONFIG[:domain]}" %>
+	</p>
 
-<p>
-	<strong>Store location</strong><br />
-	<%= link_to "http://#{@user.store.name}.#{APP_CONFIG[:domain]}", "http://#{@user.store.name}.#{APP_CONFIG[:domain]}" %>
-</p>
+	<p>
+		<strong>Store language</strong><br />
+		<%= @user.store.language.titleize %>
+	</p>
 
-<p>
-	<strong>Store language</strong><br />
-	<%= @user.store.language.titleize %>
-</p>
+	<p>
+		<strong>New account positioning</strong><br />
+		<%= @user.store.positioning.titleize %>
+	</p>
 
-<p>
-	<strong>New account positioning</strong><br />
-	<%= @user.store.positioning.titleize %>
-</p>
-
-<p>	
-	<%= link_to "Edit Store", edit_store_path(@user.store) %> &nbsp; 
-	<%= link_to "Change Password", edit_user_path(@current_user, :edit_action => 'change_password') %> 	
-</p>
-
+	<p>	
+		<%= link_to "Edit Store", edit_store_path(@user.store) %> &nbsp; 
+	</p>
+	
+</div>
 <hr />
-
-<p>
-	<strong>Name</strong><br />
-	<%= @user.full_name %>
-</p>
-
-<p>
-	<strong>Address</strong><br />
-	<%= format_address(@user.address1, @user.address2, @user.city_name, @user.zip) %>
-</p>
-
-<p>
-	<strong>Phone Number</strong><br />
-		<%= format_phone(@user.phone, @user.phone_extension) %>
-</p>
-
-<% if @user.fax %>
+<div id="myinfo">
+	<h2>User Information</h2>
 	<p>
-		<strong>Fax Number</strong><br />
-		<%= format_phone(@user.fax, @user.fax_extension) %>
+		<strong>Name</strong><br />
+		<%= @user.full_name %>
 	</p>
-<% end %>
 
-<% if @user.cell %>
 	<p>
-		<strong>Cell Phone number</strong><br />
-		<%= format_phone(@user.cell, nil) %>
+		<strong>Address</strong><br />
+		<%= format_address(@user.address1, @user.address2, @user.city_name, @user.zip) %>
 	</p>
-<% end %>
 
-<p>
-	<strong>E-mail</strong><br />
-	<%= @user.email %>
-</p>
+	<p>
+		<strong>Phone Number</strong><br />
+			<%= format_phone(@user.phone, @user.phone_extension) %>
+	</p>
 
-<h3>Account Information</h3>
+	<% if @user.fax %>
+		<p>
+			<strong>Fax Number</strong><br />
+			<%= format_phone(@user.fax, @user.fax_extension) %>
+		</p>
+	<% end %>
 
-<p>
-	<strong>Account Type</strong><br />
-	<%= @user.account_type.titleize %>
-</p>
+	<% if @user.cell %>
+		<p>
+			<strong>Cell Phone number</strong><br />
+			<%= format_phone(@user.cell, nil) %>
+		</p>
+	<% end %>
 
-<p>
-	<strong>Account Number</strong><br />
-	<%= @user.account_number %>
-</p>
+	<p>
+		<strong>E-mail</strong><br />
+		<%= @user.email %>
+	</p>
+	<p>
+		<%= link_to "Edit User Information", edit_user_path(@user) %>
+	</p>
+</div>
+<hr />
+<div id="accountinfo">
+	<h2>Account Information</h2>
+	<p>
+		<strong>Account Type</strong><br />
+		<%= @user.account_type.titleize %>
+	</p>
 
-<p>
-	<strong>Bank Routing</strong><br />
-	<%= @user.routing %>
-</p>
+	<p>
+		<strong>Account Number</strong><br />
+		<%= @user.account_number %>
+	</p>
 
-<p>
-	<strong>SSN/TIN/RFC</strong><br />
-	<%= @user.routing %>
-</p>
+	<p>
+		<strong>Bank Routing</strong><br />
+		<%= @user.routing %>
+	</p>
 
-<p>
-	<%= link_to "Edit", edit_user_path(@user) %>
-</p>
+	<p>
+		<strong>SSN/TIN/RFC</strong><br />
+		<%= @user.routing %>
+	</p>
+
+	<p>
+		<%= link_to "Edit Account Information", edit_user_path(@user) %>
+	</p>
+</div>

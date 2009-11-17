@@ -1,24 +1,30 @@
-<% title "Subir productos en masa" %>
+<% title "Winnamoney | Bulk Create Products" %>
+
+<% content_for :sidebar do %>
+	<p>
+		<%= link_to	"Back to product listing", products_path %>
+	</p>
+<% end %>
+
 
 <% form_tag products_path, :method => :post, :multipart => true do %>
 <p>
-	<%= label_tag	:category_mass, "Categor&iacute;a de los productos" %> <br />
-	<%= select_tag 	:category_mass, categories_for_select %>
+	<%= label_tag	:category_mass, "Category" %> <br />
+	<%= select_tag 	:category_mass, categories_for_select, :class => 'medium' %>
 </p>
 
 
-<p style="float:left;">
+<p>
 	<%= hidden_field_tag :create_type, "mass" %>
-	<%= label_tag	:products_csv, "Archivo CSV" %> <br />
-	<%= file_field_tag :products_csv %>
+	<%= label_tag	:products_csv, "CSV File" %> <br />
+	<%= file_field_tag :products_csv%>
 </p>
-
-<%= image_tag "indicator.gif", :style => 'float:left;margin-top:22px;display:none', :id => 'indicator' %>
+<p>
+	<%= image_tag "indicator.gif", :style => 'display:none', :id => 'indicator' %>
+</p>
 
 <div class="clear"></div>
 <p>
-	<%= submit_tag "Subir archivo", :id => 'upload_csv_file' %>
+	<%= submit_tag "Upload File", :id => 'upload_csv_file' %>
 </p>
 <% end %>
-
-<p><%= link_to "Volver", products_path %></p>

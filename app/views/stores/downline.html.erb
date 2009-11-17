@@ -1,20 +1,28 @@
 <% title "Winnamoney | Downline" %>
-<h1>Downline</h1>
 
-<% form_for @current_store do |f| %>
-  <%= error_messages_for :store %>
-  <%= hidden_field_tag :update_action, 'change_positioning' %>
-  <p>
-    <%= f.label :positioning, "Current Automatic Positioning" %><br />
-    <%= f.select :positioning, Store::POSITIONING %>
-	<%= f.submit "Change" %>
-  </p>
-  <p></p>
+<% content_for  :sidebar do %>
+	<% if params[:id] %>
+		<%= link_to("Back to root",stores_path(:index_action => 'downline' )) %>
+		<hr />
+	<% end %>
+	
+	<% form_for @current_store do |f| %>
+	  <%= error_messages_for :store %>
+	  <%= hidden_field_tag :update_action, 'change_positioning' %>
+	  <p>
+	    <%= f.label :positioning, "Positioning" %><br />
+	    <%= f.select :positioning, Store::POSITIONING %>
+		<%= f.submit "Change" %>
+	  </p>
+	  <p></p>
 
+	<% end %>
+	<hr />
+	<p>To navigate in the tree click on the store you want to switch as the root.</p>
 <% end %>
 
-<p>To navigate in the tree click on the store you want to switch as the root.</p>
-<%= link_to("Back to root",stores_path(:index_action => 'downline' )) if params[:id] %>
+<br />
+
 <table class="downline_tree">
 	<% for level in 0..@levels do %>
 		<tr>

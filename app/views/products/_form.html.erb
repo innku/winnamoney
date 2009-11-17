@@ -1,31 +1,31 @@
 <% form_for @product do |f| %>
   <%= error_messages_for :product %>
   <p>
-    <%= f.label :name, "Nombre" %><br />
+    <%= f.label :name, "Name" %><br />
     <%= f.text_field :name %>
   </p>
   <p>
-    <%= f.label :product_key, "Clave del producto" %><br />
+    <%= f.label :product_key, "Provider Key" %><br />
     <%= f.text_field :product_key %>
   </p>
   <p>
-    <%= f.label :description, "Descripci&oacute;n"%><br />
+    <%= f.label :description, "Description"%><br />
     <%= f.text_area :description, :class => 'rte'  %>
   </p>
 
   <p>
-	<%= f.label		:category_id, "Categor&iacute;a" %> <br />
+	<%= f.label		:category_id, "Category" %> <br />
 	<%= f.select 	:category_id, [["", -1]] + Category.all.collect {|c| [c.name,c.id] } %>
   </p>
 
   
 	<p>
-		<%= f.label		:subcategory_id, "Sub categor&iacute;a" %> <br />
+		<%= f.label		:subcategory_id, "Sub-category" %> <br />
 		<%= f.select 	:subcategory_id, [["", -1]] + Subcategory.siblings(@product.category_id).collect {|s| [s.name, s.id]} %>
 	</p>
 	
 	<p>
-		<%= f.label		:tag_id, "Sub Sub Categor&iacute;a" %> <br />
+		<%= f.label		:tag_id, "Sub-Sub-Category" %> <br />
 		<%= f.select 	:tag_id, [["", -1]] + Tag.siblings(@product.subcategory_id).collect {|t| [t.name, t.id]}  %>
 	</p>
 
@@ -35,7 +35,7 @@
 	</script>
 
   <p>
-    <%= f.label :state_name, "Estado de Origen" %><br />
+    <%= f.label :state_name, "Origin State" %><br />
     <%= f.text_field :state_name %>
   </p>
 
@@ -72,51 +72,51 @@
 	</script>
 
   <p>
-    <%= f.label :existence, "Existencia" %><br />
+    <%= f.label :existence, "In stock" %><br />
     <%= f.text_field :existence %>
   </p>
 
   <p>
-    <%= f.label :small_image_url, "URL de la imagen peque&ntilde;a" %><br />
+    <%= f.label :small_image_url, "Small Image URL" %><br />
     <%= f.text_field :small_image_url %>
   </p>
   <p>
-    <%= f.label :medium_image_url, "URL de la imagen mediana" %><br />
+    <%= f.label :medium_image_url, "Medium Image URL" %><br />
     <%= f.text_field :medium_image_url %>
   </p>
   <p>
-    <%= f.label :big_image_url, "URL de la imagen grande" %><br />
+    <%= f.label :big_image_url, "Big Image URL" %><br />
     <%= f.text_field :big_image_url %>
   </p>
 
   <p>
-    <%= f.label :cost, "Costo" %><br />
+    <%= f.label :cost, "Cost" %><br />
     <%= f.text_field :cost %>
   </p>
   <p>
-    <%= f.label :handling, "Gastos de Manejo" %><br />
+    <%= f.label :handling, "Handling" %><br />
     <%= f.text_field :handling %>
   </p>
 	<p>
-	  <%= f.label :local_transport, "Flete Local" %><br />
+	  <%= f.label :local_transport, "Local Transport" %><br />
 	  <%= f.text_field :local_transport %>
 	</p>
 	<p>
-	  <%= f.label :international_transport, "Flete Internacional" %><br />
+	  <%= f.label :international_transport, "International Transport" %><br />
 	  <%= f.text_field :international_transport %>
 	</p>
 	<p>
-    <%= f.label :tax, "Impuesto" %><br />
+    <%= f.label :tax, "Tax" %><br />
     <%= f.text_field :tax %>
   </p>
 	<p>
-    <%= f.label :discount, "Descuento" %><br />
+    <%= f.label :discount, "Discount" %><br />
     <%= f.text_field :discount %>
   </p>
   <p>
-    <%= f.label :selling_price, "Precio de venta" %><br />
+    <%= f.label :selling_price, "Selling Price" %><br />
     <%= f.text_field :selling_price %>
   </p>
 
-  <p><%= f.submit "Guardar" %></p>
+  <p><%= f.submit "Save" %></p>
 <% end %>

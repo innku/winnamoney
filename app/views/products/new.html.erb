@@ -1,6 +1,12 @@
-<% title "Nuevo Producto" %>
+<% title "Winnamoney | New Product" %>
 
-<h1>Nuevo Producto</h1>
+<% content_for :sidebar do %>
+	<p>
+		<%= link_to	"Back to product listing", products_path %>
+	</p>
+<% end %>
+
+<h2>New Product</h2>
 
 <%= render :partial => 'form' %>
 

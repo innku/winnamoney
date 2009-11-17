@@ -3,18 +3,36 @@
   	<%= link_to "Products", products_path %> &nbsp;
   	<%= link_to "Clients", users_path %> &nbsp;
 	<%= link_to "Downline", stores_path(:index_action => 'downline') %> &nbsp; 
+	<%= link_to "Logout", logout_path %> &nbsp; 
 <%	elsif @current_user %>
-	<%= link_to "My store", "http://#{@current_user.store.name}.#{APP_CONFIG[:domain]}" %> &nbsp;
-	<%= link_to "My information", user_path(@current_user) %> &nbsp; 
-	<%= link_to "My Referrals", stores_path(:index_action => 'referrals') %> &nbsp; 
-	<%= link_to "My Downline", stores_path(:index_action => 'downline') %> &nbsp; 
+	<div id="hello">
+		<%= link_to "My Store", "http://#{@current_user.store.name}.#{APP_CONFIG[:domain]}" %> &nbsp;
+		<%= link_to "My Referrals", stores_path(:index_action => 'referrals') %> &nbsp; 
+		<%= link_to "My Downline", stores_path(:index_action => 'downline') %> &nbsp;
+		<%= link_to "My Account", user_path(@current_user) %> &nbsp; 
+		<%= link_to "Logout", logout_path %> &nbsp; 
+	</div> 
 <% elsif controller_name != "sessions" %>
-	<%= link_to "Login", login_path %>
-	<%= link_to "Register", register_path %>
+	<!--SALUDO-->
+	<div id="hello">
+			<p>Welcome to <span><%= @current_store.name.titleize %></span>, <%= link_to "Register", register_path() %> or <%= link_to "Sign In", login_path %> to shop</p>
+	</div>
+	<!--SEARCH-->
+	<div id="search">
+		<% form_tag(@current_store, :method => :get) do %>
+			<%= text_field_tag :q, params[:q],:class => 'sbox' %>
+			<%= image_submit_tag "/images/buscar.png", :class => 'sbutton' %>
+		<% end %>
+	</div>
 <% end %>
 
 <%if @current_user%>
-	<%= link_to "Logout", logout_path %> &nbsp; 
+<div id="search">
+	<% form_tag(@current_store, :method => :get) do %>
+		<%= text_field_tag :q, params[:q],:class => 'sbox' %>
+		<%= image_submit_tag "/images/buscar.png", :class => 'sbutton' %>
+	<% end %>
+</div>
 <% end %>
 
 </p>
