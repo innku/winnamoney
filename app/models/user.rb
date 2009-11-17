@@ -40,7 +40,11 @@ class User < ActiveRecord::Base
   after_validation :validate_cities
   
   def self.admin
-    User.find_by_email("rrosa@gmx.us")
+    if ENV["RAILS_ENV"] == 'production'
+      User.find_by_email("rrosa@gmx.us")
+    else
+      User.new(:email => 'adrian@innku.com')
+    end
   end
   
   def self.find_and_edit(id, params)
