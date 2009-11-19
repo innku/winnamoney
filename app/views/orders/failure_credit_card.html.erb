@@ -1,9 +1,9 @@
-<% title "Winnamoney | Payment Declined" %>
+<% title "Winnamoney | #{I18n.t "orders.text.declined.title"}" %>
 
 <% content_for :heading do %>
-	<h2>Your Payment was declined</h2>
+	<h2><%= I18n.t "orders.text.declined.header" %></h2>
 <% end %>
 
-<p>Don't Worry, we haven't deducted any money from your credit card.</p>
+<p><%= I18n.t "orders.text.declined.declined1" %></p>
 
-<p>Please check with your bank and try again.</p>
+<p><%= I18n.t "orders.text.declined.declined2" %></p>

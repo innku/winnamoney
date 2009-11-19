@@ -2,12 +2,12 @@
 	<div class="payment_tabs">
 	  <!-- tabs -->
 	<br />
-	  <strong>Payment type:</strong>
+	  <strong><%= I18n.t "orders.labels.payment_type" %></strong>
 
 	  <ul class="tabNavigation" >
-	    <li><a href="#paypal" <%= display_string?("class='selected'", (@order == credit_card_order || @order.nil?)) %>>Credit Card</a></li>
-	    <li><a href="#deposit" <%= display_string?("class='selected'", (@order == deposit_order)) %>>Bank deposit</a></li>
-		<li><a href="#other" <%= display_string?("class='selected'", (@order == contact_later_order)) %>>Other</a></li>
+	    <li><a href="#paypal" <%= display_string?("class='selected'", (@order == credit_card_order || @order.nil?)) %>><%= I18n.t "orders.labels.credit_card" %></a></li>
+	    <li><a href="#deposit" <%= display_string?("class='selected'", (@order == deposit_order)) %>><%= I18n.t "orders.labels.bank_deposit" %></a></li>
+		<li><a href="#other" <%= display_string?("class='selected'", (@order == contact_later_order)) %>><%= I18n.t "orders.labels.other" %></a></li>
 	  </ul>
 
 		<%= link_to image_tag("http://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif", :style => 'border:none;' ), express_new_order_path%>

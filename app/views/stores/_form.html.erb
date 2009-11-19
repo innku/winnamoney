@@ -1,17 +1,17 @@
 <% form_for @store do |f| %>
   <%= error_messages_for :store %>
   <p>
-    <%= f.label :name, "Store name" %><br />
+    <%= f.label :name, (I18n.t 'stores.labels.name') %><br />
     http://&nbsp;<%= f.text_field :name, :class => 'medium' %>.winnamoney.com<br />
 	<small style="display:none;color:red;" id="store_taken_warning">This name is already taken</small>
   </p>
   <p>
-    <%= f.label :language, "Language" %><br />
+    <%= f.label :language, (I18n.t 'stores.labels.language') %><br />
     <%= f.select :language, Store::LANGUAGES, {}, :class=> 'medium'  %>
   </p>
   <% if @current_user.nil? or (@current_user and @current_user.is_admin?) %>
 	  <p>
-	    <%= f.label :sponsor_name, "Sponsor Name or ID (If you have one)" %><br />
+	    <%= f.label :sponsor_name, (I18n.t 'stores.labels.sponsor_name') %><br />
 	    <%= f.text_field :sponsor_name, :class => 'large' %>
 	  </p>
   <% else %>
@@ -20,8 +20,8 @@
   <%= f.hidden_field :parent_id  %>
   <%= f.hidden_field :side  %>
   <p>
-    <%= f.label :positioning, "Positioning" %><br />
+    <%= f.label :positioning, (I18n.t 'stores.labels.positioning') %><br />
     <%= f.select :positioning, Store::POSITIONING,{}, :class=> 'medium' %>
   </p>
-  <p><%= f.submit "Save" %></p>
+  <p><%= f.submit (I18n.t 'stores.labels.submit') %></p>
 <% end %>

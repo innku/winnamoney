@@ -8,7 +8,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :stores
 
   map.resources :users
-  map.resources :orders, :new => {:express => :get}, :collection => {:success => :get} do |order|
+  map.resources :orders, :new => {:express => :get} do |order|
     order.resources :payments
   end
   

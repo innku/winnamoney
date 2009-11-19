@@ -1,13 +1,13 @@
-<% title "Winnamoney | Register Successful"%>
+<% title "Winnamoney | #{I18n.t "orders.text.success.title_register_successful"}"%>
 
 <% content_for :heading do %>
-	<h2>Your Order was registered successfully!</h2>
+	<h2><%= I18n.t "orders.text.success.header_register_successful" %></h2>
 <% end %>
 
-<p>We will be waiting for your deposit</p>
+<p><%= I18n.t "orders.text.success.deposit1" %></p>
 
-<p>Your order confirmation number is: <%= @order.id %></p>
+<p><%= I18n.t "orders.text.success.confirmation_number" %> <%= @order.id %></p>
 
 <% if @order.suscription? %>
-	<p>You will receive a confirmation E-mail to activate your account</p>
+	<p><%= I18n.t "orders.text.success.deposit2" %></p>
 <% end %>

@@ -5,18 +5,18 @@
 <%= f.hidden_field :order_type %>
 
 <p>
-	<%= f.label :account_type, "Account Type" %> <br />
-	<%= f.label :account_type_check, "Check"%>
+	<%= f.label :account_type, (I18n.t "orders.labels.account_type") %> <br />
+	<%= f.label :account_type_check, (I18n.t "orders.labels.account_type_check")%>
 	<%= f.radio_button :account_type, "check" %>
-	<%= f.label :account_type_savings, "Savings"%>
+	<%= f.label :account_type_savings, (I18n.t "orders.labels.account_type_savings")%>
 	<%= f.radio_button :account_type, "savings" %>
 </p>
 <p>
-	<%= f.label :account_number, "Account number" %> <br />
+	<%= f.label :account_number, (I18n.t "orders.labels.account_number") %> <br />
 	<%= f.text_field :account_number, :class => 'large' %>
 </p>
 <p>
-	<%= f.label :routing, "Bank Routing" %> <br />
+	<%= f.label :routing, (I18n.t "orders.labels.routing") %> <br />
 	<%= f.text_field :routing, :class => 'large' %>
 </p>
 
@@ -26,6 +26,6 @@
 </p>
 
 <p>
-	<%= f.submit "Finish sucription" %>
+	<%= f.submit (I18n.t "orders.labels.submit_deposit") %>
 </p>
 <% end %>

@@ -14,7 +14,7 @@ class UsersController < ApplicationController
           keyword = params[:keyword].split.empty? ? nil : params[:keyword].split
         end
         status = params[:status] unless params[:status] == "0"
-        @users = User.names_or_last_names_or_email_or_id_like_all(keyword).store_status_like(status).paginate(:page => params[:page], :per_page => 20)
+        @users = User.names_or_last_names_or_email_or_id_or_ssn_or_phone_like_all(keyword).store_status_like(status).paginate(:page => params[:page], :per_page => 20)
       }
     end
   end

@@ -1,12 +1,13 @@
-<% title "Winnamoney | Register" %>
+<% title "Winnamoney | #{I18n.t "orders.text.title"}" %>
+
 <% content_for :heading  do %>
-	<h2>Confirm suscription and complete payment</h2>
+	<h2><%= I18n.t "orders.text.header" %></h2>
 <% end %>
 
 <table style="text-align:left;border:1px solid black;">
 	<tr>
-		<th>Store name</th>
-		<th>Amount</th>
+		<th><%= I18n.t "orders.text.store_name" %></th>
+		<th><%= I18n.t "orders.text.amount" %></th>
 	</tr>
 	<tr>
 		<td>http://<%= @user.store.name %>.winnamoney.com</th>

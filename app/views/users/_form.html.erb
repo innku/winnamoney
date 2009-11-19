@@ -4,62 +4,62 @@
 
 <%= hidden_field_tag :store_id, params[:store_id] %>
 
-<p><%= f.label :names, "Names" %><br/>
+<p><%= f.label :names, (I18n.t 'users.labels.names') %><br/>
 <%= f.text_field :names, :class=>'large' %></p>
 
-<p><%= f.label :last_names, "Last names" %><br/>
+<p><%= f.label :last_names, (I18n.t 'users.labels.last_names') %><br/>
 <%= f.text_field :last_names, :class=>'large' %></p>
 
-<p><%= f.label :city_name, "City" %><br/>
+<p><%= f.label :city_name, (I18n.t 'users.labels.city') %><br/>
 <%= f.text_field :city_name, :class => 'city_autocomplete large' %></p>
 
-<p><%= f.label :address1, "Address 1" %><br/>
+<p><%= f.label :address1, (I18n.t 'users.labels.address1') %><br/>
 <%= f.text_field :address1, :class=>'large' %> <br/>
-<%= f.label :address2, "Address 2" %><br/>
+<%= f.label :address2, (I18n.t 'users.labels.address2') %><br/>
 <%= f.text_field :address2, :class=>'large' %></p>
 
 <p>
-	<%= f.label :zip, "Zip Code" %><br/>
+	<%= f.label :zip, (I18n.t 'users.labels.zip') %><br/>
 	<%= f.text_field :zip, :class=>'small' %>
 </p>
 
-<p><%= f.label :phone, "Phone number" %><br/>
+<p><%= f.label :phone, (I18n.t 'users.labels.phone') %><br/>
 <%= f.text_field :phone, :class=>'medium' %> &nbsp; <small>Ext.</small> &nbsp;<%= f.text_field :phone_extension, :class=>'small'%></p>
 
-<p><%= f.label :fax, "Fax number" %><br/>
+<p><%= f.label :fax, (I18n.t 'users.labels.fax') %><br/>
 <%= f.text_field :fax, :class=>'medium' %> &nbsp; <small>Ext.</small> &nbsp;<%= f.text_field :fax_extension, :class=>'small' %></p>
 
-<p><%= f.label :cell, "Cell Phone number" %><br/>
+<p><%= f.label :cell, (I18n.t 'users.labels.cell') %><br/>
 <%= f.text_field :cell, :class=>'medium' %> &nbsp;</p>
 
 <% if user.new_record? %>
 
-<p><%= f.label :email, "E-mail" %><br/>
+<p><%= f.label :email,(I18n.t 'users.labels.email') %><br/>
 <%= f.text_field :email, :class=>'large' %></p>
 
-<p><%= f.label :password, "Password" %><br/>
+<p><%= f.label :password, (I18n.t 'users.labels.password')%><br/>
 <%= f.password_field :password, :class=>'medium' %></p>
 
-<p><%= f.label :password_confirmation, "Confirm password" %><br/>
+<p><%= f.label :password_confirmation, (I18n.t 'users.labels.confirm_password') %><br/>
 <%= f.password_field :password_confirmation, :class=>'medium' %></p>
 
 <% end %>
 
 <div id="accountinfo">
-	<h2>Account Information</h2>
+	<h2><%= (I18n.t 'users.text.account_header') %></h2>
 	<p>
-		<%= f.label :account_type, "Account Type" %> <br />
-		<%= f.label :account_type_check, "Check"%>
+		<%= f.label :account_type, (I18n.t 'users.labels.account_type') %> <br />
+		<%= f.label :account_type_check, (I18n.t 'users.labels.account_type_check')%>
 		<%= f.radio_button :account_type, "check" %>
-		<%= f.label :account_type_savings, "Savings"%>
+		<%= f.label :account_type_savings, (I18n.t 'users.labels.account_type_savings')%>
 		<%= f.radio_button :account_type, "savings" %>
 	</p>
 	<p>
-		<%= f.label :account_number, "Account number" %> <br />
+		<%= f.label :account_number, (I18n.t 'users.labels.account_number')%> <br />
 		<%= f.text_field :account_number, :class=>'large' %>
 	</p>
 	<p>
-		<%= f.label :routing, "Bank Routing" %> <br />
+		<%= f.label :routing, (I18n.t 'users.labels.routing') %> <br />
 		<%= f.text_field :routing, :class=>'large' %>
 	</p>
 	<p>
@@ -68,6 +68,6 @@
 	</p>
 </div>
 
-<p><%= submit_tag 'Save User' %></p>
+<p><%= submit_tag (I18n.t 'users.labels.submit') %></p>
 
 <% end -%>

@@ -6,7 +6,6 @@
 	<%= link_to "Logout", logout_path %> &nbsp; 
 <%	elsif @current_user %>
 	<div id="hello">
-		<%= link_to "My Store", "http://#{@current_user.store.name}.#{APP_CONFIG[:domain]}" %> &nbsp;
 		<%= link_to "My Referrals", stores_path(:index_action => 'referrals') %> &nbsp; 
 		<%= link_to "My Downline", stores_path(:index_action => 'downline') %> &nbsp;
 		<%= link_to "My Account", user_path(@current_user) %> &nbsp; 

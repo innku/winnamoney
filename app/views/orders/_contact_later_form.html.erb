@@ -1,10 +1,10 @@
-<p>If you want us to contact you personally to complete your transaction.</p>
+<p><%= (I18n.t "orders.text.contact_me1") %></p>
 
-<p>Please click on the following button.</p>
+<p><%= (I18n.t "orders.text.contact_me2") %></p>
 
 <% form_for order, :url => orders_path() do |f| %>
 	<%= error_messages_for :contact_later_order %>
 	<%= f.hidden_field :payment_method %>
 	<%= f.hidden_field :order_type %>
-	<%= f.submit "Contact Me" %>
+	<%= f.submit (I18n.t "orders.labels.submit_contact") %>
 <% end %>

@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
   before_save               :encrypt_password
   before_create             :make_activation_code
   
-  attr_accessible :names, :last_names, :city_name, :address1, :address2,:zip, :phone, :phone_extension, :fax, :fax_extension, :email, :password, :password_confirmation,:cell,:account_type, :account_number, :routing , :ssn
+  attr_accessible :names, :last_names, :city_name, :address1, :address2,:zip, :phone, :phone_extension, :fax, :fax_extension, :email, :password, :password_confirmation,:cell,:account_type, :account_number,:routing,:ssn
     
   after_validation :validate_cities
   

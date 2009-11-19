@@ -1,13 +1,12 @@
-<% title "Winnamoney | Register" %>
+<% title "Winnamoney | #{(I18n.t 'stores.text.title')}" %>
+
 <% content_for :heading do %>
-	<% if @current_user.nil?%>
-		<h2>My Store</h2>
-	<%else%>
-		<h2>Store Information</h2>
+	<h2><%= I18n.t 'stores.text.header' %></h2>
+	<% if !@current_user.nil?%>
 		<% if params[:parent_id] %>
-			<small>* The position you selected for your referral will be taken as soon as payment is complete</small>
+			<small><%= I18n.t 'stores.text.payment_needed' %></small>
 		<% elsif @current_user and !@current_user.is_admin? %>
-			<small>* This user will be positioned automatically with your selected logic (<%= @current_store.positioning.titleize %>)</small>
+			<small><%= I18n.t 'stores.text.position' %>(<%= @current_store.positioning.titleize %>)</small>
 		<% end %>
 	<% end %>
 <%end%>
