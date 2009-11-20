@@ -5,6 +5,7 @@ class ProductsController < ApplicationController
   before_filter :admin_required, :only => [:index, :new, :create, :edit, :update, :destroy]
   before_filter :find_cart, :only => [:show]
   before_filter :clear_register_session, :only => [:show]
+  before_filter :shopping_action!, :only => 'details'
   
   
   def index
@@ -14,6 +15,7 @@ class ProductsController < ApplicationController
     category = params[:category] if params[:category] and params[:category].to_i > 0
     on_home = params[:on_home].nil? ? nil : 1
     @products = Product.name_or_product_key_like_all(keyword).tag_subcategory_category_id_like(category).on_home_like(on_home).paginate(:page => params[:page], :per_page => 10)
+    virtual_office_action!
   end
   
   def show

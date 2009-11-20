@@ -1,9 +1,7 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
-  <head>
-    <title><%= h(yield(:title) || "Untitled") %></title>
-    <%= stylesheet_link_tag 'application', 'jquery-ui-1.7.2.custom' %>
+<head>
+  <title><%= h(yield(:title) || "Untitled") %></title>
+  <%= stylesheet_link_tag 'application', 'jquery-ui-1.7.2.custom' %>
 	<%= stylesheet_link_tag 'jquery.autocomplete' %>
 	<%= stylesheet_link_tag 'jquery.rte' %>
 	<%= javascript_include_tag 'jquery' %>
@@ -12,62 +10,67 @@
 	<%= javascript_include_tag 'jquery.scrollfollow' %>
 	<%= javascript_include_tag 'application' %>
 	<%= javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery? %>
-    <%= yield(:head) %>
-  </head>
-  <body>
-	
-	<div id="header">
-		<div class="wrapper">
-			<!--LOGO-->
-			<div id="logo">
-				<img src="/images/logo.png" alt="Winnamoney"/>
-			</div>
-			<!--MENU-->
-			<div id="menu">
-				<ul>
-					<li><a href="#">News</a></li>
-					<li><a href="#">Company</a></li>
-					<li><a href="#">Opportunity</a></li>
-					<li><a href="#">Virtual office</a></li>
-					<li><%= link_to "Go Shopping", @current_store, :class => "active" %></li>
-					<li><a href="#">Join us</a></li>
-				</ul>
-			</div>
+  <%= yield(:head) %>
+</head>
+<body>
+<!--HEADER-->
+<div id="header">
+	<div class="wrapper">
+		<!--LOGO-->
+		<div id="logo">
+			<img src="/images/logo.png" alt="Winnamoney"/>
+		</div>
+		<!--MENU-->
+		<div id="menu">
+			<%= render :partial => '/layouts/main_menu' %>
 		</div>
 	</div>
+</div>
+<!--CONTENTENIDO-->
 
-	<!--CONTENTENIDO-->
-	<div id="content">
-		<div class="wrapper">
-			<!--MAIN-->
-			<div id="main">
-				<%= render :partial => '/layouts/menu' %>
-			</div>
-			
-				<!--REST-->
-				<div id="rest">
-					<!--LEFT-->
-					<div id="cleft">
-						<%= yield(:sidebar) %>
+<div id="content">
+	<div class="wrapper">
+		<!--MAIN-->
+		<div id="main">
+		</div>
+			<!--MENU TIENDA-->
+			<div id="ribbon">
+				<!--HOME-->
+				<div id="menuinterno">
+
+					<div class="flechon">
+						<h3><%= yield(:header) %></h3>
 					</div>
-					<!--RIGHT-->
-					<div id="cright">
+					<div>
+						<%= render :partial => '/layouts/menu' %>
+					</div>
+				</div>
+			</div>
+			<!--REST-->
+
+			<div id="rest">
+				<!--LEFT-->
+				<div id="cleft">
+					<%= yield(:sidebar) %>
+				</div>
+				<!--RIGHT-->
+				<div id="cright">
+					<!--WORK AREA-->
+					<div class="clear">
+					<div id="workarea">
 						<%- flash.each do |name, msg| -%>
 					      <%= content_tag :div, msg, :id => "flash_#{name}" %>
 					    <%- end -%>
-						<!--BREAD + PAGES-->
-						
 						<%= yield %>
 					</div>
 				</div>
-		</div>
+			</div>
 	</div>
-	<!--FOOTER-->
-	<div id="footer">
-		<div class="wrapper">
-			
-		</div>
-	</div>	
-
-  </body>
+</div>
+<!--FOOTER-->
+<div id="footer">
+	<div class="wrapper">
+	</div>
+</div>
+</body>
 </html>

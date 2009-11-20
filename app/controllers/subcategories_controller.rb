@@ -1,7 +1,8 @@
 class SubcategoriesController < ApplicationController
   
   before_filter :clear_register_session, :only => [:show]
-  before_filter      :find_cart, :only => [:show]
+  before_filter :find_cart, :only => [:show]
+  before_filter :shopping_action!, :only => 'show'
   
   def index
     if params[:category_id]

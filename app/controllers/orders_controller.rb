@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
     if in_register_process?
       @user = User.find(session[:registered_user_id])
       build_order_types(:current_order => nil, :payment_type => 'suscription')
-      render :action => 'new', :layout => 'register'
+      render :action => 'new'
     else
       build_order_types(:current_order => nil, :payment_type => 'product_purchase')
       render 'confirm_order'
@@ -29,32 +29,32 @@ class OrdersController < ApplicationController
         when "credit_card"
           if @order.purchase!
             @order.complete!
-            render 'success_credit_card', :layout => 'confirmation'
+            render 'success_credit_card'
           else
             @order.decline!
-            render 'failure_credit_card', :layout => 'confirmation'
+            render 'failure_credit_card'
           end
         when "deposit"
           if @order.suscription?
             @order.user.store.stand_by!
-            render 'success_deposit', :layout => 'confirmation'
+            render 'success_deposit'
           else
             @order.stand_by!
-            render 'success_deposit', :layout => 'confirmation'
+            render 'success_deposit'
           end
         when "contact_later"
           if @order.suscription?
             @order.user.store.contact_me!
-            render 'success_contact', :layout => 'confirmation'
+            render 'success_contact'
           else
             @order.contact_me!
-            render 'success_contact', :layout => 'confirmation'
+            render 'success_contact'
           end
       end
     else
       if in_register_process?
         build_order_types(:current_order => @order, :payment_type => 'suscription')
-        render :action => 'new', :layout => 'register'
+        render :action => 'new'
       else
         build_order_types(:current_order => @order, :payment_type => 'product_purchase')
         render 'confirm_order'
@@ -75,6 +75,12 @@ class OrdersController < ApplicationController
     :cancel_return_url => new_order_url())
     
     redirect_to EXPRESS_GATEWAY.redirect_url_for(response.token)
+  end
+  
+  #TODO ERASE DEBUG CODE 
+  def success
+    @order = Order.find_by_order_type('product_purchase')
+    render 'success_contact'
   end
   
   private
@@ -107,7 +113,6 @@ class OrdersController < ApplicationController
   end
   
   def can_create_order
-    logger.warn in_shopping_process?.inspect
     unless (in_register_process? or in_shopping_process?)
       redirect_to @current_store
       return false

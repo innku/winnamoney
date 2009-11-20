@@ -1,38 +1,69 @@
-<% title "Winnamoney | Checkout | Payment Information" %>
-<h1>Payment Information</h1>
-<h2>Items in your Cart</h2>
+<% title "Winnamoney | #{I18n.t('orders.text.title.product_purchase')}" %>
 
-<table id="cart_detail">
-	<tr>
-		<th>Name</th>
-		<th>Quantity</th>
-		<th>Unit Price</th>
-		<th>Price</th>
-	</tr>
+<% content_for :header do %>
+	 <%= I18n.t('orders.text.title.product_purchase') %>
+<% end %>
+
+<% content_for :sidebar do %>
+	<%= render :partial => '/layouts/steps_checkout', :locals => {:active_step => 'orders'} %>
+<% end %>
+
+<div id="cart">
+	<h2><%= I18n.t('orders.text.header_checkout') %></h2>
+	<table width="100%" cellpadding="4" cellspacing="0" border="0" class="tabla">
+		<thead>
+			<tr>
+				<th><%= I18n.t('carts.table.name') %></th>
+				<th><%= I18n.t('carts.table.quantity') %></th>
+				<th><%= I18n.t('carts.table.unit') %></th>
+				<th><%= I18n.t('carts.table.price') %></th>
+			</tr>
+		</thead>
+			<% @cart.items.each do |item|%>
+			    <tr id="<%= item.id %>">
+					<td><%= truncate(item.name,30) %></td>
+					<td><%= item.quantity %></td>
+					<td class="aright"><%= number_to_currency item.unit_price %></td>
+					<td class="aright"><%= number_to_currency item.price %><%= "<sub>Tax included</sub>" if item.taxes_apply?  %></td>
+				</tr>
+			<% end %>
+		<tfoot>
+			<tr>
+				<td colspan="2">&nbsp;</td>
+				<td class="aright"><%= I18n.t('carts.table.price') %>:</td>
+				<td class="aright total"><%= number_to_currency @cart.price %></td>
+			</tr>
+			<tr>
+				<td colspan="2">&nbsp;</td>
+				<td class="aright"><%= I18n.t('carts.table.shipping') %>:</td>
+				<td class="aright total"><%= number_to_currency @cart.shipping_price %></td>
+			</tr>
+			<tr>
+				<td colspan="2">&nbsp;</td>
+				<td class="aright"><%= I18n.t('carts.table.handling') %>:</td>
+				<td class="aright total"><%= number_to_currency @cart.handling %></td>
+			</tr>
+			<tr>
+				<td colspan="2">&nbsp;</td>
+				<td class="aright"><big>Total:</big></td>
+				<td class="aright total"><big><%= number_to_currency @cart.total %></big></td>
+			</tr>
+		</tfoot>
+	</table>
 	
-	<% @cart.items.each do |item|%>
-		<tr id="<%= item.id %>">
-			<td><%= truncate(item.name,30) %></td>
-			<td><%= item.quantity %></td>
-			<td><%= number_to_currency item.unit_price %></td>
-			<td><%= number_to_currency item.price %><%= "<sub>Tax included</sub>" if item.taxes_apply?  %></td>
-		</tr>
-	<% end %>
+	<h2><%= I18n.t('addresses.text.header') %></h2>
+	<div class="shipdeliver" id="shipping_address">
+		<h2><%= I18n.t('addresses.text.shipping') %></h2>
+		<%= render :partial => 'address',:object => @cart.shipping  %>
+	</div>
+
+	<div class="shipdeliver nomargin" id="billing_address">
+		<h2><%= I18n.t('addresses.text.billing') %></h2>
+		<%= render :partial => 'address',:object => @cart.billing  %>
+	</div>
 	
-</table>
-
-<h2>Order Summary</h2>
-<table>
-	<tr>
-		<td>Total</td>
-		<td><strong><%= number_to_currency @cart.price %></strong></td>
-	</tr>
-</table>
-
-<h2>Billing Address</h2>
-<%= render :partial => 'address',:object => @cart.billing  %>
-
-<h2>Shipping Address</h2>
-<%= render :partial => 'address',:object => @cart.shipping  %>
-
-<%= render :partial => 'payment_types', :locals => {:credit_card_order => @credit_card_order, :deposit_order => @deposit_order, :contact_later_order => @contact_later_order, :express_checkout_order => @express_checkout_order, :user => @user} %>
+	<div class="clearb">
+		<%= render :partial => 'payment_types', :locals => {:credit_card_order => @credit_card_order, :deposit_order => @deposit_order, :contact_later_order => @contact_later_order, :express_checkout_order => @express_checkout_order, :user => @user} %>
+	</div>
+	
+</div>

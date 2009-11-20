@@ -134,7 +134,7 @@ $(document).ready(function(){
 				   { update_action: "increase", _method: "put"  }, 
 					function(data){
 						$( "tr#"+ data.id + " span.item_quantity").html(data.new_quantity);
-						$("big#cart_total_price").html(data.new_total);
+						$("td#cart_total_price").html(data.new_total);
 					}, "json");
 			return false;	
 	});
@@ -151,7 +151,7 @@ $(document).ready(function(){
 							if(data.redirect_cart)
 								history.go(-1);
 						}
-						$("big#cart_total_price").html(data.new_total);
+						$("td#cart_total_price").html(data.new_total);
 					}, "json");
 			return false;	
 	});
@@ -159,11 +159,11 @@ $(document).ready(function(){
 	$("a.remove_item_from_cart").click(
 		function(){
 			if(confirm("Are you sure?")){
-				$.post("/cart_items/" + $(this).closest("td").find("input").val(), 
+				$.post("/cart_items/" + $(this).closest("tr").find("input").val(), 
 					   { _method: "delete"  }, 
 						function(data){
 							$( "tr#"+ data.id).remove();
-							$("big#cart_total_price").html(data.new_total);
+							$("td#cart_total_price").html(data.new_total);
 							if(data.redirect_cart)
 								history.go(-1);
 						}, "json");
@@ -179,10 +179,10 @@ $(document).ready(function(){
 	});
 	
 	$("input#shipping_address_same_for_billing").change(function(){
-		if(!$(this).attr("checked")){
-			$("div#billing_address_form").show();
+		if($(this).attr("checked")){
+			$("div#billing_address").find("input").attr("disabled","disabled")
 		}else{
-			$("div#billing_address_form").hide();
+			$("div#billing_address").find("input").removeAttr("disabled")
 		}
 	});
 	

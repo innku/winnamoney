@@ -1,4 +1,9 @@
 <% title "Winnamoney | Products" %>
+
+<% content_for :header do %>
+	Back Office
+<% end %>
+
 <% content_for :sidebar do %>
 <p><%= link_to "All products", products_path() %></p>
 <p><%= link_to "Products on Home Page", products_path(:on_home => true) %></p>

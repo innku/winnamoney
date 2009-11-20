@@ -1,7 +1,6 @@
 <% title store_title() %>
-
 <div id="pages">
-	<p>Listing <b><%= @products.size %> of <%= @products.total_entries %></b> products</p>
+	<p><%= I18n.t "stores.text.home.listing" %> <b><%= @products.size %> <%= I18n.t "stores.text.home.of" %> <%= @products.total_entries %></b> <%= I18n.t "stores.text.home.products" %></p>
 </div>
 
 <!--PRODUCTOS-->

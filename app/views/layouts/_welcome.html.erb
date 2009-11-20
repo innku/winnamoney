@@ -1,0 +1,23 @@
+<p>
+<% if @current_user %>
+	<!--SALUDO-->
+	<div id="hello">
+		<p>
+			Welcome to <span><%= @current_store.name.titleize %></span>, you can go to <%= link_to "Site Administration", login_path %> or <%= link_to "Logout", logout_path %>
+		</p>
+	</div> 
+<% else %>
+	<div id="hello">
+			<p><%= I18n.t "stores.text.home.welcome" %> <span><%= @current_store.name.titleize %></span>, <%= link_to I18n.t("stores.text.home.register"), register_path() %> <%= I18n.t "stores.text.home.or" %> <%= link_to I18n.t("stores.text.home.signin"), login_path %>. <%= I18n.t('stores.text.home.available') %> <%=link_to "English", store_path(@current_store, :locale => 'en') %> <%= I18n.t('stores.text.home.or') %> <%= link_to "Espa&ntilde;ol",store_path(@current_store, :locale => 'es') %>.</p>
+	</div>
+<% end %>
+
+<!--SEARCH-->
+<div id="search">
+	<% form_tag(@current_store, :method => :get) do %>
+		<%= text_field_tag :q, params[:q],:class => 'sbox' %>
+		<%= image_submit_tag "/images/#{I18n.t("images.search")}", :class => 'sbutton' %>
+	<% end %>
+</div>
+
+</p>

@@ -39,4 +39,34 @@ module ApplicationHelper
     links
   end
   
+  def steps_title_class(step, active_step)
+    if (step == active_step)
+      return 'activestep'
+    else
+      return 'step'
+    end
+  end
+  
+  def steps_des_class(step, active_step)
+    if (step == active_step)
+      return 'activestepdes'
+    else
+      return 'stepdes'
+    end
+  end
+  
+  def virtual_office?
+    return (session[:app_action] == 'v' and !@current_user.is_admin?)
+  end
+  
+  def main_class(item)
+    if item == 'shopping' and session[:app_action] == 's'
+      return 'active'
+    elsif item == 'register' and session[:app_action] == 'r'
+      return 'active'
+    elsif item == 'virtual_office' and (session[:app_action] == 'v')
+      return 'active'
+    end
+  end
+  
 end

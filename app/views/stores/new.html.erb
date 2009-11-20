@@ -1,14 +1,20 @@
 <% title "Winnamoney | #{(I18n.t 'stores.text.title')}" %>
 
-<% content_for :heading do %>
-	<h2><%= I18n.t 'stores.text.header' %></h2>
-	<% if !@current_user.nil?%>
-		<% if params[:parent_id] %>
-			<small><%= I18n.t 'stores.text.payment_needed' %></small>
-		<% elsif @current_user and !@current_user.is_admin? %>
-			<small><%= I18n.t 'stores.text.position' %>(<%= @current_store.positioning.titleize %>)</small>
-		<% end %>
-	<% end %>
+<% content_for :header do %>
+	<%= I18n.t 'stores.text.title' %>
 <%end%>
+
+<% content_for :sidebar do %>
+	<%= render :partial => '/layouts/steps_suscription', :locals => {:active_step => 'stores'} %>
+<% end %>
+
+<h2><%= I18n.t 'stores.text.header' %></h2>
+<% if !@current_user.nil?%>
+	<% if params[:parent_id] %>
+		<small><%= I18n.t 'stores.text.payment_needed' %></small>
+	<% elsif @current_user and !@current_user.is_admin? %>
+		<small><%= I18n.t 'stores.text.position' %>(<%= @current_store.positioning.titleize %>)</small>
+	<% end %>
+<% end %>
 
 <%= render :partial => 'form' %>

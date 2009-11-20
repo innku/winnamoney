@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
-  before_filter :find_user, :find_store
+  before_filter :find_user, :find_store, :set_locale
 
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
@@ -37,6 +37,11 @@ class ApplicationController < ActionController::Base
       redirect_to "http://#{APP_CONFIG[:domain]}?not_active=true"      
       return false
     end
+  end
+  
+  def set_locale
+    session[:locale] = params[:locale] if params[:locale]
+    I18n.locale = session[:locale] || @current_store.locale
   end
   
   def store_domain
@@ -72,6 +77,18 @@ class ApplicationController < ActionController::Base
   
   def clear_shopping_session
     session[:cart_id] = nil
+  end
+  
+  def shopping_action!
+    session[:app_action] = 's'
+  end
+  
+  def virtual_office_action!
+    session[:app_action] = 'v'
+  end
+  
+  def register_action!
+    session[:app_action] = 'r'
   end
   
 end

@@ -1,0 +1,19 @@
+<ul class="stepbystep">
+	<li>
+		<p class="<%= steps_title_class('stores', active_step) %>"><%= I18n.t('steps.step1') %></p>
+		<p class="<%= steps_des_class('stores', active_step) %>"><%= I18n.t('steps.suscription.store_info') %></p>
+	</li>
+
+	<li>
+		<p class="<%= steps_title_class('users', active_step) %>"><%= I18n.t('steps.step2') %></p>
+		<p class="<%= steps_des_class('users', active_step) %>"><%= I18n.t('steps.suscription.contact_info') %></p>
+	</li>
+	<li>
+		<p class="<%= steps_title_class('orders', active_step) %>"><%= I18n.t('steps.step3') %></p>
+		<p class="<%= steps_des_class('orders', active_step) %>"><%= I18n.t('steps.suscription.payment_info') %></p>
+	</li>
+	<li>
+		<p class="<%= steps_title_class('success', active_step) %>"><%= I18n.t('steps.step4') %></p>
+		<p class="<%= steps_des_class('success', active_step) %>"><%= I18n.t('steps.confirmation') %></p>
+	</li>
+</ul>

@@ -1,6 +1,13 @@
 <% title "Winnamoney | #{(I18n.t 'users.text.title')}" %>
-<% content_for :heading do %>
-	<h2><%= I18n.t 'users.text.header' %></h2>
+
+<% content_for :header do %>
+	<%= I18n.t 'users.text.title' %>
+<%end%>
+
+<% content_for :sidebar do %>
+	<%= render :partial => '/layouts/steps_suscription', :locals => {:active_step => 'users'} %>
 <% end %>
+
+	<h2><%= I18n.t 'users.text.header' %></h2>
 
 <%= render :partial => 'form', :locals => {:user => @user} %>

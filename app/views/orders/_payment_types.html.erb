@@ -2,7 +2,7 @@
 	<div class="payment_tabs">
 	  <!-- tabs -->
 	<br />
-	  <strong><%= I18n.t "orders.labels.payment_type" %></strong>
+	  <h2><%= I18n.t "orders.labels.payment_type" %></h2>
 
 	  <ul class="tabNavigation" >
 	    <li><a href="#paypal" <%= display_string?("class='selected'", (@order == credit_card_order || @order.nil?)) %>><%= I18n.t "orders.labels.credit_card" %></a></li>

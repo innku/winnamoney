@@ -1,69 +1,73 @@
-<% title "Winnamoney | Checkout | Review your Order" %>
+<% title "Winnamoney | #{I18n.t('carts.title')}" %>
 
-<h1>Review your Order</h1>
+<% content_for :header do %>
+	 <%= I18n.t('carts.title') %>
+<% end %>
 
-<h2>Cart</h2>
+<% content_for :sidebar do %>
+	<%= render :partial => '/layouts/steps_checkout', :locals => {:active_step => 'cart'} %>
+<% end %>
 
-<table id="cart_detail">
-	<tr>
-		<th>Name</th>
-		<th>Unit Price</th>
-		<th>Quantity</th>
-	</tr>
-	
-	<% @cart.items.each do |item|%>
-		<tr id="<%= item.id %>">
-			<td><%= link_to truncate(item.name,30), item.product %></td>
-			<td><%= number_to_currency item.unit_price %></td>
-			<td>
-				
-				<span><%= link_to "-", "#", :class => "decrease_cart_item"%></span>
-				<span class="item_quantity"><%= item.quantity %></span>
-				<%= hidden_field_tag :item_id, item.id %>
-				<span><%= link_to "+", "#", :class => "increase_cart_item"%></span>
-				<%= link_to "<small>Remove</small>", "#", :class => "remove_item_from_cart" %>
-			</td>
-		</tr>
-	<% end %>
-	
-</table>
-
-<p><strong>Total:</strong>&nbsp;<big id="cart_total_price"><%= number_to_currency @cart.price %></big></p>
-
-<% unless @cart.has_addresses? %>
-	<h2>Delivery and Billing</h2>
-
-	<h3>Shipping Address</h3>
-
+<div id="cart">
+	<h2><%= I18n.t('carts.header') %></h2>
+	<table width="100%" cellpadding="4" cellspacing="0" border="0" class="tabla">
+		<thead>
+			<tr>
+				<th><%= I18n.t('carts.table.name') %></th>
+				<th><%= I18n.t('carts.table.unit') %></th>
+				<th><%= I18n.t('carts.table.quantity') %></th>
+				<th>&nbsp;</th>
+			</tr>
+		</thead>
+			<% @cart.items.each do |item|%>
+			    <tr id="<%= item.id %>">
+					<td><%= truncate(item.name,30) %></td>
+					<td class="aright"><%= number_to_currency item.unit_price %></td>
+					<td class="aright">
+						<span><%= link_to "-", "#", :class => "decrease_cart_item"%></span>
+						<span class="item_quantity"><%= item.quantity %></span>
+						<%= hidden_field_tag :item_id, item.id %>
+						<span><%= link_to "+", "#", :class => "increase_cart_item"%></span>
+					</td>
+					<td class="aright"><%= link_to I18n.t('carts.table.remove'), "#", :class => "remove_item_from_cart" %></td>
+				</tr>
+			<% end %>
+		<tfoot>
+			<tr>
+				<td colspan="2">&nbsp;</td>
+				<td class="aright"><%= I18n.t('carts.table.price') %></td>
+				<td class="aright total" id="cart_total_price"><%= number_to_currency @cart.price %></td>
+			</tr>
+		</tfoot>
+	</table>
+	<% unless @cart.has_addresses? %>
+	<h2><%= I18n.t('addresses.text.header') %></h2>
 	<% form_for :shipping_address, @shipping_address, :url => addresses_path do |f| %>
+		<div class="shipdeliver" id="shipping_address">
+			<h3><%= I18n.t('addresses.text.shipping') %></h3>
 
-	  <%= error_messages_for :shipping_address %>
-		
-	  <%= render :partial => 'form', :locals => {:f => f} %>
-		
-	  <p>
-		<%= f.label 	:same_for_billing, "Same information for Billing" %> 
-		<%= f.check_box :same_for_billing %>
-	  </p>
-				
-	  <div id="billing_address_form" style="<%= display?(!@shipping_address.same_for_billing?) %>">
-		<h3>Billing Address</h3>
-		<% fields_for :billing_address, @billing_address do |b| %>
-			<%= error_messages_for :billing_address %>
-			<%= b.hidden_field :address_type %>
-			<%= render :partial => 'form', :locals => {:f => b} %>
-		<% end %>
-	
-	  </div>
+				  <%= error_messages_for :shipping_address %>
 
-	  <p><%= f.submit "Save Addresses and Continue" %></p>
-
+				  <%= render :partial => '/carts/form', :locals => {:f => f, :disabled => false} %>
+			 
+				  <p>
+					<%= f.label 	:same_for_billing, "Same information for Billing" %> 
+					<%= f.check_box :same_for_billing %>
+				  </p>
+		</div>
+		<div class="shipdeliver nomargin" id="billing_address">
+			<h3><%= I18n.t('addresses.text.billing') %></h3>
+			<% fields_for :billing_address, @billing_address do |b| %>
+				<%= error_messages_for :billing_address %>
+				<%= b.hidden_field :address_type %>
+				<%= render :partial => '/carts/form', :locals => {:f => b, :disabled => true} %>
+			<% end %>
+		</div>
+		<%= image_submit_tag I18n.t('images.sac'), :class => 'save_and_continue' %>
 	<% end %>
+</div>	
 <% else %>
 	<p>
-		<%= link_to "Confirm Items and Pay", new_order_path %>
+		<%= link_to image_tag(I18n.t('images.sac'), :class => 'save_and_continue'), new_order_path %>
 	</p>
 <% end %>
-<p>
-	<%= link_to "&laquo;&nbsp;Back", :back %>
-</p>

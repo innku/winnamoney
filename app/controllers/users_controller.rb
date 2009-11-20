@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   before_filter       :cant_create_user_without_store, :only => [:new, :create]
   before_filter       :login_required, :only => [:edit, :update]
   skip_before_filter  :find_store, :only => [:activate]
+  before_filter       :register_action!, :only => [:new]
 
   def index
     respond_to do |format|
@@ -21,7 +22,6 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new 
-    render :layout => 'register' 
   end
 
   def create
@@ -34,15 +34,14 @@ class UsersController < ApplicationController
       redirect_to new_order_path()
       flash[:notice] = "Register successful!"
     else
-      render :action => 'new', :layout => 'register'
+      render :action => 'new'
     end
   end
   
   def edit
     @user = @current_user.is_admin? ? User.find(params[:id]) : @current_user
+    virtual_office_action!
     case params[:edit_action]
-      when "unsubscribe"
-        render 'unsubscribe'
       when "change_password"
         render 'change_password'
       else

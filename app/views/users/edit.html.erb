@@ -1,6 +1,14 @@
 <% title "Winnamoney | My information" %>
 
-<h1>User Information</h1>
+<% content_for :header do %>
+	<% if virtual_office? %>
+		Virtual Office
+	<% else %>
+		Back Office
+	<% end %>
+<% end %>
+
+<h2>User Information</h2>
 
 <% content_for :sidebar do %>
 	<p>

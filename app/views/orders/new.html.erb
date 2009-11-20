@@ -1,17 +1,25 @@
 <% title "Winnamoney | #{I18n.t "orders.text.title"}" %>
 
-<% content_for :heading  do %>
-	<h2><%= I18n.t "orders.text.header" %></h2>
+<% content_for :header do %>
+	<%= I18n.t 'orders.text.title.suscription' %>
+<%end%>
+
+<% content_for :sidebar do %>
+	<%= render :partial => '/layouts/steps_suscription', :locals => {:active_step => 'orders'} %>
 <% end %>
 
-<table style="text-align:left;border:1px solid black;">
-	<tr>
-		<th><%= I18n.t "orders.text.store_name" %></th>
-		<th><%= I18n.t "orders.text.amount" %></th>
-	</tr>
+<h2><%= I18n.t "orders.text.header" %></h2>
+
+<table class="tabla suscription">
+	<thead>
+		<tr>
+			<th><%= I18n.t "orders.text.store_name" %></th>
+			<th><%= I18n.t "orders.text.amount" %></th>
+		</tr>
+	</thead>
 	<tr>
 		<td>http://<%= @user.store.name %>.winnamoney.com</th>
-		<td>189.00 US$</th>
+		<td class="total">189.00 US$</th>
 	</tr>
 </table>
 

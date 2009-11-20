@@ -20,11 +20,31 @@ class Cart < ActiveRecord::Base
   end
   
   def price
-    total=0
+    @price=0
     self.items.each do |item|
-      total += item.price
+      @price += item.price
     end
-    total
+    @price
+  end
+  
+  def shipping_price
+    @shipping=0
+    self.items.each do |item|
+      @shipping += item.product.local_transport
+    end
+    @shipping
+  end
+  
+  def handling
+    @handling=0
+    self.items.each do |item|
+      @handling += item.product.handling
+    end
+    @handling
+  end
+  
+  def total
+    @price + @shipping + @handling
   end
   
   def complete!

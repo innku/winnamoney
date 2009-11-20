@@ -4,6 +4,8 @@ class StoresController < ApplicationController
   before_filter      :clear_shopping_session, :only => [:new]
   before_filter      :find_cart, :only => [:show]
   before_filter      :login_required, :only => [:edit, :update]
+  before_filter      :shopping_action!, :only => [:show]
+  before_filter      :register_action!, :only => [:new]
   
   def index
     respond_to do |format|
@@ -22,11 +24,13 @@ class StoresController < ApplicationController
           end
         when "referrals"
           @stores = @current_store.referrals.paginate(:page => params[:page], :per_page => 20)
+          virtual_office_action!
           format.html { render :layout => 'application'}
         when "downline"
           @levels = 5
           @store = Store.find_by_id(params[:id]) || @current_store
           @stores = @store.downline(:levels => @levels)
+          virtual_office_action!
           format.html {render :action => 'downline', :layout => 'application'}
         else
           @stores = Store.all.paginate(:page => params[:page], :per_page => 20)
@@ -50,7 +54,7 @@ class StoresController < ApplicationController
     @store.sponsor_id = @current_store.id if @current_store
     @store.parent_id = params[:parent_id]
     @store.side = params[:side]
-    render :layout => 'register'
+    render :layout => 'application'
   end
   
   def create
@@ -60,7 +64,7 @@ class StoresController < ApplicationController
       session[:registered_store_id] = @store.id
       redirect_to new_user_path()
     else
-      render :action => 'new', :layout => 'register'
+      render :action => 'new', :layout => 'application'
     end
   end
   

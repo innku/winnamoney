@@ -1,5 +1,13 @@
 <% title "Winnamoney | Downline" %>
 
+<% content_for :header do %>
+	<% if virtual_office? %>
+		Virtual Office
+	<% else %>
+		Back Office
+	<% end %>
+<% end %>
+
 <% content_for  :sidebar do %>
 	<% if params[:id] %>
 		<%= link_to("Back to root",stores_path(:index_action => 'downline' )) %>

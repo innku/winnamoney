@@ -1,8 +1,22 @@
 <% title "Winnamoney | #{I18n.t "orders.text.declined.title"}" %>
 
-<% content_for :heading do %>
-	<h2><%= I18n.t "orders.text.declined.header" %></h2>
+<% content_for :header do %>
+	<% if @order.suscription? %>
+		<%= I18n.t 'orders.text.title.suscription' %>
+	<% else %>
+		<%= I18n.t 'orders.text.title.product_purchase' %>
+	<% end %>
 <% end %>
+
+<% content_for :sidebar do %>
+	<% if @order.suscription? %>
+		<%= render :partial => '/layouts/steps_suscription', :locals => {:active_step => 'success'} %>
+	<% else %>
+		<%= render :partial => '/layouts/steps_checkout', :locals => {:active_step => 'success'} %>
+	<% end %>
+<% end %>
+
+<h2><%= I18n.t "orders.text.declined.header" %></h2>
 
 <p><%= I18n.t "orders.text.declined.declined1" %></p>
 

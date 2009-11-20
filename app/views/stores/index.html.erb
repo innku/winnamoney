@@ -1,4 +1,9 @@
 <% title "Winnamoney | My Referrals" %>
+
+<% content_for :header do %>
+	Virtual Office
+<% end %>
+
 <% content_for :sidebar do %>
 	<p>
 		<%= link_to	"New Referral", new_store_path %>
@@ -10,10 +15,10 @@
 		<p>
 			Listing <b><%= @stores.size %> of <%= @stores.total_entries %></b> Referrals
 		</p>
-		<table>
+		<table class="tabla internal">
 		  <tr>
-		    <th>Cliente</th>
-		    <th>Tienda</th>
+		    <th>Client</th>
+		    <th>Store</th>
 			<th>Status</th>
 		  </tr>
 		  <% for store in @stores %>

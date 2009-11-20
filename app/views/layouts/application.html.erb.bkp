@@ -24,7 +24,14 @@
 			</div>
 			<!--MENU-->
 			<div id="menu">
-				<%= render :partial => '/layouts/main_menu' %>
+				<ul>
+					<li><a href="#">News</a></li>
+					<li><a href="#">Company</a></li>
+					<li><a href="#">Opportunity</a></li>
+					<li><a href="#">Virtual office</a></li>
+					<li><%= link_to "Go Shopping", @current_store, :class => "active" %></li>
+					<li><a href="#">Join us</a></li>
+				</ul>
 			</div>
 		</div>
 	</div>
@@ -34,34 +41,14 @@
 		<div class="wrapper">
 			<!--MAIN-->
 			<div id="main">
-				<%= render :partial => '/layouts/welcome' %>
+				<%= render :partial => '/layouts/menu' %>
 			</div>
-				<!--MENU TIENDA-->
-				<div id="ribbon">
-					<!--HOME-->
-					<div id="menutienda">
-						<table width="100%" cellpadding="0" cellspacing="0">
-							<tr>
-								<td width="35px" style="background:url(/images/home.png) right center; text-align: right;">
-									<%= link_to image_tag("casa.gif", :alt => "home", :style => 'border:none;'), @current_store %>
-								</td>
-								<td>
-									<%= render :partial => '/layouts/categories' %>
-								</td>
-							</tr>
-						</table>
-					</div>
-				</div>
+			
 				<!--REST-->
 				<div id="rest">
 					<!--LEFT-->
 					<div id="cleft">
-						<!--MINI CART-->
-						<div id="minicart">
-							<div class="content">
-								<%= render :partial => '/products/cart' %>
-							</div>
-						</div>
+						<%= yield(:sidebar) %>
 					</div>
 					<!--RIGHT-->
 					<div id="cright">
@@ -69,11 +56,6 @@
 					      <%= content_tag :div, msg, :id => "flash_#{name}" %>
 					    <%- end -%>
 						<!--BREAD + PAGES-->
-						<div id="bread">
-							<ul>
-								<%= breadcrumb_links %>
-							</ul>
-						</div>
 						
 						<%= yield %>
 					</div>

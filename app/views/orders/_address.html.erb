@@ -1,21 +1,21 @@
 <div>
 	<p>
-		<strong>Full Name:</strong><br />
+		<strong><%= I18n.t('addresses.labels.full_name') %>:</strong><br />
 		<%= address.names %> <%= address.last_names %>
 	</p>
 	
 	<p>
-		<strong>Address</strong><br />
+		<strong><%= I18n.t('addresses.labels.address') %>:</strong><br />
 		<%= format_address(address.address1, address.address2, address.city_name, address.zip) %>
 	</p>
 	
 	<p>
-		<strong>E-mail:</strong><br />
+		<strong><%= I18n.t('addresses.labels.email') %>:</strong><br />
 		<%= address.email %>
 	</p>
 	
 	<p>
-		<strong>Phone Number:</strong><br />
+		<strong><%= I18n.t('addresses.labels.phone') %>:</strong><br />
 		<%= address.phone %>
 	</p>
 

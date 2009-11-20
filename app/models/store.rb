@@ -46,6 +46,10 @@ class Store < ActiveRecord::Base
     end
   end
   
+  def locale
+    self.language == "english" ? "en" : "es"
+  end
+  
   def sponsor_name=(s_name)
     write_attribute(:sponsor_name, s_name)
     name, id = s_name.split(',')

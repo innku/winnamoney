@@ -1,5 +1,11 @@
 <% title "Winnamoney | My Account" %>
 
+<% content_for :header do %>
+	<% if virtual_office? %>
+		Virtual Office
+	<% end %>
+<% end %>
+
 <% content_for :sidebar do%>
 	<p>
 		<strong>Store Status</strong><br />

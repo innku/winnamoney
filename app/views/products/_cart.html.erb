@@ -12,9 +12,10 @@
 			<td class="cart_prc" id="cart_total"><strong><%= number_to_currency @cart.price %></strong></td>
 		</tr>
 	</table>
-	<p><%= link_to "Checkout", @cart %></p>
+	<p><%= link_to image_tag(I18n.t("images.checkout"), :class => 'cartcheckout'), @cart %></p>
+	<div class="clearb"></div>
 <% else %>
 	<p style="margin:0px;padding:.5em;">
-		You have no items on your cart.
+		<%= I18n.t 'carts.no_items' %>
 	</p>
 <% end %>

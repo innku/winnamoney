@@ -1,11 +1,16 @@
 <% title "Winnamoney | Bulk Create Products" %>
 
+<% content_for :header do %>
+	Back Office
+<% end %>
+
 <% content_for :sidebar do %>
 	<p>
 		<%= link_to	"Back to product listing", products_path %>
 	</p>
 <% end %>
 
+<h2>Bulk create products</h2>
 
 <% form_tag products_path, :method => :post, :multipart => true do %>
 <p>
