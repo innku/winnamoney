@@ -69,4 +69,8 @@ module ApplicationHelper
     end
   end
   
+  def current_path(params=nil)
+    {:controller => controller_name, :action => action_name }.merge(params)
+  end
+  
 end
