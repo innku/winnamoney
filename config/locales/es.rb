@@ -169,6 +169,20 @@
            :payment => 'Completa tu pago',
          }
        },
+       :number => {
+         :format => {
+           :precision => 3,
+           :separator => '.',
+           :delimiter => '.'
+         },
+         :currency => {
+           :format => {
+             :unit => '$',
+             :precision => 2,
+             :format => '%u %n'
+           }
+         }
+       },
        :activerecord => {
          :errors => {
            :template => {

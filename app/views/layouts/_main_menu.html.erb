@@ -2,8 +2,9 @@
 	<li><%= link_to "News", "#"%></li>
 	<li><%= link_to "Company", "#" %></li>
 	<li><%= link_to "Oportunity", "#" %></li>
-
-	<li><%= link_to "Virtual Office", login_path, :class => main_class('virtual_office') %></li>
+	<% unless @current_store.user.is_admin? %>
+		<li><%= link_to "Virtual Office", login_path, :class => main_class('virtual_office') %></li>
+	<% end %>
 	<li><%= link_to "Go Shopping", @current_store, :class => main_class('shopping')  %></li>
 	<li><%= link_to "Join Us", register_path, :class => main_class('register')  %></li>
 </ul>
