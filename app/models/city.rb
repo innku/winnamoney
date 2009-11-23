@@ -4,7 +4,7 @@ class City < ActiveRecord::Base
   
   named_scope :with_name, lambda {|name| {:conditions => ["cities.name = '#{name}' or cities.city_name = '#{name}'"]} }
   
-  named_scope :like, lambda {|name| { :include => [:state], :conditions => ["cities.name LIKE '%%#{name}%%' OR cities.city_name LIKE '%%#{name}%%' OR states.name LIKE '%%#{name}%%'"]} }
+  named_scope :like, lambda {|name| { :include => [:state], :conditions => ["cities.name LIKE '%%#{name}%%' OR cities.city_name LIKE '%%#{name}%%'"]} }
   
   named_scope :with_state_name, lambda {|state_name| {:include => [:state], :conditions => ["states.name = '#{state_name}' or states.abbr = '#{state_name}' or states.short='#{state_name}' or states.short2='#{state_name}'"]} }
   

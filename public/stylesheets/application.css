@@ -226,6 +226,8 @@ a {
 #hello p {
 	margin: 3px 0px;
 	float: left;
+	font-size:12px;
+	width:580px;
 }
 /*SEARCH*/
 #search {

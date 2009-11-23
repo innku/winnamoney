@@ -10,7 +10,7 @@
          :position => '* This user will be positioned automatically with your selected logic',
          :home => {
            :welcome => 'Welcome to',
-           :register => 'Register',
+           :register => 'Register here',
            :or => 'or',
            :signin => 'Signin',
            :listing => 'Listing',

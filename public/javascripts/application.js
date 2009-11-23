@@ -50,7 +50,8 @@ $(document).ready(function(){
 	{
 		matchSubset:true,
 		matchContains:true,
-		cacheLength:20,
+		cacheLength:1,
+		max:100,
 		formatResult: formatCity,
 		formatItem: formatCity,
 	}
@@ -180,10 +181,21 @@ $(document).ready(function(){
 	
 	$("input#shipping_address_same_for_billing").change(function(){
 		if($(this).attr("checked")){
-			$("div#billing_address").find("input").attr("disabled","disabled")
+			$("div#billing_address").find("input").attr("disabled","disabled");
+			$("div#shipping_address").find("input").change();
 		}else{
-			$("div#billing_address").find("input").removeAttr("disabled")
+			$("div#billing_address").find("input").removeAttr("disabled").val("");
 		}
+	});
+	
+	$("div#shipping_address input[type=text]").keyup(function(){
+		if($("input#shipping_address_same_for_billing").attr('checked'))
+			$("#"+ $(this).attr('id').replace("shipping","billing")).val($(this).val());
+	});
+	
+	$("div#shipping_address input[type=text]").change(function(){
+		if($("input#shipping_address_same_for_billing").attr('checked'))
+			$("#"+ $(this).attr('id').replace("shipping","billing")).val($(this).val());
 	});
 	
 	$("input#upload_csv_file").click(function(){

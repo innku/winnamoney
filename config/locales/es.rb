@@ -10,7 +10,7 @@
          :position => '* Este usuario ser&aacute; posicionado autom&aaacute;ticamente con la l&oacute;gica que seleccionaste',
          :home => {
            :welcome => 'Bienvenido a',
-           :register => 'Reg&iacute;strate',
+           :register => 'Reg&iacute;strate aqu&iacute;',
            :or => 'o',
            :signin => 'Ingresa',
            :listing => 'Listando',

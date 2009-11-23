@@ -124,7 +124,7 @@ class Product < ActiveRecord::Base
   end
   
   def price_for_owner
-    self.selling_price * (1 - Store::OWNER_DISCOUNT)
+    self.selling_price * ((100.0 - self.discount.to_i)/100.0)
   end
   
   def state_name=(state_name)

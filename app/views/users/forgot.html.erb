@@ -1,0 +1,14 @@
+<% title "Winnamoney | Forgot Password"  %>
+<%= error_messages_for :user %>
+
+<% form_for :user do |f| -%>
+<h2>Request to reset password</h2>
+
+<p>
+	<%= f.label :email, "Email:" %> <br />
+	<%= f.text_field :email %>
+</p>
+
+<%= submit_tag 'Request' %>
+
+<% end -%>

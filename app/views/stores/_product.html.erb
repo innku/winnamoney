@@ -3,7 +3,7 @@
 		<%= link_to(image_tag(product.small_image_url, :alt => "Picture Not Available"),product_path(product) ) %>
 	</div>
 	<p class="name"><%= link_to truncate(product.name,48), product_path(product) %></p>	
-	<% if @current_store.owner?(@current_user) %>
+	<% if @current_store.owner?(@current_user) and (product.discount.to_i > 0) %>
 		<p class="price">
 			<small><strike><%= number_to_currency product.selling_price %></strike></small><br />
 			<strong><%= number_to_currency product.price_for_owner %></strong>
