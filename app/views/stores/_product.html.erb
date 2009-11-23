@@ -13,6 +13,6 @@
 	<% end %>
 	<% form_tag cart_items_path do  %>
 		<%= hidden_field_tag :product_id, product.id, :class => 'product_id' %>
-		<%= image_submit_tag "/images/add.png", :class => 'add_product_to_cart' %>
+		<%= image_submit_tag "/images/#{I18n.t('images.add')}", :class => 'add_product_to_cart' %>
 	<% end %>
 </div>

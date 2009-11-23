@@ -26,7 +26,7 @@
 		<div class="clearb">
 		<% form_tag cart_items_path do  %>
 			<%= hidden_field_tag :product_id, @product.id, :class => 'product_id' %>
-			<%= image_submit_tag "/images/bgde.png", :class => 'add_product_to_cart', :alt => 'Add to cart' %>
+			<%= image_submit_tag "/images/#{I18n.t('images.bigadd')}", :class => 'add_product_to_cart', :alt => 'Add to cart' %>
 		<% end %>
 		</div>
 	</div>

@@ -420,15 +420,23 @@ div.clearb {
 clear:both;
 }
 
+.english_cart{
+	background: #24486E url(/images/sctop.png) no-repeat;
+}
+
+.spanish_cart{
+	background: #24486E url(/images/carrito.png) no-repeat;
+}
+
 /*MINI CART*/
 #minicart {
-	background: #24486E url(/images/sctop.png) no-repeat;
 	padding: 39px 0px 10px 0px;
 	-moz-border-radius-bottomleft: 6px;
 	-moz-border-radius-bottomright: 6px;
 	-webkit-border-radius-bottomleft: 6px;
 	-webkit-border-radius-bottomright: 6px;
 }
+
 #minicart .content {
 	background: #A2D1EE;
 	margin: 0px 2px;
@@ -759,4 +767,55 @@ ul.internal_menu{
 ul.internal_menu li{
 	float:left;
 	margin-left:20px;
+}
+
+ul.tabNavigation {
+	border-bottom:1px solid #CCCCCC;
+	float:left;
+	height:29px;
+	margin:0 0 0px;
+	padding:0;
+	width:100%;
+}
+
+ul.tabNavigation li {
+	float:left;
+	list-style-type:none;
+	margin-right:4px;
+}
+
+ul.tabNavigation li a {
+	-moz-background-clip:border;
+	-moz-background-inline-policy:continuous;
+	-moz-background-origin:padding;
+	-moz-border-radius-topleft:6px;
+	-moz-border-radius-topright:6px;
+	background:#FFFFFF url(/images/grad.jpg) repeat scroll 0 0;
+	border:1px solid #CCCCCC;
+	display:block;
+	font-weight:bold;
+	height:23px;
+	padding:5px 15px 0;
+}
+
+ul.tabNavigation li a.selected {
+-moz-background-clip:border;
+-moz-background-inline-policy:continuous;
+-moz-background-origin:padding;
+background:#FFFFFF none repeat scroll 0 0;
+border-bottom:1px solid #FFFFFF;
+color:#333333;
+}
+
+div.payment_tabs div{
+	padding-left:15px;
+}
+
+div.payment_types{
+	width:170px;
+	float:right;
+}
+
+p.payment_types p{
+	float:none;
 }

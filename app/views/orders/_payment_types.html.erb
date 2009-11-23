@@ -7,16 +7,19 @@
 	  <ul class="tabNavigation" >
 	    <li><a href="#paypal" <%= display_string?("class='selected'", (@order == credit_card_order || @order.nil?)) %>><%= I18n.t "orders.labels.credit_card" %></a></li>
 	    <li><a href="#deposit" <%= display_string?("class='selected'", (@order == deposit_order)) %>><%= I18n.t "orders.labels.bank_deposit" %></a></li>
+		<li><a href="#express" <%= display_string?("class='selected'", (@order == express_checkout_order)) %>>Paypal</a></li>
 		<li><a href="#other" <%= display_string?("class='selected'", (@order == contact_later_order)) %>><%= I18n.t "orders.labels.other" %></a></li>
 	  </ul>
-
-		<%= link_to image_tag("http://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif", :style => 'border:none;' ), express_new_order_path%>
 
 	  <p class="clear"></p>
 
 	  <!-- tab containers -->
 	  <div id="paypal" style="<%= display?(@order == credit_card_order || @order.nil?) %>">
 	    <%= render :partial => 'payments_pro_form', :locals => {:order => credit_card_order } %>
+	  </div>
+	  <div id="express">
+		<p><%= I18n.t('orders.text.paypal') %></p>
+		<%= link_to image_tag("http://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif", :style => 'border:none;' ), express_new_order_path%>
 	  </div>
 	  <div id="deposit" style="<%= display?(@order == deposit_order) %>">
 	    <%= render :partial => 'deposit_form', :locals => {:order => deposit_order, :user => user } %>
@@ -25,7 +28,6 @@
 		<%= render :partial => 'contact_later_form', :locals => {:order => contact_later_order } %>
 	  </div>
 	</div>
-	
 	<script type="text/javascript" charset="utf-8">
 		$(function () {
 		    var tabContainers = $('div.payment_tabs > div');

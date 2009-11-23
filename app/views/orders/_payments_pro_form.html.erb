@@ -35,7 +35,7 @@
 		<%= f.date_select :card_expires_on, :discard_day => true, :start_year => Date.today.year, :end_year => (Date.today.year + 10), :add_month_numbers => true, :order => [:month, :year] %>
 	</p>
 	<p>
-		<%= f.submit (I18n.t "orders.labels.submit_credit") %>
+		<%= image_submit_tag I18n.t('images.complete') %>
 	</p>
 	
 <% end %>

@@ -6,5 +6,5 @@
 	<%= error_messages_for :contact_later_order %>
 	<%= f.hidden_field :payment_method %>
 	<%= f.hidden_field :order_type %>
-	<%= f.submit (I18n.t "orders.labels.submit_contact") %>
+	<%= image_submit_tag I18n.t('images.finish') %>
 <% end %>

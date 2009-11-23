@@ -66,6 +66,7 @@
             :amount => 'Cantidad',
             :contact_me1 => 'Si quieres que te contactemos personalmente para completar tu transacci&oacute;n',
             :contact_me2 => 'Por favor haz click en el siguiente bot&oacute;n',
+            :paypal => 'Para finalizar la compra utilizando Paypal Express, haz click en el siguiente bot&oacute;n.',
             :success => {
               :title_payment_successful => 'Pago Exitoso',
               :header_payment_successful => 'Tu pago se ha procesado con &eacute;xito!',
@@ -144,6 +145,13 @@
          :search => 'buscar.png',
          :checkout => 'comprarcarrito.png',
          :sac => 'gyc.png',
+         :add => 'agregarchico.png',
+         :bigadd => 'agregar.png',
+         :complete => "completar.png",
+         :finish => 'susc.png',
+       },
+       :classes => {
+         :cart => 'spanish_cart'
        },
        :steps => {
          :step1 => 'Paso uno',

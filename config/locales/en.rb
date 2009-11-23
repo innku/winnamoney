@@ -66,6 +66,7 @@
             :amount => 'Amount',
             :contact_me1 => 'If you want us to contact you personally to complete your transaction.',
             :contact_me2 => 'Please click on the following button.',
+            :paypal => 'In order to checkout with Paypal Express, please click the following button.',
             :success => {
               :title_payment_successful => 'Payment Successful',
               :header_payment_successful => 'Your Payment was processed successfully!',
@@ -144,6 +145,12 @@
         :search => 'search.png',
         :checkout => 'checkoutcart.png',
         :sac => 'savecontinue.png',
+        :add => 'add.png',
+        :bigadd => 'bgde.png',
+        :complete => "complete.png"
+      },
+      :classes => {
+        :cart => 'english_cart',
       },
       :steps => {
         :step1 => 'Step One',
