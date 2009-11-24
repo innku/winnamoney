@@ -193,7 +193,7 @@ $(document).ready(function(){
 			$("#"+ $(this).attr('id').replace("shipping","billing")).val($(this).val());
 	});
 	
-	$("div#shipping_address input[type=text]").change(function(){
+	$("div#shipping_address input[type=text]").blur(function(){
 		if($("input#shipping_address_same_for_billing").attr('checked'))
 			$("#"+ $(this).attr('id').replace("shipping","billing")).val($(this).val());
 	});

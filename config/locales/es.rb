@@ -168,6 +168,18 @@
            :review => 'Revisa tu &oacute;rden',
            :payment => 'Completa tu pago',
          }
+       },:date => {
+         :formats => {
+           :default      => "%e/%m/%Y",
+           :short        => "%e %b",
+           :long         => "%e de %B de %Y",
+           :only_day     => "%e"
+         },
+         :day_names      => %w(Domingo Lunes Martes Miércoles Jueves Viernes Sábado),
+         :abbr_day_names => %w(Dom Lun Mar Mie Jue Vie Sab),
+         :month_names    => [nil] + %w(Enero Febrero Marzo Abril Mayo Junio Julio Agosto Setiembre Octubre Noviembre Diciembre),
+         :abbr_month_names => [nil] + %w(Ene Feb Mar Abr May Jun Jul Ago Set Oct Nov Dic),
+         :order          => [:day, :month, :year]
        },
        :number => {
          :format => {
@@ -179,7 +191,7 @@
            :format => {
              :unit => '$',
              :precision => 2,
-             :format => '%u %n'
+             :format => '%u%n'
            }
          }
        },
