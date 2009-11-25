@@ -7,18 +7,18 @@ class User < ActiveRecord::Base
   has_one                   :store
   has_many                  :orders
 
-  validates_presence_of     :email
-  validates_presence_of     :names
-  validates_presence_of     :last_names
-  validates_presence_of     :city_id
-  validates_presence_of     :address1
-  validates_presence_of     :phone
-  validates_presence_of     :account_type
-  validates_presence_of     :account_number
-  validates_presence_of     :routing
-  validates_presence_of     :ssn
+  validates_presence_of     :email, :message => 'Your E-mail is required'
+  validates_presence_of     :names, :message => 'Your Name is required'
+  validates_presence_of     :last_names, :message => 'Your Last Name is required'
+  validates_presence_of     :city_id, :message =>'We need to know your city'
+  validates_presence_of     :address1, :message =>'Your address is required'
+  validates_presence_of     :phone, :message =>'Your phone number is required'
+  validates_presence_of     :account_type, :message =>'Your account type is required'
+  validates_presence_of     :account_number, :message =>'Your account number is required'
+  validates_presence_of     :routing,:message => 'Your bank routing is required'
+  validates_presence_of     :ssn, :message =>'Your Social Security Number is Required'
 
-  validates_numericality_of :phone
+  validates_numericality_of :phone, :message => 'Your phone number can only contain numbers'
   validates_numericality_of :fax, :allow_blank => true
   validates_numericality_of :cell, :allow_blank => true
   validates_presence_of     :password,                   :if => :password_required?,
@@ -27,7 +27,8 @@ class User < ActiveRecord::Base
                             :message => "You must provide a password confirmation"
   validates_length_of       :password, :within => 4..40, :if => :password_required?,
                             :message => "The password you provided is too small"
-  validates_confirmation_of :password,                   :if => :password_required?
+  validates_confirmation_of :password,                   :if => :password_required?,
+                            :message => 'Your passwords dont match'
   validates_length_of       :email,    :within => 3..100, 
                             :message => "Your email doesn't' have a correct format"
   validates_uniqueness_of   :email, :case_sensitive => false, 
