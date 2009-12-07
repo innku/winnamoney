@@ -19,7 +19,7 @@
 		</a>
 	</div>
 	<div id="colright">
-		<img src="/images/go.gif"/>
+
 	</div>
 	<div class="sep">
 		<h2>Contact Us</h2>
@@ -44,8 +44,12 @@
 		</div>
 	</div>
 	<div class="sep">
+		<%- flash.each do |name, msg| -%>
+	      <%= content_tag :div, msg, :id => "flash_#{name}" %>
+	    <%- end -%>
+		<% form_tag contact_path, :method => :post do %>
 		<h2>Consultants Contact Form</h2>
-		<div class="form_left">
+		<div class="form_left" id="message">
 		<label for="name">Name:</label>
 		<br/>
 		<input id="name" class="in" type="text" name="name"/>
@@ -59,12 +63,13 @@
 		<input id="phone" class="in" type="text" name="phone"/>
 		</div>
 		<div class="form_right">
-			<label for="mensaje">Su mensaje:</label>
+			<label for="mensaje">Your message:</label>
 			<br/>
-			<textarea class="in" rows="7" cols="30" name="mensaje" ></textarea>
+			<textarea class="in" rows="7" cols="30" name="message" ></textarea>
 			<br/>
 			<input type="image" src="/images/send.jpg" name="submitimage"/>
 		</div>
+		<% end %>
 	</div>
 </div>
 <% content_for :rightbar do %>

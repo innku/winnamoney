@@ -52,6 +52,17 @@ class UserMailer < ActionMailer::Base
     @body[:url]  = "http://#{user.store.name}.#{APP_CONFIG[:domain]}/reset/#{user.reset_code}"
   end
   
+  def contact(params)
+    @recipients  = "rrosa@gmx.us"
+    @from = params[:email]
+    @subject = "[Winnamoney] Web Contact"
+    @sent_on = Time.now
+    body[:name] = params[:name]
+    body[:phone] = params[:email]
+    body[:phone] = params[:phone]
+    body[:message] = params[:message]
+  end
+  
   protected
     def setup_email(user, copy_to=nil)
       @recipients  = "#{user.email}"

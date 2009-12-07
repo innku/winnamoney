@@ -984,7 +984,7 @@ div#bank_helpbox {
 -moz-background-clip:border;
 -moz-background-inline-policy:continuous;
 -moz-background-origin:padding;
-background:#FFFFFF url(images/green.png) repeat-y scroll right top;
+background:#FFFFFF url(/images/green.png) repeat-y scroll right top;
 border:5px solid #FFFFFF;
 font-size:13px;
 padding:0;
