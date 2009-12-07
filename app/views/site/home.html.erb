@@ -5,14 +5,12 @@
 		<h1>Discover the fastest way to make money</h1>
 	</div>
 	<p>Start your own business and manage it from the confort of your home.</p>
-	<a href="#">
+	<a href="<%= register_path %>">
 	<img alt="Create Your Online Store Now" src="/images/create_store.png" style="border:none;"/>
 	</a>
 	<br/>
 	<br/>
-	<a href="#">
-	<em>Learn more about this opportunity »</em>
-	</a>
+	<em><%= link_to "Learn more about this opportunity &raquo;", company_path %></em>
 	<div id="carrusel">
 		<div id="next">
 			<a href="#">
@@ -35,7 +33,7 @@
 					<p>
 						We want to share your success with the whole Winnamoney Family.  Your photo along with your success story can be in this Gallery of Winners!
 					</p>
-					<a href="#">Learn more »</a>
+					<%= link_to "Learn more &raquo;", company_path %>
 				</div>
 			</div>
 		</div>
@@ -45,7 +43,7 @@
 <% content_for :rightbar do  %>
 	<h2>As a Winnamoney Independent Consultant you:</h2>
 	<p> Will become an entrepreneur who, from day one, will receive the support of a Complete Back Office Team allowing you to offer a fantastic line of products</p>
-	<a href="#">Learn more »</a>
+	<%= link_to "Learn more &raquo;", oportunity_path %> </a>
 	<div class="separator">
 		<h2>A Myriad Line of Products!</h2>
 		<p>

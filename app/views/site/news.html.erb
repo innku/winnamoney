@@ -1,0 +1,48 @@
+<% title 'Winnamoney | News' %>
+<div id="ribbon">
+<h1>News</h1>
+</div>
+<div class="sep">
+	<h2>Winnamoney comes to live</h2>
+	<p>Winnamoney starts operations with the Primary Mission of improving the quality of life for all its members. Our Business Philosophy is based on the premise of triumph. We understand the triumph of others as our own success. The welfare of our members is our greatest satisfaction.</p>
+</div>
+
+<div class="sep">
+	<h2>Winnamoney opens its first Satellite Office</h2>
+	<p>Due to the overwhelming success of our consultants, the first satellite office is open in Houston, TX to directly support the business activities of our local members. Many more offices to be open in the near future. Stay tuned!</p>
+</div>
+
+<div class="sep">
+	<h2>VoIP Telephone Services are included among the products for you to offer!</h2>
+	<p>Now you can use and offer the most modern and cutting edge telephone technology services! You will never grow tired of calling worldwide…</p>
+</div>
+
+<div class="sep">
+	<h2>Your Personal Website has been completely  remodeled and revamped</h2>
+	<p>Incorporating new characteristics  and most functional design, your E-Store is now faster and easier to use. Start enjoying your completely new and updated Web-site.</p>
+</div>
+<% content_for :rightbar do %>
+	<h2>Great Business Opportunity</h2>
+	<p>Our Mission at Winnamoney is to contribute to the welfare and quality of life of our Consultants by giving them the tools necessary to develop a profitable business. </p>
+	<p>We also strive to have a positive impact on our community by  donating to social projects</p>
+	<div class="separator">
+		<h2>The Perfect Business Solution</h2>
+		<p>Success is within everyone’s reach. To achieve this we must be trained and learn how to develop our business. </p>
+		<p>Training Seminars are the perfect solution to the challenges your business is facing today. Stay tuned for the next Training Seminar in your Area!</p>
+	</div>
+	<h2>Featured product</h2>
+	<div class="miniatura">
+		<%= image_tag(@product.small_image_url, :width => '90') %>
+	</div>
+	<p>
+		<%= @product.name %>
+	<br/>
+	<span class="miniprecio"><%= number_to_currency(@product.selling_price) %></span>
+	</p>
+	<a href="#">
+		<% form_tag cart_items_path do  %>
+			<%= hidden_field_tag :product_id, @product.id, :class => 'product_id' %>
+			<%= image_submit_tag "/images/mini_button.png" %>
+		<% end %>
+	</a>
+<% end %>

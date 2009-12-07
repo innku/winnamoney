@@ -5,7 +5,7 @@ class SiteController < ApplicationController
   end
   
   def news
-  
+    @product = Product.featured.first
   end
   
   def company
