@@ -60,12 +60,18 @@ module ApplicationHelper
   end
   
   def main_class(item)
-    if item == 'shopping' and session[:app_action] == 's'
-      return 'active'
-    elsif item == 'register' and session[:app_action] == 'r'
-      return 'active'
-    elsif item == 'virtual_office' and (session[:app_action] == 'v')
-      return 'active'
+    if controller_name == 'site'
+      if item == action_name
+        return 'active'
+      end
+    else
+      if item == 'shopping' and session[:app_action] == 's'
+        return 'active'
+      elsif item == 'register' and session[:app_action] == 'r'
+        return 'active'
+      elsif item == 'virtual_office' and (session[:app_action] == 'v')
+        return 'active'
+      end
     end
   end
   

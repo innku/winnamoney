@@ -14,12 +14,95 @@
 	<thead>
 		<tr>
 			<th><%= I18n.t "orders.text.store_name" %></th>
-			<th><%= I18n.t "orders.text.amount" %></th>
+			<th></th>
 		</tr>
 	</thead>
 	<tr>
-		<td>http://<%= @user.store.name %>.winnamoney.com</th>
+		<td><%= I18n.t('stores.labels.name') %></th>
+		<td class="total">http://<%= @user.store.name %>.winnamoney.com</th>
+	</tr>
+	<tr>
+		<td>Sponsor</th>
+		<td class="total"><%= @user.store.sponsor.user.full_name %></th>
+	</tr>
+	<tr>
+		<td><%= I18n.t('carts.table.price') %></th>
 		<td class="total">189.00 US$</th>
+	</tr>
+</table>
+<br />
+<table class="tabla suscription">
+	<thead>
+		<tr>
+			<th><%= I18n.t('users.text.header') %></th>
+			<th></th>
+		</tr>
+	</thead>
+	<tr>
+		<td><%= I18n.t('users.labels.names') %></th>
+		<td class="total"><%= @user.names %></th>
+	</tr>
+	<tr>
+		<td><%= I18n.t('users.labels.last_names') %></th>
+		<td class="total"><%= @user.last_names %></th>
+	</tr>
+	
+	<tr>
+		<td><%= I18n.t('users.labels.address1') %></th>
+		<td class="total"><%= @user.address1 %></th>
+	</tr>
+	<tr>
+		<td><%= I18n.t('users.labels.address2') %></th>
+		<td class="total"><%= @user.address2 %></th>
+	</tr>
+	<tr>
+		<td><%= I18n.t('users.labels.city') %></th>
+		<td class="total"><%= @user.city_name %></th>
+	</tr>
+	<tr>
+		<td><%= I18n.t('users.labels.zip') %></th>
+		<td class="total"><%= @user.zip %></th>
+	</tr>
+	<tr>
+		<td><%= I18n.t('users.labels.phone') %></th>
+		<td class="total"><%= @user.phone %></th>
+	</tr>
+	<tr>
+		<td><%= I18n.t('users.labels.fax') %></th>
+		<td class="total"><%= @user.fax %></th>
+	</tr>
+	<tr>
+		<td><%= I18n.t('users.labels.cell') %></th>
+		<td class="total"><%= @user.cell %></th>
+	</tr>
+	<tr>
+		<td><%= I18n.t('users.labels.email') %></th>
+		<td class="total"><strong><%= @user.email %></strong></th>
+	</tr>
+</table>
+<br />
+<table class="tabla suscription">
+	<thead>
+		<tr>
+			<th><%= I18n.t('users.text.account_header') %></th>
+			<th></th>
+		</tr>
+	</thead>
+	<tr>
+		<td><%= I18n.t('users.labels.account_type') %></th>
+		<td class="total"><%= @user.account_type.titleize %></td>
+	</tr>
+	<tr>
+		<td><%= I18n.t('users.labels.routing') %></th>
+		<td class="total"><%= @user.routing %></td>
+	</tr>
+	<tr>
+		<td><%= I18n.t('users.labels.account_number') %></th>
+		<td class="total"><%= @user.account_number %></td>
+	</tr>
+	<tr>
+		<td>SSN/TIC/RFC</th>
+		<td class="total"><%= @user.ssn %></td>
 	</tr>
 </table>
 

@@ -208,6 +208,14 @@ $(document).ready(function(){
 	
 	$("div#cleft").scrollFollow();
 	
+	$('img#help_tag').mouseover(function(){
+		$(this).siblings('div').show();
+	});
+	
+	$('img#help_tag').mouseout(function(){
+		$(this).siblings('div').hide();
+	});
+	
 	
 	$('.rte').rte({
 		width: 450,

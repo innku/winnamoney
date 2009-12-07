@@ -32,7 +32,7 @@ class UsersController < ApplicationController
       Store.find(session[:registered_store_id]).user_is!(@user)
       session[:registered_user_id] = @user.id
       redirect_to new_order_path()
-      flash[:notice] = "Register successful!"
+      flash[:notice] = "Registration successful!"
     else
       render :action => 'new'
     end
@@ -84,7 +84,7 @@ class UsersController < ApplicationController
     if logged_in? && !current_user.active?
       current_user.activate
       @current_store = current_user.store
-      flash[:notice] = "Register completed! You need to complete your payment before your store is ready to sell"
+      flash[:notice] = "Registration completed! You need to complete your payment before your store is ready to sell"
     end
     redirect_back_or_default('/')
   end

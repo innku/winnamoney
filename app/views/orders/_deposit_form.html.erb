@@ -3,28 +3,48 @@
 
 <%= f.hidden_field :payment_method %>
 <%= f.hidden_field :order_type %>
-
-<p>
-	<%= f.label :account_type, (I18n.t "orders.labels.account_type") %> <br />
-	<%= f.label :account_type_check, (I18n.t "orders.labels.account_type_check")%>
-	<%= f.radio_button :account_type, "check" %>
-	<%= f.label :account_type_savings, (I18n.t "orders.labels.account_type_savings")%>
-	<%= f.radio_button :account_type, "savings" %>
-</p>
-<p>
-	<%= f.label :account_number, (I18n.t "orders.labels.account_number") %> <br />
-	<%= f.text_field :account_number, :class => 'large' %>
-</p>
-<p>
-	<%= f.label :routing, (I18n.t "orders.labels.routing") %> <br />
-	<%= f.text_field :routing, :class => 'large' %>
-</p>
-
-<p>
-	<%= f.label :ssn, "SSN/TIN/RFC" %> <br />
-	<%= f.text_field :ssn, :class => 'large' %>
-</p>
-
+<div class="clearb"></div>
+<table class="tabla suscription">
+	<thead>
+		<tr>
+			<th>Account Information</th>
+			<th>USA</th>
+		</tr>
+	</thead>
+	<tr>
+		<td>Beneficiary</td>
+		<td class="total">Winnamoney,LLC</th>
+	</tr>
+	<tr>
+		<td>Bank</td>
+		<td class="total">Wells Fargo Bank</th>
+	</tr>
+	<tr>
+		<td>Account Number</th>
+		<td class="total">XXXXXX7150</th>
+	</tr>
+</table>
+<br />
+<table class="tabla suscription">
+	<thead>
+		<tr>
+			<th>Account Information</th>
+			<th>M&eacute;xico</th>
+		</tr>
+	</thead>
+	<tr>
+		<td>Beneficiario</td>
+		<td class="total">Pacific Western Bank</th>
+	</tr>
+	<tr>
+		<td>Banco</td>
+		<td class="total">Banamex</th>
+	</tr>
+	<tr>
+		<td>Account Number</th>
+		<td class="total">7704212</th>
+	</tr>
+</table>
 <p>
 	<%= image_submit_tag I18n.t('images.finish') %>
 </p>

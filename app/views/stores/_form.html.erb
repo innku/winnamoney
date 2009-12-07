@@ -1,5 +1,16 @@
 <% form_for @store do |f| %>
   <%= error_messages_for :store %>
+  <% if(@current_user and @current_user.is_admin?) %>
+	  <p>
+	    <%= f.label :sponsor_name, (I18n.t 'stores.labels.sponsor_name') %><br />
+	    <%= f.text_field :sponsor_name, :class => 'large' %>
+	  </p>
+  <% else %>
+	  <em>
+	  	<%= I18n.t('stores.labels.sponsor_is') %> <%= @store.sponsor.user.full_name %>
+	  </em>
+	  <%= f.hidden_field :sponsor_id %>
+  <% end %>
   <p>
     <%= f.label :name, (I18n.t 'stores.labels.name') %><br />
     http://&nbsp;<%= f.text_field :name, :class => 'medium' %>.winnamoney.com<br />
@@ -9,14 +20,6 @@
     <%= f.label :language, (I18n.t 'stores.labels.language') %><br />
     <%= f.select :language, Store::LANGUAGES, {}, :class=> 'medium'  %>
   </p>
-  <% if @current_user.nil? or (@current_user and @current_user.is_admin?) %>
-	  <p>
-	    <%= f.label :sponsor_name, (I18n.t 'stores.labels.sponsor_name') %><br />
-	    <%= f.text_field :sponsor_name, :class => 'large' %>
-	  </p>
-  <% else %>
-	  <%= f.hidden_field :sponsor_id %>
-  <% end %>
   <%= f.hidden_field :parent_id  %>
   <%= f.hidden_field :side  %>
   <p>

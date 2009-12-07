@@ -4,8 +4,8 @@
   :'en' => {
      :stores => {
        :text => {
-         :title => 'Create your store',
-         :header => 'Store Information',
+         :title => 'Create your E-Store',
+         :header => 'E-Store Information',
          :payment_needed => '* The position you selected for your referral will be taken as soon as payment is complete',
          :position => '* This user will be positioned automatically with your selected logic',
          :home => {
@@ -16,27 +16,28 @@
            :listing => 'Listing',
            :of => 'of',
            :products => 'products',
-           :available => 'This store is available in'
+           :available => 'This E-Store is available in'
          }
        },
        :labels => {
-          :name => 'Store Name',
+          :name => 'E-Store Name',
           :language => 'Language',
           :sponsor_name => 'Sponsor Name or ID (If you have one)',
+          :sponsor_is => 'Your sponsor is:',
           :positioning => 'Positioning',
-          :submit => 'Save User'
+          :submit => 'Save E-Store'
         }
      },
      :users => {
         :text => {
-          :title => 'Create your store',
-          :header => 'User Information',
-          :account_header => 'Account Information'
+          :title => 'Create your E-Store',
+          :header => 'Consultant Information',
+          :account_header => 'Bank Account Information'
         },
         :labels => {
-           :names => 'Names',
-           :last_names => 'Last Names',
-           :city => 'City Name',
+           :names => 'Name',
+           :last_names => 'Last Name',
+           :city => 'City',
            :address1 => 'Address 1',
            :address2 => 'Address 2',
            :zip => 'Zip Code',
@@ -44,39 +45,42 @@
            :fax => 'Fax Number',
            :cell => 'Cell Phone Number',
            :email => 'E-mail',
-           :password => 'Password',
+           :password => 'Choose your Password',
            :confirm_password => 'Confirm Password',
            :account_type => 'Account Type',
-           :account_type_check => 'Check',
+           :account_type_check => 'Checking',
            :account_type_savings => 'Savings',
            :account_number => 'Account Number',
            :routing => 'Bank Routing',
-           :submit => 'Save User'
+           :submit => 'I accept, proceed to checkout',
+           :documents => 'Documents',
+           :consultant_agreement => 'Consultant Agreement',
+           :general_policies => 'General Policies'
          }
       },
       :orders => {
           :text => {
             :title => {
-              :suscription => 'Create your store',
+              :suscription => 'Create your E-Store',
               :product_purchase => 'Checkout'
             },
-            :header => 'Confirm suscription and complete payment',
+            :header => 'Confirm information and complete payment',
             :header_checkout => 'Complete your payment', 
-            :store_name => 'Store Name',
+            :store_name => 'E-Store Information',
             :amount => 'Amount',
             :contact_me1 => 'If you want us to contact you personally to complete your transaction.',
             :contact_me2 => 'Please click on the following button.',
             :paypal => 'In order to checkout with Paypal Express, please click the following button.',
             :success => {
               :title_payment_successful => 'Payment Successful',
-              :header_payment_successful => 'Your Payment was processed successfully!',
+              :header_payment_successful => 'Your Payment has been processed successfully',
               :title_register_successful => 'Register Successful',
               :header_register_successful => 'Your Order was registered successfully!',
               :confirmation_number => 'Your order confirmation number is: ',
-              :credit_card1 => 'You will receive a confirmation E-mail to activate your account and start selling',
+              :credit_card1 => 'You will receive shortly an e-mail containing necessary information to activate your account and instructions to start selling products',
               :deposit1 => "We will be waiting for your deposit",
-              :deposit2 => "You will receive a confirmation E-mail to activate your account",
-              :contact1 => "You will receive a confirmation E-mail to activate your account",
+              :deposit2 => "You will receive shortly an e-mail containing necessary information to activate your account and instructions to start selling products",
+              :contact1 => "You will receive shortly an e-mail containing necessary information to activate your account and instructions to start selling products",
               :contact2 => "We will be in touch with you soon to complete this transaction"
               
             },
@@ -147,7 +151,8 @@
         :sac => 'savecontinue.png',
         :add => 'add.png',
         :bigadd => 'bgde.png',
-        :complete => "complete.png"
+        :complete => "complete.png",
+        :finish => "finish.png"
       },
       :classes => {
         :cart => 'english_cart',
@@ -159,9 +164,9 @@
         :step4 => 'Step Four',
         :confirmation => 'Confirmation',
         :suscription => {
-          :store_info => 'Enter your store information',
-          :contact_info => 'Enter your contact and account information',
-          :payment_info => 'Complete payment',
+          :store_info => 'Enter your E-Store information',
+          :contact_info => 'Enter your contact and bank account information',
+          :payment_info => 'Confirm information and complete payment',
         },
         :checkout => {
           :review => 'Review your order',

@@ -31,6 +31,11 @@ ActionController::Routing::Routes.draw do |map|
   map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate', :activation_code => nil
   map.register  '/register', :controller => 'stores', :action => 'new'
   map.login     '/login', :controller => 'sessions', :action => 'new'
+  map.shop     '/shop', :controller => 'stores', :action => 'show'
+  map.home     '/home', :controller => 'site', :action => 'home'
+  map.news     '/news', :controller => 'site', :action => 'news'
+  map.company     '/company', :controller => 'site', :action => 'company'
+  map.oportunity     '/oportunity', :controller => 'site', :action => 'oportunity'
   map.logout    '/logout', :controller => 'sessions', :action => 'destroy'
   map.forgot    '/forgot',                    :controller => 'users',     :action => 'forgot'
   map.reset     'reset/:reset_code',          :controller => 'users',     :action => 'reset'

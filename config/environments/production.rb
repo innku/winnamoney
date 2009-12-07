@@ -32,9 +32,9 @@ config.action_mailer.raise_delivery_errors = true
 config.after_initialize do
   ActiveMerchant::Billing::Base.mode = :production
   paypal_options = {
-    :login => "wsell_1257058028_biz_api1.innku.com",
-    :password => "1257058061",
-    :signature => "A8vRYyLBrwgszDoaGl7GW6XElR-6Aco-MRZNFvTcS4QLMyKGEqUXHMg8"
+    :login => "admin_api1.winnamoney.com",
+    :password => "TQTHECYCNWBQ2AQX",
+    :signature => "ANExOWvij9xplR6UcrTIxyF9Yl6BABtAKxTvGFH0TRowcjIASKKaz7F8"
   }
   
   ::STANDARD_GATEWAY = ActiveMerchant::Billing::PaypalGateway.new(paypal_options)

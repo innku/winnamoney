@@ -10,13 +10,14 @@
 <p><%= f.label :last_names, (I18n.t 'users.labels.last_names') %><br/>
 <%= f.text_field :last_names, :class=>'large' %></p>
 
-<p><%= f.label :city_name, (I18n.t 'users.labels.city') %><br/>
-<%= f.text_field :city_name, :class => 'city_autocomplete large' %></p>
-
 <p><%= f.label :address1, (I18n.t 'users.labels.address1') %><br/>
 <%= f.text_field :address1, :class=>'large' %> <br/>
 <%= f.label :address2, (I18n.t 'users.labels.address2') %><br/>
 <%= f.text_field :address2, :class=>'large' %></p>
+
+
+<p><%= f.label :city_name, (I18n.t 'users.labels.city') %><br/>
+<%= f.text_field :city_name, :class => 'city_autocomplete large' %></p>
 
 <p>
 	<%= f.label :zip, (I18n.t 'users.labels.zip') %><br/>
@@ -46,7 +47,16 @@
 <% end %>
 
 <div id="accountinfo">
-	<h2><%= (I18n.t 'users.text.account_header') %></h2>
+	<h2 style="float:left;">
+		<%= (I18n.t 'users.text.account_header') %>
+	</h2>
+	<div id='bank_help'>
+		<%= image_tag('help.png', :width => '25', :id => 'help_tag') %>
+		<div id="bank_helpbox">
+			<%= image_tag('bankhelp.jpg') %>	
+		</div>
+	</div>
+	<div class="clearb"></div>
 	<p>
 		<%= f.label :account_type, (I18n.t 'users.labels.account_type') %> <br />
 		<%= f.label :account_type_check, (I18n.t 'users.labels.account_type_check')%>
@@ -55,17 +65,38 @@
 		<%= f.radio_button :account_type, "savings" %>
 	</p>
 	<p>
-		<%= f.label :account_number, (I18n.t 'users.labels.account_number')%> <br />
-		<%= f.text_field :account_number, :class=>'large' %>
-	</p>
-	<p>
 		<%= f.label :routing, (I18n.t 'users.labels.routing') %> <br />
 		<%= f.text_field :routing, :class=>'large' %>
+	</p>
+	<p>
+		<%= f.label :account_number, (I18n.t 'users.labels.account_number')%> <br />
+		<%= f.text_field :account_number, :class=>'large' %>
 	</p>
 	<p>
 		<%= f.label :ssn, "SSN/TIN/RFC" %> <br />
 		<%= f.text_field :ssn, :class=>'large' %>
 	</p>
+	
+	<div>
+		<h2>E-SIGN Notice - Consent To Electronic Record</h2>
+		<p>
+			E-SIGN, the Electronic Signatures in Global and National Commerce Act (15 U.S.C. § 7001, et seq.), requires that you consent to entering into an electronic agreement with Winnamoney.com   You will not be required to submit a paper application.   You must consent to the use of an electronic record and read the appropriate Agreement below.   You will electronically acknowledge that you have read these documents by checking the “I agree-Proceed to Application” button below.   If you do not have a copy of Acrobat Reader you can download a free copy by clicking on the Icon below.
+		</p>
+	</div>
+	
+	<div>
+		<h2>Verify Terms Of Agreement</h2>
+		<p>
+			Yes, I am applying to become an INDEPENDENT CONSULTANT with WINNAMONEY. I have read, understand, accept and agree to the Terms of Agreement  and I have read, understand, accept and agree to the  Independent Consultant Terms and Policies. (click here to download Independent Consultant Terms and read) (Click here to download Company Policies and read)
+		</p>
+	</div>
+	
+	<p>
+		<h2><%= I18n.t('users.labels.documents') %></h2>
+		<%= link_to I18n.t('users.labels.consultant_agreement'), '/files/consultant_agreement.pdf' %> | &nbsp;
+		<%= link_to I18n.t('users.labels.general_policies'), '/files/general_policies.pdf' %>
+	</p>
+	
 </div>
 
 <p><%= submit_tag (I18n.t 'users.labels.submit') %></p>

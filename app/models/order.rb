@@ -6,11 +6,6 @@ class Order < ActiveRecord::Base
   belongs_to  :cart
   has_many    :transactions, :class_name => "OrderTransaction"
   has_many    :payments
-  
-  validates_presence_of :account_number, :if => :deposit?
-  validates_presence_of :account_type, :if => :deposit?
-  validates_presence_of :routing, :if => :deposit? 
-  validates_presence_of :ssn, :if => :deposit?
                              
   validate_on_create    :validate_card, :if => :credit_card?            
                         

@@ -35,52 +35,17 @@
 	<!--CONTENTENIDO-->
 	<div id="content">
 		<div class="wrapper">
-			<!--MAIN-->
-			<div id="main">
-				<%= render :partial => '/layouts/welcome' %>
+			<div id="main2" class="<%= 'white' unless action_name == 'home' %>">
+				
+				<div class="left">
+					<%= yield %>
+				</div>
+				
+				<div class="right">
+					<%= yield(:rightbar) %>
+				</div>
+			
 			</div>
-				<!--MENU TIENDA-->
-				<div id="ribbon">
-					<!--HOME-->
-					<div id="menutienda">
-						<table width="100%" cellpadding="0" cellspacing="0">
-							<tr>
-								<td width="35px" style="background:url(/images/home.png) right center; text-align: right;">
-									<%= link_to image_tag("casa.gif", :alt => "home", :style => 'border:none;'), @current_store %>
-								</td>
-								<td>
-									<%= render :partial => '/layouts/categories' %>
-								</td>
-							</tr>
-						</table>
-					</div>
-				</div>
-				<!--REST-->
-				<div id="rest">
-					<!--LEFT-->
-					<div id="cleft">
-						<!--MINI CART-->
-						<div id="minicart" class="<%= I18n.t('classes.cart') %>">
-							<div class="content">
-								<%= render :partial => '/products/cart' %>
-							</div>
-						</div>
-					</div>
-					<!--RIGHT-->
-					<div id="cright">
-						<%- flash.each do |name, msg| -%>
-					      <%= content_tag :div, msg, :id => "flash_#{name}" %>
-					    <%- end -%>
-						<!--BREAD + PAGES-->
-						<div id="bread">
-							<ul>
-								<%= breadcrumb_links %>
-							</ul>
-						</div>
-						
-						<%= yield %>
-					</div>
-				</div>
 		</div>
 	</div>
 	<!--FOOTER-->

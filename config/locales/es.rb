@@ -23,6 +23,7 @@
           :name => 'Nombre de la tienda',
           :language => 'Idioma',
           :sponsor_name => 'Nombre o ID de tu sponsor (Si cuentas con uno)',
+          :sponsor_is => 'Tu sponsor es:',
           :positioning => 'Posicionamiento',
           :submit => 'Guardar Usuario'
         }
@@ -30,12 +31,12 @@
      :users => {
         :text => {
           :title => 'Crea tu tienda',
-          :header => 'Informaci&oacute;n del Usuario',
-          :account_header => 'Informaci&oacute;n de la Cuenta'
+          :header => 'Informaci&oacute;n del Consultante',
+          :account_header => 'Informaci&oacute;n de la Cuenta Bancaria'
         },
         :labels => {
-           :names => 'Nombres',
-           :last_names => 'Apellidos',
+           :names => 'Nombre',
+           :last_names => 'Apellido',
            :city => 'Ciudad',
            :address1 => 'Direcci&oacute;n 1',
            :address2 => 'Direcci&oacute;n 2',
@@ -44,14 +45,17 @@
            :fax => 'N&uacute;mero de Fax',
            :cell => 'N&uacute;mero Celular',
            :email => 'Correo Electr&oacute;nico',
-           :password => 'Contrase&ntilde;a',
+           :password => 'Elige tu Contrase&ntilde;a',
            :confirm_password => 'Confirmar Contrase&ntilde;a',
            :account_type => 'Tipo de cuenta',
            :account_type_check => 'Cheques',
            :account_type_savings => 'Ahorros',
            :account_number => 'N&uacute;mero de cuenta',
            :routing => 'Routing del banco',
-           :submit => 'Guardar Usuario'
+           :submit => 'Acepto, proceder a completar suscripci&oacute;n',
+           :documents => 'Documentos',
+           :consultant_agreement => 'Acuerdo del consultante',
+           :general_policies => 'Pol&iacute;ticas Generales'
          }
       },
       :orders => {
@@ -161,8 +165,8 @@
          :confirmation => 'Confirmaci&oacute;n',
          :suscription => {
            :store_info => 'Ingresa la informaci&oacute;n de tu tienda',
-           :contact_info => 'Ingresa tu informaci&oacute;n de contacto y de cuenta',
-           :payment_info => 'Completa tu pago',
+           :contact_info => 'Ingresa tu informaci&oacute;n de contacto y de cuenta bancaria',
+           :payment_info => 'Confirmar informaci&oacute;n y completar pago',
          },
          :checkout => {
            :review => 'Revisa tu &oacute;rden',
