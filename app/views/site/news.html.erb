@@ -30,19 +30,21 @@
 		<p>Success is within everyone’s reach. To achieve this we must be trained and learn how to develop our business. </p>
 		<p>Training Seminars are the perfect solution to the challenges your business is facing today. Stay tuned for the next Training Seminar in your Area!</p>
 	</div>
-	<h2>Featured product</h2>
-	<div class="miniatura">
-		<%= image_tag(@product.small_image_url, :width => '90') %>
-	</div>
-	<p>
-		<%= @product.name %>
-	<br/>
-	<span class="miniprecio"><%= number_to_currency(@product.selling_price) %></span>
-	</p>
-	<a href="#">
-		<% form_tag cart_items_path do  %>
-			<%= hidden_field_tag :product_id, @product.id, :class => 'product_id' %>
-			<%= image_submit_tag "/images/mini_button.png" %>
-		<% end %>
-	</a>
+	<% if @product %>
+		<h2>Featured product</h2>
+		<div class="miniatura">
+			<%= image_tag(@product.small_image_url, :width => '90') %>
+		</div>
+		<p>
+			<%= @product.name %>
+		<br/>
+		<span class="miniprecio"><%= number_to_currency(@product.selling_price) %></span>
+		</p>
+		<a href="#">
+			<% form_tag cart_items_path do  %>
+				<%= hidden_field_tag :product_id, @product.id, :class => 'product_id' %>
+				<%= image_submit_tag "/images/mini_button.png" %>
+			<% end %>
+		</a>
+	<% end %>
 <% end %>

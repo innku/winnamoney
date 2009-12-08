@@ -40,7 +40,7 @@ class Store < ActiveRecord::Base
   def self.with_subdomain(sub)
     subdomain, domain = sub.split(".")
     if ["www", "winnamoney"].include?(subdomain)
-      store = Store.first
+      Store.first
     else
       Store.find_by_name(subdomain)
     end
