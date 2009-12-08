@@ -14,7 +14,7 @@
 		<h2><%= @product.name %></h2>
 		<p><em>id:&nbsp;<%= @product.id %></em></p>
 		<p><%= @product.description %></p>
-
+		<p><em>Existence: </em><%= @product.existence %></p>
 		<% if @current_store.owner?(@current_user) %>
 			<p class="precio">
 				<small><strike><%= number_to_currency @product.selling_price %></strike></small><br />
