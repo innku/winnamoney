@@ -1,8 +1,8 @@
 #------------  Deploy with Git ----------------------
 
 set :application, "winnamoney.innku.com"
-set :rails_env, "production"
-set :base_path, "production"
+set :rails_env, "staging"
+set :base_path, "staging"
 set :use_sudo,  false
 
 default_run_options[:pty] = true
@@ -12,7 +12,7 @@ set :scm_passphrase, "soyinnku09"
 set :user, "winna"
 
 set :deploy_to, "/home/#{user}/#{base_path}"
-set :branch, "master"
+set :branch, "staging"
 set :deploy_via,  :remote_cache
 
 role :app, application
