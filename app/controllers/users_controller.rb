@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   before_filter       :cant_create_user_without_store, :only => [:new, :create]
   before_filter       :login_required, :only => [:edit, :update]
   skip_before_filter  :find_store, :only => [:activate]
+  skip_before_filter  :set_locale, :only => [:activate]
   before_filter       :register_action!, :only => [:new]
 
   def index
