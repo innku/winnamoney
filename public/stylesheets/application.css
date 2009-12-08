@@ -149,6 +149,12 @@ body {
 	float: left;
 	padding: 10px 0;
 }
+
+#footer{
+	font-size:11px;
+	color:#333;
+}
+
 #header {
 	background: #333;
 }
