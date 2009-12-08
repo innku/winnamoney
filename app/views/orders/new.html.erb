@@ -21,10 +21,12 @@
 		<td><%= I18n.t('stores.labels.name') %></th>
 		<td class="total">http://<%= @user.store.name %>.winnamoney.com</th>
 	</tr>
-	<tr>
-		<td>Sponsor</th>
-		<td class="total"><%= @user.store.sponsor.user.full_name %></th>
-	</tr>
+	<% unless @user.store.sponsor.nil? %>
+		<tr>
+			<td>Sponsor</th>
+			<td class="total"><%= @user.store.sponsor.user.full_name %></th>
+		</tr>
+	<% end %>
 	<tr>
 		<td><%= I18n.t('carts.table.price') %></th>
 		<td class="total">189.00 US$</th>
