@@ -14,6 +14,7 @@ set :user, "winna"
 set :deploy_to, "/home/#{user}/#{base_path}"
 set :branch, "staging"
 set :deploy_via,  :remote_cache
+set :git_enable_submodules, true
 
 role :app, application
 role :web, application
