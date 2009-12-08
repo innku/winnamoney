@@ -82,23 +82,18 @@
 		<p>
 			E-SIGN, the Electronic Signatures in Global and National Commerce Act (15 U.S.C. § 7001, et seq.), requires that you consent to entering into an electronic agreement with Winnamoney.com   You will not be required to submit a paper application.   You must consent to the use of an electronic record and read the appropriate Agreement below.   You will electronically acknowledge that you have read these documents by checking the “I agree-Proceed to Application” button below.   If you do not have a copy of Acrobat Reader you can download a free copy by clicking on the Icon below.
 		</p>
+		<%= link_to image_tag('acrobat.png', :width => '50', :style => 'border:none;'),"http://get.adobe.com/reader/" %>
 	</div>
 	
 	<div>
 		<h2>Verify Terms Of Agreement</h2>
 		<p>
-			Yes, I am applying to become an INDEPENDENT CONSULTANT with WINNAMONEY. I have read, understand, accept and agree to the Terms of Agreement  and I have read, understand, accept and agree to the  Independent Consultant Terms and Policies. (click here to download Independent Consultant Terms and read) (Click here to download Company Policies and read)
+			Yes, I am applying to become an INDEPENDENT CONSULTANT with WINNAMONEY. I have read, understand, accept and agree to the Terms of Agreement  and I have read, understand, accept and agree to the  Independent Consultant Terms and Policies. (<%= link_to "Click here to download Independent Consultant Terms and read", '/files/consultant_agreement.pdf' %>) (<%= link_to "Click here to download Company Policies and read", '/files/general_policies.pdf' %>
+			)
 		</p>
 	</div>
-	
-	<p>
-		<h2><%= I18n.t('users.labels.documents') %></h2>
-		<%= link_to I18n.t('users.labels.consultant_agreement'), '/files/consultant_agreement.pdf' %> | &nbsp;
-		<%= link_to I18n.t('users.labels.general_policies'), '/files/general_policies.pdf' %>
-	</p>
-	
 </div>
 
-<p><%= submit_tag (I18n.t 'users.labels.submit') %></p>
+<p><%= submit_tag (I18n.t 'users.labels.submit') %> <strong><%= link_to 'Decline', home_path %></strong></p>
 
 <% end -%>
