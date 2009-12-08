@@ -40,3 +40,54 @@
 		<td><strong><%= number_to_currency @cart.price %></strong></td>
 	</tr>
 </table>
+
+<h2>Billing Information</h2>
+
+<div>
+	<p>
+		<strong><%= I18n.t('addresses.labels.full_name') %>:</strong><br />
+		<%= @cart.billing.names %> <%= @cart.billing.last_names %>
+	</p>
+	
+	<p>
+		<strong><%= I18n.t('addresses.labels.address') %>:</strong><br />
+		<%= @cart.billing.address1 %>, <%= @cart.billing.address2 %>, <%= @cart.billing.city_name %>,<%= @cart.billing.zip %>
+	</p>
+	
+	<p>
+		<strong><%= I18n.t('addresses.labels.email') %>:</strong><br />
+		<%= @cart.billing.email %>
+	</p>
+	
+	<p>
+		<strong><%= I18n.t('addresses.labels.phone') %>:</strong><br />
+		<%= @cart.billing.phone %>
+	</p>
+
+</div>
+
+<h2>Shipping Information</h2>
+
+<div>
+	<p>
+		<strong><%= I18n.t('addresses.labels.full_name') %>:</strong><br />
+		<%= @cart.shipping.names %> <%= @cart.shipping.last_names %>
+	</p>
+	
+	<p>
+		<strong><%= I18n.t('addresses.labels.address') %>:</strong><br />
+		<%= @cart.shipping.address1 %>, <%= @cart.shipping.address2 %>, <%= @cart.shipping.city_name %>,<%= @cart.shipping.zip %>
+	</p>
+	
+	<p>
+		<strong><%= I18n.t('addresses.labels.email') %>:</strong><br />
+		<%= @cart.shipping.email %>
+	</p>
+	
+	<p>
+		<strong><%= I18n.t('addresses.labels.phone') %>:</strong><br />
+		<%= @cart.shipping.phone %>
+	</p>
+
+</div>
+

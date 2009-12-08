@@ -15,7 +15,9 @@ class StoresController < ApplicationController
           format.js { render :json => store.to_json }
         when "redirect_to_store"
           store = Store.with_subdomain(current_subdomain)
-          if store.active? or (@current_user and @current_user.store == store)
+          if store.user.is_admin?
+            format.html { redirect_to home_path }
+          elsif store.active? or (@current_user and @current_user.store == store)
             flash[:error] = "The store you're looking for doesn't exist" if params[:not_found]
             flash[:error] = "The store you're looking is not active yet" if params[:not_active]
             format.html { redirect_to store }

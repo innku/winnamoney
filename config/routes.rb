@@ -26,7 +26,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :subcategories
   map.resources :tags
   
-  map.home '/', :controller => 'stores', :action => 'index', :index_action => 'redirect_to_store'
+  map.store_home      '/', :controller => 'stores', :action => 'index', :index_action => 'redirect_to_store'
   
   map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate', :activation_code => nil
   map.register  '/register', :controller => 'stores', :action => 'new'
