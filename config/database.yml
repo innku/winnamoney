@@ -24,7 +24,7 @@ production:
   reconnect: false
   database: winna_production
   pool: 5
-  username: winna
+  username: winna_winna
   password: soyinnku09
   socket: /tmp/mysql.sock
   
