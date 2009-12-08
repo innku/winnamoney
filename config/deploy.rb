@@ -1,8 +1,8 @@
 #------------  Deploy with Git ----------------------
 
 set :application, "winnamoney.innku.com"
-set :rails_env, "staging"
-set :base_path, "staging"
+set :rails_env, "production"
+set :base_path, "production"
 set :use_sudo,  false
 
 default_run_options[:pty] = true

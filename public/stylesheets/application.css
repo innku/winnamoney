@@ -1048,6 +1048,10 @@ div.sep {
 	width:100%;
 }
 
+div.sep h2 span{
+	font-size:12px;
+}
+
 .holderleft {
 	float:left;
 	margin-right:20px;
