@@ -2,7 +2,8 @@
 # Likewise, all the methods added will be available for all controllers.
 
 class ApplicationController < ActionController::Base
-  include AuthenticatedSystem
+  include AuthenticatedSystem  
+  include ExceptionLoggable
   
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
@@ -90,5 +91,12 @@ class ApplicationController < ActionController::Base
   def register_action!
     session[:app_action] = 'r'
   end
+  
+  private
+
+  def local_request?
+    false
+  end
+  
   
 end

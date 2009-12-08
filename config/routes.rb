@@ -40,5 +40,5 @@ ActionController::Routing::Routes.draw do |map|
   map.forgot    '/forgot',                    :controller => 'users',     :action => 'forgot'
   map.reset     'reset/:reset_code',          :controller => 'users',     :action => 'reset'
   map.contact   '/contact', :controller => 'site', :action => 'contact', :method => :post
-  
+  map.connect "logged_exceptions/:action/:id", :controller => "logged_exceptions"
 end
