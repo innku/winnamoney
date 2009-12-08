@@ -2,9 +2,7 @@
 # Likewise, all the methods added will be available for all controllers.
 
 class ApplicationController < ActionController::Base
-  include AuthenticatedSystem  
-  include ExceptionLoggable
-  
+  include AuthenticatedSystem    
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
   before_filter :find_user, :find_store, :set_locale
