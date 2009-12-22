@@ -2,6 +2,7 @@
 log/*.log
 tmp/*.html
 public/system/*
+public/files/*.*
 config/deploy.rb
 db/schema.rb
 public/images/test/*/*/*/*
