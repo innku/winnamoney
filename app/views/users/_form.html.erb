@@ -33,10 +33,10 @@
 <p><%= f.label :cell, (I18n.t 'users.labels.cell') %><br/>
 <%= f.text_field :cell, :class=>'medium' %> &nbsp;</p>
 
-<% if user.new_record? %>
-
 <p><%= f.label :email,(I18n.t 'users.labels.email') %><br/>
 <%= f.text_field :email, :class=>'large' %></p>
+
+<% if user.new_record? %>
 
 <p><%= f.label :password, (I18n.t 'users.labels.password')%><br/>
 <%= f.password_field :password, :class=>'medium' %></p>
@@ -77,6 +77,8 @@
 		<%= f.text_field :ssn, :class=>'large' %>
 	</p>
 	
+	<% if user.new_record? %>
+	
 	<div>
 		<h2>E-SIGN Notice - Consent To Electronic Record</h2>
 		<p>
@@ -92,8 +94,15 @@
 			)
 		</p>
 	</div>
+	
+	<% end %>
+	
 </div>
 
-<p><%= submit_tag (I18n.t 'users.labels.submit') %> <strong><%= link_to 'Decline', home_path %></strong></p>
+<% if user.new_record? %>
+	<p><%= submit_tag (I18n.t 'users.labels.submit') %> <strong><%= link_to 'Decline', home_path %></strong></p>
+<% else %>
+	<p><%= submit_tag "Save" %></p>
+<% end %>
 
 <% end -%>
